@@ -1,0 +1,47 @@
+overview:
+  title: "Overview"
+  icon: "info"
+  icon_bg: "#e0f2fe"
+  icon_color: "#0284c7"
+
+timeline:
+  title: "Timeline & Location"
+  icon: "calendar"
+  icon_bg: "#fef3c7"
+  icon_color: "#d97706"
+
+stakeholders:
+  title: "Stakeholders"
+  icon: "landmark"
+  icon_bg: "#ede9fe"
+  icon_color: "#7c3aed"
+
+digitalisation:
+  title: "Digitalisation & Data"
+  icon: "monitor"
+  icon_bg: "#e0e7ff"
+  icon_color: "#4f46e5"
+
+hazards:
+  title: "Hazards"
+  icon: "alert-triangle"
+  icon_bg: "#fee2e2"
+  icon_color: "#dc2626"
+
+cost-benefit:
+  title: "Cost & Benefit"
+  icon: "bar-chart-3"
+  icon_bg: "#d1fae5"
+  icon_color: "#059669"
+
+principles:
+  title: "Resilience Principles Assessment"
+  icon: "shield-check"
+  icon_bg: "#f0fdf4"
+  icon_color: "#16a34a"
+
+futures:
+  title: "Futures"
+  icon: "sparkles"
+  icon_bg: "#fdf4ff"
+  icon_color: "#a855f7"

@@ -1,0 +1,8 @@
+<div class="hero">
+  <div class="hero-inner">
+    {% if include.breadcrumb %}<div class="hero-breadcrumb">{{ include.breadcrumb }}</div>{% endif %}
+    <h1>{{ include.title | default: page.hero_title }}</h1>
+    {% if include.subtitle or page.hero_subtitle %}<p class="hero-subtitle">{{ include.subtitle | default: page.hero_subtitle }}</p>{% endif %}
+    {% if include.tags %}<div class="hero-tags">{% for tag in include.tags %}<span class="hero-tag">{{ tag }}</span>{% endfor %}</div>{% endif %}
+  </div>
+</div>

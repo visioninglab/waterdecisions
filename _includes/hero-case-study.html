@@ -1,0 +1,13 @@
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-breadcrumb"><a href="{{ '/index.html' | relative_url }}"><i data-lucide="book-open" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Case Studies</a> <span>&rsaquo;</span> <a href="{{ '/index.html' | relative_url }}?sector={{ page.breadcrumb_sector_filter }}">{{ page.breadcrumb_sector_label }}</a> <span>&rsaquo;</span> {{ page.country }}</div>
+    <h1>{{ page.title }}</h1>
+    <p class="hero-subtitle">{{ page.subtitle }}</p>
+    {% if page.hero_tags %}
+    <div class="hero-tags">
+      {% for tag in page.hero_tags %}<span class="hero-tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>

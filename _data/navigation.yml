@@ -1,0 +1,24 @@
+- label: "Case Studies"
+  url: "/index.html"
+  icon: "book-open"
+  id: "case-studies"
+
+- label: "Principles"
+  url: "/principles.html"
+  icon: "scale"
+  id: "principles"
+
+- label: "Glossary"
+  url: "/glossary.html"
+  icon: "bookmark"
+  id: "glossary"
+
+- label: "Assessment"
+  url: "/assessment.html"
+  icon: "clipboard-check"
+  id: "assessment"
+
+- label: "About"
+  url: "/about.html"
+  icon: "info"
+  id: "about"

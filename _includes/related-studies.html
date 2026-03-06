@@ -1,0 +1,19 @@
+{% if page.related_studies %}
+<div class="related-studies">
+  <div class="related-studies-inner">
+    <h3>Related Case Studies</h3>
+    <div class="related-grid">
+      {% for study in page.related_studies %}
+      <a href="{{ study.slug | append: '.html' | relative_url }}" class="related-card">
+        <div class="related-card-banner" style="background: {{ study.banner_gradient }};"></div>
+        <div class="related-card-body">
+          <span class="related-card-cat">{{ study.category }}</span>
+          <span class="related-card-title">{{ study.title }}</span>
+          <span class="related-card-desc">{{ study.desc }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}

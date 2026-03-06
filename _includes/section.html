@@ -1,0 +1,27 @@
+{% assign s = include.section %}
+{% assign meta = site.data.sections[s.id] %}
+{% assign sec_icon = s.icon | default: meta.icon | default: "info" %}
+{% assign sec_icon_bg = s.icon_bg | default: meta.icon_bg | default: "#e0f2fe" %}
+{% assign sec_icon_color = s.icon_color | default: meta.icon_color | default: "#0284c7" %}
+{% assign sec_title = s.title | default: meta.title | default: s.id %}
+<div class="section" id="{{ s.id }}">
+  <div class="section-header" onclick="toggleSection(this)">
+    {% if s.icon_emoji %}
+    <div class="section-icon" style="background:{{ sec_icon_bg }};color:{{ sec_icon_color }};">{{ s.icon_emoji }}</div>
+    {% else %}
+    <div class="section-icon" style="background:{{ sec_icon_bg }};color:{{ sec_icon_color }};"><i data-lucide="{{ sec_icon }}"></i></div>
+    {% endif %}
+    <h2>{{ sec_title }}</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+  </div>
+  <div class="section-body">
+    {% if s.type == "hazards" %}
+      {% include hazard-cards.html section=s %}
+    {% elsif s.type == "principles" %}
+      {% include principles-assessment.html section=s %}
+    {% elsif s.type == "taps-grid" %}
+      {% include taps-grid.html section=s %}
+    {% else %}
+      {{ s.content | markdownify }}
+    {% endif %}
+  </div>
+</div>

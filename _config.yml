@@ -1,0 +1,40 @@
+title: DIR Case Study Wiki
+description: >
+  Exploring resilience through real-world infrastructure case studies
+  assessed against UNDRR Principles and ISO 22372.
+url: "https://visioninglab.github.io"
+baseurl: "/DIRwiki"
+
+# Collections
+collections:
+  case_studies:
+    output: true
+    permalink: /:slug.html
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "case_studies"
+    values:
+      layout: "case-study"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  parse_block_html: true
+
+# Exclude from build
+exclude:
+  - decrypted/
+  - DIRcasestudies_v1/
+  - DIRcasestudies_v1.zip
+  - docs/
+  - "*.ps1"
+  - .staticrypt.json
+  - Gemfile.lock
+  - node_modules/
+  - README.md
+  - CLAUDE.md

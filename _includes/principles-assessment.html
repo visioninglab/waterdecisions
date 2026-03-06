@@ -1,0 +1,5 @@
+{% assign s = include.section %}
+<p style="margin-bottom:1rem; font-size:14px; color:var(--muted);">Assessment of meeting Principles of Resilient Infrastructure</p>
+{% for p in s.assessments %}
+<div class="principle-card"><h4>{{ p.principle }}{% if p.status == "todo" %} <span class="status-tag todo">To Do</span>{% endif %}</h4>{{ p.content | markdownify }}</div>
+{% endfor %}

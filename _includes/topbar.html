@@ -1,0 +1,13 @@
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="{{ '/index.html' | relative_url }}">
+      <span class="dot"></span>
+      DIR Case Study Wiki
+    </a>
+  </div>
+  <div class="topbar-nav">
+    {% for item in site.data.navigation %}
+    <a href="{{ item.url | relative_url }}"{% if page.nav_active == item.id %} class="active"{% endif %}><i data-lucide="{{ item.icon }}" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>{{ item.label }}</a>{% unless forloop.last %} {% endunless %}
+    {% endfor %}
+  </div>
+</div>

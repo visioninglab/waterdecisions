@@ -1,0 +1,7 @@
+<nav class="toc">
+  <div class="toc-title">Contents</div>
+  {% for section in page.sections %}
+  {% assign meta = site.data.sections[section.id] %}
+  <a href="#{{ section.id }}">{{ section.title | default: meta.title | default: section.id }}</a>
+  {% endfor %}
+</nav>

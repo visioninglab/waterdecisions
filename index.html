@@ -1,0 +1,155 @@
+---
+layout: default
+title: false
+description: "DIR Case Study Wiki - Exploring resilience through real-world infrastructure case studies across water, energy, transport, digital, and climate sectors."
+nav_active: case-studies
+footer_text: "DIR Case Study Wiki &bull; Resilient Infrastructure Research &bull; Last updated February 2026"
+---
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <h1>Case Studies</h1>
+    <p class="hero-subtitle">Exploring resilience through real-world infrastructure case studies &mdash; assessed against the <a href="https://www.undrr.org/publication/handbook-implementing-principles-resilient-infrastructure" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">UNDRR Principles</a> and <a href="https://www.iso.org/standard/50275.html" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">ISO 22372</a> framework for resilient infrastructure.</p>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="page-content">
+
+  <!-- STATS -->
+  <div class="overview-stats">
+    <div class="overview-stat">
+      <i data-lucide="book-open" class="overview-stat-icon"></i>
+      <div class="overview-stat-num">{{ site.case_studies | size }}</div>
+      <div class="overview-stat-label">Case Studies</div>
+    </div>
+    <div class="overview-stat">
+      <i data-lucide="layers" class="overview-stat-icon"></i>
+      <div class="overview-stat-num">7</div>
+      <div class="overview-stat-label">Sectors</div>
+    </div>
+    <div class="overview-stat">
+      <i data-lucide="shield-check" class="overview-stat-icon"></i>
+      <div class="overview-stat-num">6</div>
+      <div class="overview-stat-label">Principles Tracked</div>
+    </div>
+    <div class="overview-stat">
+      <i data-lucide="globe" class="overview-stat-icon"></i>
+      <div class="overview-stat-num">5</div>
+      <div class="overview-stat-label">Countries / Regions</div>
+    </div>
+  </div>
+
+  <!-- SEARCH & FILTERS -->
+  <div class="search-bar">
+    <input type="text" id="studySearch" placeholder="Search case studies&hellip;" aria-label="Search case studies">
+    <button class="reset-filters-btn" id="resetFilters" onclick="resetAllFilters()" style="display:none;">Reset all filters</button>
+  </div>
+
+  <div class="filter-group" id="sectorFilter">
+    <label>Sector:</label>
+    <button class="filter-btn active" onclick="setFilter('sector','all',this)">All</button>
+    <button class="filter-btn" onclick="setFilter('sector','water',this)">Water</button>
+    <button class="filter-btn" onclick="setFilter('sector','energy',this)">Energy</button>
+    <button class="filter-btn" onclick="setFilter('sector','transport',this)">Transport</button>
+    <button class="filter-btn" onclick="setFilter('sector','digital',this)">Digital</button>
+    <button class="filter-btn" onclick="setFilter('sector','climate',this)">Climate</button>
+    <button class="filter-btn" onclick="setFilter('sector','built',this)">Built Environment</button>
+    <button class="filter-btn" onclick="setFilter('sector','space',this)">Space</button>
+  </div>
+  <div class="filter-group" id="hazardFilter">
+    <label>Hazard:</label>
+    <button class="filter-btn active" onclick="setFilter('hazard','all',this)">All</button>
+    <button class="filter-btn" onclick="setFilter('hazard','natural',this)">Natural</button>
+    <button class="filter-btn" onclick="setFilter('hazard','flood',this)">Flood</button>
+    <button class="filter-btn" onclick="setFilter('hazard','climate',this)">Climate</button>
+    <button class="filter-btn" onclick="setFilter('hazard','seismic',this)">Seismic</button>
+    <button class="filter-btn" onclick="setFilter('hazard','cyber',this)">Cyber</button>
+    <button class="filter-btn" onclick="setFilter('hazard','organisational',this)">Organisational</button>
+  </div>
+
+  <!-- LOCATION MAP -->
+  <div class="map-section">
+    <div class="map-section-header">
+      <label>Location:</label>
+      <button class="map-reset-btn hidden" id="mapResetBtn" onclick="resetMap()">Show All Locations</button>
+    </div>
+    <div class="world-map-container">
+      <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg" style="max-height:320px;" role="img" aria-label="World map showing case study locations">
+        <rect fill="#f0eeea" width="360" height="180" rx="8"/>
+        <g class="map-region" data-location="usa" onclick="setLocation('usa')" tabindex="0" role="button"><title>USA - 2 case studies</title>
+          <path d="M30,45 L55,40 L75,42 L85,48 L90,55 L88,62 L82,70 L75,75 L65,78 L55,77 L42,72 L35,65 L28,58 L25,50 Z"/>
+          <path d="M15,30 L30,28 L40,32 L50,30 L55,35 L50,40 L38,42 L25,40 L18,36 Z"/>
+        </g>
+        <text class="map-label" x="55" y="56">USA</text>
+        <text class="map-count" x="55" y="60">2 studies</text>
+        <g class="map-region" data-location="eu" onclick="setLocation('eu')" tabindex="0" role="button"><title>European Union - 1 case study</title>
+          <path d="M155,30 L165,28 L175,30 L185,28 L195,32 L198,40 L195,48 L190,55 L182,58 L175,56 L168,58 L160,55 L155,48 L152,40 Z"/>
+          <path d="M145,42 L152,38 L155,44 L150,48 L145,46 Z"/>
+        </g>
+        <text class="map-label" x="175" y="44">EU</text>
+        <text class="map-count" x="175" y="48">1 study</text>
+        <g class="map-region" data-location="china" onclick="setLocation('china')" tabindex="0" role="button"><title>China - 4 case studies</title>
+          <path d="M240,40 L255,35 L270,38 L282,42 L290,50 L292,60 L288,68 L280,74 L270,76 L260,74 L250,70 L242,62 L238,52 L236,45 Z"/>
+        </g>
+        <text class="map-label" x="265" y="55">China</text>
+        <text class="map-count" x="265" y="59">4 studies</text>
+        <g class="map-region" data-location="singapore" onclick="setLocation('singapore')" tabindex="0" role="button"><title>Singapore - 1 case study</title>
+          <circle cx="272" cy="102" r="4"/>
+          <circle cx="272" cy="102" r="6.5" fill="none" stroke="#d4d0ca" stroke-width="0.8"/>
+        </g>
+        <text class="map-label" x="272" y="94">Singapore</text>
+        <text class="map-count" x="272" y="112">1 study</text>
+        <g class="map-region" data-location="australia" onclick="setLocation('australia')" tabindex="0" role="button"><title>Australia - 2 case studies</title>
+          <path d="M270,120 L285,115 L300,118 L310,125 L315,135 L310,148 L300,155 L288,158 L275,155 L268,145 L265,135 L266,125 Z"/>
+          <path d="M310,150 L318,148 L322,155 L316,158 Z"/>
+        </g>
+        <text class="map-label" x="290" y="135">Australia</text>
+        <text class="map-count" x="290" y="139">2 studies</text>
+        <path d="M80,90 L92,85 L100,90 L102,100 L98,115 L90,130 L82,140 L75,145 L72,135 L70,120 L72,105 L75,95 Z" fill="#e8e6e2" stroke="#fff" stroke-width="0.5"/>
+        <path d="M165,65 L178,62 L188,68 L192,80 L190,95 L185,108 L178,118 L170,122 L162,118 L158,108 L155,95 L157,80 L160,70 Z" fill="#e8e6e2" stroke="#fff" stroke-width="0.5"/>
+        <line x1="0" y1="90" x2="360" y2="90" stroke="#d4d0ca" stroke-width="0.2" stroke-dasharray="2,4" opacity="0.5"/>
+        <line x1="180" y1="0" x2="180" y2="180" stroke="#d4d0ca" stroke-width="0.2" stroke-dasharray="2,4" opacity="0.5"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- CASE STUDY CARDS -->
+  <div class="studies-grid" id="studiesGrid">
+    {% assign studies = site.case_studies | sort: "slug" %}
+    {% for study in studies %}
+    <a href="{{ study.url | relative_url }}" class="study-card" data-sector="{{ study.card.filters.sector }}" data-hazard="{{ study.card.filters.hazard }}" data-location="{{ study.card.filters.location }}">
+      <div class="study-card-banner" style="background: {{ study.card.banner_gradient }};"></div>
+      <div class="study-card-body">
+        <div class="study-card-category">{{ study.card.category }}</div>
+        <div class="study-card-title">{{ study.card.short_title }}</div>
+        <div class="study-card-desc">{{ study.card.short_desc }}</div>
+        <div class="study-card-tags">
+          {% for tag in study.card.tags %}
+          <span class="study-card-tag">{{ tag }}</span>
+          {% endfor %}
+          {% if study.status == "draft" %}
+          <span class="study-card-tag" style="background:#fef3c7;color:#92400e;">Draft</span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="study-card-footer">
+        <span>{{ study.card.footer_text }}</span>
+        {% if study.status == "draft" %}
+        <span class="status"><span class="status-dot draft"></span> Draft</span>
+        {% else %}
+        <span class="status"><span class="status-dot active"></span> Published</span>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+
+    <!-- No Results -->
+    <div class="no-results" id="noResults">
+      <h3>No matching case studies</h3>
+      <p>Try adjusting your filters to see more results.</p>
+    </div>
+
+  </div>
+</div>

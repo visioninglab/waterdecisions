@@ -1,0 +1,233 @@
+# ============================================================
+# Sveltia CMS Configuration — DIR Case Study Wiki
+# ============================================================
+# Sveltia CMS is a Decap CMS-compatible editor with native
+# GitHub PKCE support (no external OAuth proxy needed).
+#
+# Setup:
+#   1. Register a GitHub OAuth App at https://github.com/settings/developers
+#      - Application name: DIR Wiki CMS
+#      - Homepage URL: https://visioninglab.github.io/DIRwiki/
+#      - Authorization callback URL: https://visioninglab.github.io/DIRwiki/admin/
+#   2. Copy the Client ID into the "app_id" field below
+# ============================================================
+
+backend:
+  name: github
+  repo: visioninglab/DIRwiki
+  branch: master
+  auth_type: pkce
+  app_id: Ov23liv8hsOrJoDVvert
+
+publish_mode: editorial_workflow
+
+media_folder: "assets/images"
+public_folder: "/DIRwiki/assets/images"
+
+site_url: "https://visioninglab.github.io/DIRwiki"
+display_url: "https://visioninglab.github.io/DIRwiki"
+logo_url: "https://visioninglab.github.io/DIRwiki/favicon.svg"
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
+# ============================================================
+# Collections
+# ============================================================
+collections:
+
+  # --------------------------------------------------------
+  # Case Studies
+  # --------------------------------------------------------
+  - name: case_studies
+    label: "Case Studies"
+    label_singular: "Case Study"
+    folder: "_case_studies"
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{title}} ({{country}} — {{sector}})"
+    sortable_fields: ["title", "country", "sector", "status"]
+
+    fields:
+
+      # --- Core metadata ---
+      - { name: title, label: Title, widget: string, hint: "Full title, e.g. 'Singapore — Deep Tunnel Sewerage System (DTSS)'" }
+      - { name: slug, label: Slug, widget: string, hint: "URL slug, e.g. 'singapore-dtss' — becomes /singapore-dtss.html" }
+      - { name: description, label: Meta Description, widget: text }
+      - { name: country, label: Country / Region, widget: string }
+      - name: sector
+        label: Sector
+        widget: select
+        options:
+          - { label: "Water", value: "water" }
+          - { label: "Energy", value: "energy" }
+          - { label: "Transport", value: "transport" }
+          - { label: "Digital", value: "digital" }
+          - { label: "Climate", value: "climate" }
+          - { label: "Built Environment", value: "built" }
+          - { label: "Space", value: "space" }
+      - name: status
+        label: Status
+        widget: select
+        default: draft
+        options:
+          - { label: "Published", value: "published" }
+          - { label: "Draft", value: "draft" }
+      - { name: nav_active, label: Nav Active, widget: hidden, default: "case-studies" }
+
+      # --- Hero ---
+      - { name: subtitle, label: Hero Subtitle, widget: text, hint: "Displayed below the title in the hero banner." }
+      - { name: breadcrumb_sector_label, label: Breadcrumb Sector Label, widget: string, hint: "e.g. 'Water', 'Climate'" }
+      - { name: breadcrumb_sector_filter, label: Breadcrumb Sector Filter, widget: string, hint: "Must match a sector filter value, e.g. 'water', 'climate'" }
+      - name: hero_tags
+        label: Hero Tags
+        widget: list
+        min: 1
+        max: 6
+        field: { name: tag, label: Tag, widget: string }
+
+      # --- Stats bar ---
+      - name: stats
+        label: Stats Bar
+        widget: list
+        required: false
+        hint: "Three key statistics shown below the hero. Leave empty for draft studies."
+        fields:
+          - { name: value, label: Value, widget: string, hint: "e.g. '$10B', '206 km'" }
+          - { name: label, label: Label, widget: string, hint: "e.g. 'Total Cost', 'Tunnel Network'" }
+
+      # --- Infobox (sidebar quick facts) ---
+      - name: infobox
+        label: Quick Facts
+        widget: object
+        fields:
+          - { name: title, label: Box Title, widget: string, default: "Quick Facts" }
+          - name: items
+            label: Fact Items
+            widget: list
+            fields:
+              - { name: label, label: Label, widget: string }
+              - { name: value, label: Value, widget: string }
+
+      # --- Homepage card ---
+      - name: card
+        label: Homepage Card
+        widget: object
+        collapsed: true
+        hint: "Controls how this study appears on the homepage grid."
+        fields:
+          - { name: category, label: Category Line, widget: string, hint: "e.g. 'Water · Singapore'" }
+          - { name: short_title, label: Short Title, widget: string }
+          - { name: short_desc, label: Short Description, widget: text }
+          - { name: banner_gradient, label: Banner Gradient CSS, widget: string, hint: "e.g. 'linear-gradient(90deg, #0284c7, #0e4d6e)'" }
+          - { name: footer_text, label: Footer Text, widget: string }
+          - name: tags
+            label: Card Tags
+            widget: list
+            field: { name: tag, label: Tag, widget: string }
+          - name: filters
+            label: Filters
+            widget: object
+            hint: "Used by homepage search/filter system."
+            fields:
+              - { name: sector, label: Sector, widget: string }
+              - { name: hazard, label: Hazard Keywords, widget: string, hint: "Space-separated, e.g. 'natural climate flood'" }
+              - { name: location, label: Location, widget: string, hint: "e.g. 'singapore', 'usa', 'eu', 'china', 'australia'" }
+
+      # --- Content sections ---
+      - name: sections
+        label: Content Sections
+        widget: list
+        hint: "The main body of the case study. Each section is collapsible."
+        types:
+
+          # Standard text section
+          - name: standard
+            label: "Text Section"
+            widget: object
+            summary: "{{fields.id}} — Text"
+            fields:
+              - { name: id, label: Section ID, widget: string, hint: "e.g. 'overview', 'timeline', 'stakeholders', 'digitalisation', 'cost-benefit', 'futures'" }
+              - { name: title, label: Title Override, widget: string, required: false, hint: "Overrides the default title from sections.yml" }
+              - { name: icon, label: Lucide Icon Name, widget: string, required: false, hint: "e.g. 'droplets', 'clock', 'users'. Overrides default." }
+              - { name: icon_emoji, label: Emoji Icon (HTML), widget: string, required: false, hint: "HTML entity e.g. '&#x1F30D;'. Used instead of Lucide icon." }
+              - { name: icon_bg, label: Icon Background Colour, widget: string, required: false }
+              - { name: icon_color, label: Icon Colour, widget: string, required: false }
+              - { name: content, label: Content, widget: markdown }
+
+          # Hazards section (exogenous + endogenous)
+          - name: hazards
+            label: "Hazards Section"
+            widget: object
+            summary: "hazards — Exo/Endogenous"
+            fields:
+              - { name: id, label: Section ID, widget: hidden, default: "hazards" }
+              - { name: exogenous, label: Exogenous Hazards, widget: markdown, hint: "External threats (natural disasters, climate, attacks, etc.)" }
+              - { name: endogenous, label: Endogenous Hazards, widget: markdown, hint: "Internal threats (design flaws, maintenance gaps, organisational failures, etc.)" }
+
+          # Principles assessment
+          - name: principles
+            label: "Principles Assessment"
+            widget: object
+            summary: "principles — P1–P6 Assessment"
+            fields:
+              - { name: id, label: Section ID, widget: hidden, default: "principles" }
+              - name: assessments
+                label: Principle Assessments
+                widget: list
+                hint: "Assess against all six UNDRR principles."
+                fields:
+                  - name: principle
+                    label: Principle
+                    widget: select
+                    options:
+                      - "Continuously Learning (P1)"
+                      - "Proactively Protected (P2)"
+                      - "Environmentally Integrated (P3)"
+                      - "Socially Engaged (P4)"
+                      - "Shared Responsibility (P5)"
+                      - "Adaptively Transforming (P6)"
+                  - name: status
+                    label: Status
+                    widget: select
+                    options:
+                      - { label: "Completed", value: "done" }
+                      - { label: "To Do", value: "todo" }
+                  - { name: content, label: Assessment Content, widget: markdown }
+
+          # Card grid (e.g. Singapore four taps, China hydraulic components)
+          - name: taps-grid
+            label: "Card Grid Section"
+            widget: object
+            summary: "{{fields.id}} — Card Grid"
+            fields:
+              - { name: id, label: Section ID, widget: string, hint: "e.g. 'four-taps', 'components'" }
+              - { name: title, label: Section Title, widget: string }
+              - { name: icon, label: Lucide Icon Name, widget: string, required: false }
+              - { name: content, label: Introduction Text, widget: markdown, required: false, hint: "Shown above the cards." }
+              - name: cards
+                label: Cards
+                widget: list
+                fields:
+                  - { name: num, label: "Number / Label", widget: string, hint: "e.g. '1st National Tap'" }
+                  - { name: title, label: Title, widget: string }
+                  - { name: desc, label: Description, widget: text }
+              - { name: footer_content, label: Footer Content, widget: markdown, required: false, hint: "Shown below the cards." }
+
+      # --- Related studies ---
+      - name: related_studies
+        label: Related Studies
+        widget: list
+        hint: "Shown at the bottom. Usually 3 related case studies."
+        fields:
+          - { name: slug, label: Case Study Slug, widget: string, hint: "e.g. 'australia-bridge'" }
+          - { name: category, label: Category, widget: string, hint: "e.g. 'Transport · Australia'" }
+          - { name: title, label: Title, widget: string }
+          - { name: desc, label: Short Description, widget: string }
+          - { name: banner_gradient, label: Banner Gradient CSS, widget: string }
+
+      # --- Footer ---
+      - { name: footer_text, label: Footer Text, widget: string, hint: "Shown at the bottom of the page." }

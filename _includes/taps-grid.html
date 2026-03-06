@@ -1,0 +1,12 @@
+{% assign s = include.section %}
+{% if s.content %}{{ s.content | markdownify }}{% endif %}
+<div class="taps-grid">
+  {% for card in s.cards %}
+  <div class="tap-card">
+    <div class="tap-num">{{ card.num }}</div>
+    <div class="tap-title">{{ card.title }}</div>
+    <div class="tap-desc">{{ card.desc }}</div>
+  </div>
+  {% endfor %}
+</div>
+{% if s.footer_content %}{{ s.footer_content | markdownify }}{% endif %}

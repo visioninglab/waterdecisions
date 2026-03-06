@@ -1,0 +1,10 @@
+{% if page.infobox %}
+<div class="infobox">
+  <div class="infobox-header">{{ page.infobox.title }}</div>
+  <div class="infobox-grid">
+    {% for item in page.infobox.items %}
+    <div class="infobox-item{% if item.full_width %} full{% endif %}"><span class="infobox-label">{{ item.label }}</span><span class="infobox-value">{{ item.value }}</span></div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

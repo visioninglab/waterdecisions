@@ -1,0 +1,36 @@
+# Source documents
+DIRcasestudies_v1/
+DIRcasestudies_v1.zip
+
+# Temporary scripts
+extract_docx.ps1
+read_docx.ps1
+process-html.ps1
+fix-breadcrumbs.ps1
+update-pages.ps1
+remove-font.ps1
+update-cards.ps1
+update-nav.ps1
+rename-principles.ps1
+update-fonts.ps1
+add-lucide.ps1
+update-icons.ps1
+replace-emojis.ps1
+
+# Source documents (handbook)
+docs/
+
+# StatiCrypt
+.staticrypt.json
+
+# Decrypted working copies
+decrypted/
+
+# Jekyll build output
+_site/
+.jekyll-cache/
+.jekyll-metadata
+Gemfile.lock
+
+# Node (if using npm for any tooling)
+node_modules/

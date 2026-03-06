@@ -1,0 +1,8 @@
+---
+layout: default
+---
+{% include hero.html title=page.hero_title subtitle=page.hero_subtitle %}
+
+<div class="page-content{% if page.narrow %} narrow{% endif %}">
+{{ content }}
+</div>

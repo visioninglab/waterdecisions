@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7-Minute Resilience Diagnostic &mdash; DIR Case Study Wiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="7-minute resilience diagnostic for infrastructure systems. Assess against six UNDRR principles or explore water case studies.">
+<meta property="og:title" content="7-Minute Resilience Diagnostic &mdash; DIR Case Study Wiki">
+<meta property="og:description" content="Quick resilience diagnostic for infrastructure systems aligned with ISO 22372.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css?v=4">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <a href="index.html">
+      <span class="dot"></span>
+      DIR Case Study Wiki
+    </a>
+  </div>
+  <div class="topbar-nav">
+    <a href="index.html"><i data-lucide="book-open" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Case Studies</a>
+    <a href="principles.html"><i data-lucide="scale" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Principles</a>
+    <a href="glossary.html"><i data-lucide="bookmark" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Glossary</a>
+    <a href="assessment.html" class="active"><i data-lucide="clipboard-check" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Assessment</a>
+    <a href="about.html"><i data-lucide="info" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>About</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-breadcrumb"><span class="assess-demo-tag">DEMO</span></div>
+    <h1>7-Minute Resilience Diagnostic</h1>
+    <p class="hero-subtitle">Quick infrastructure resilience assessment aligned with <a href="https://www.iso.org/standard/50275.html" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">ISO 22372</a> and the six <a href="https://www.undrr.org/publication/handbook-implementing-principles-resilient-infrastructure" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">UNDRR Principles for Resilient Infrastructure</a>.</p>
+  </div>
+</div>
+
+<!-- ASSESSMENT CONTAINER -->
+<div class="assess-container" id="assessApp">
+
+  <!-- LANDING (step 0) -->
+  <div class="assess-step active" id="step0">
+    <div class="diag-landing">
+      <div class="diag-landing-cards">
+        <div class="diag-landing-card diag-card-start" onclick="startFresh()">
+          <div class="diag-card-icon"><i data-lucide="zap"></i></div>
+          <h3>Start a 7-Minute Diagnostic</h3>
+          <p>Assess your infrastructure system against six resilience principles. Takes approximately 7 minutes.</p>
+          <span class="diag-card-action">Begin &rarr;</span>
+        </div>
+        <div class="diag-landing-card diag-card-explore">
+          <div class="diag-card-icon"><i data-lucide="droplets"></i></div>
+          <h3>Explore Water Case Studies</h3>
+          <p>See how real water infrastructure systems score against the six principles.</p>
+          <div class="diag-case-tiles" id="caseTiles"></div>
+        </div>
+      </div>
+      <!-- CASE STUDY OVERVIEW -->
+      <div class="diag-case-overview" id="caseOverview"></div>
+
+      <div class="diag-landing-footer">
+        <a href="assessment-old.html">Use the full detailed assessment tool &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESS BAR (steps 1-5) -->
+  <div class="assess-progress" id="assessProgress" style="display:none;">
+    <div class="assess-progress-step" data-step="1">
+      <div class="assess-progress-dot">1</div>
+      <div class="assess-progress-label">System</div>
+    </div>
+    <div class="assess-progress-line"></div>
+    <div class="assess-progress-step" data-step="2">
+      <div class="assess-progress-dot">2</div>
+      <div class="assess-progress-label">Priorities</div>
+    </div>
+    <div class="assess-progress-line"></div>
+    <div class="assess-progress-step" data-step="3">
+      <div class="assess-progress-dot">3</div>
+      <div class="assess-progress-label">Principles</div>
+    </div>
+    <div class="assess-progress-line"></div>
+    <div class="assess-progress-step" data-step="4">
+      <div class="assess-progress-dot">4</div>
+      <div class="assess-progress-label">Decisions</div>
+    </div>
+    <div class="assess-progress-line"></div>
+    <div class="assess-progress-step" data-step="5">
+      <div class="assess-progress-dot">5</div>
+      <div class="assess-progress-label">Results</div>
+    </div>
+  </div>
+
+  <!-- STEP 1: SYSTEM -->
+  <div class="assess-step" id="step1">
+    <div class="assess-step-header">
+      <div class="assess-iso-tag">Step 1 of 4</div>
+      <h2>Define Your System</h2>
+      <p>What infrastructure system are you assessing?</p>
+    </div>
+    <div class="assess-step-body">
+      <div class="assess-field">
+        <label for="ctxSystem">System or Organisation Name</label>
+        <input type="text" id="ctxSystem" placeholder="e.g. National Water Grid, Regional Transport Authority&hellip;">
+      </div>
+      <div class="assess-field">
+        <label for="ctxSector">Sector</label>
+        <select id="ctxSector">
+          <option value="">Select sector&hellip;</option>
+          <option value="water">Water</option>
+          <option value="energy">Energy</option>
+          <option value="transport">Transport</option>
+          <option value="digital">Digital / Telecommunications</option>
+          <option value="climate">Climate / Environment</option>
+          <option value="built">Built Environment</option>
+          <option value="health">Health</option>
+          <option value="food">Food / Agriculture</option>
+          <option value="space">Space</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="assess-field">
+        <label for="ctxScale">Scale</label>
+        <select id="ctxScale">
+          <option value="">Select scale&hellip;</option>
+          <option value="national">National</option>
+          <option value="regional">Regional</option>
+          <option value="organisation">Organisation</option>
+          <option value="project">Project</option>
+        </select>
+      </div>
+      <div class="assess-field">
+        <label for="ctxRole">Your Role / Position</label>
+        <input type="text" id="ctxRole" placeholder="e.g. Chief Resilience Officer, Programme Director&hellip;">
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: PRIORITIES -->
+  <div class="assess-step" id="step2">
+    <div class="assess-step-header">
+      <div class="assess-iso-tag">Step 2 of 4</div>
+      <h2>Priorities &amp; Stakeholders</h2>
+      <p>What are you trying to achieve and who is involved?</p>
+    </div>
+    <div class="assess-step-body">
+      <div class="assess-list-section">
+        <h3>Top 3 Strategic Outcomes</h3>
+        <div id="outcomesList" class="assess-list"></div>
+      </div>
+      <div class="assess-list-section">
+        <h3>Key Concerns <span class="assess-hint">(select all that apply)</span></h3>
+        <div class="diag-concern-grid" id="concernsGrid">
+          <label class="diag-concern-item"><input type="checkbox" value="climate"> Climate change</label>
+          <label class="diag-concern-item"><input type="checkbox" value="flood"> Flood risk</label>
+          <label class="diag-concern-item"><input type="checkbox" value="cyber"> Cyber security</label>
+          <label class="diag-concern-item"><input type="checkbox" value="ageing"> Ageing assets</label>
+          <label class="diag-concern-item"><input type="checkbox" value="interdep"> Interdependencies</label>
+          <label class="diag-concern-item"><input type="checkbox" value="supply"> Supply chain</label>
+          <label class="diag-concern-item"><input type="checkbox" value="social"> Social equity</label>
+          <label class="diag-concern-item"><input type="checkbox" value="funding"> Funding constraints</label>
+        </div>
+      </div>
+      <div class="assess-list-section">
+        <h3>Key Stakeholders</h3>
+        <div id="stakeholdersList" class="assess-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: PRINCIPLES -->
+  <div class="assess-step" id="step3">
+    <div class="assess-step-header">
+      <div class="assess-iso-tag">Step 3 of 4</div>
+      <h2>Resilience Principles</h2>
+      <p>Rate your system against each of the six UNDRR principles (0&ndash;5). Add optional reflections.</p>
+    </div>
+    <div class="assess-step-body" id="principlesBody"></div>
+  </div>
+
+  <!-- STEP 4: DECISIONS -->
+  <div class="assess-step" id="step4">
+    <div class="assess-step-header">
+      <div class="assess-iso-tag">Step 4 of 4</div>
+      <h2>Decision Clarity</h2>
+      <p>How clear and effective are decisions across these five areas?</p>
+    </div>
+    <div class="assess-step-body" id="decisionsBody"></div>
+  </div>
+
+  <!-- STEP 5: RESULTS -->
+  <div class="assess-step" id="step5">
+    <div class="assess-step-header">
+      <div class="assess-iso-tag">Results Dashboard</div>
+      <h2 id="resultsTitle">Your Resilience Profile</h2>
+      <p id="resultsSubtitle"></p>
+    </div>
+    <div class="assess-step-body">
+      <!-- Maturity card -->
+      <div class="results-card diag-maturity-card" id="maturityCard">
+        <div class="diag-maturity-header">
+          <div>
+            <div class="maturity-score" id="maturityScore">0.0</div>
+            <div class="maturity-label" id="maturityLabel">Not assessed</div>
+          </div>
+          <div class="diag-maturity-bar-wrap">
+            <div class="maturity-bar"><div class="maturity-bar-fill" id="maturityFill"></div></div>
+            <div class="maturity-pct" id="maturityPct">0% of maximum</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart + Gaps row -->
+      <div class="results-layout">
+        <div class="results-chart-col">
+          <div class="results-card">
+            <h3>Principle Scores</h3>
+            <canvas id="radarChart" width="400" height="400"></canvas>
+          </div>
+        </div>
+        <div class="results-info-col">
+          <div class="results-card" id="gapsCard">
+            <h3>Top Gaps</h3>
+            <div id="gapsContent"></div>
+          </div>
+          <div class="results-card" id="pdcaCard">
+            <h3>PDCA Cycle (derived)</h3>
+            <div id="pdcaContent"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision confidence + Suggestions row -->
+      <div class="results-layout">
+        <div class="results-chart-col">
+          <div class="results-card" id="decisionMapCard">
+            <h3>Decision Confidence Map</h3>
+            <div id="decisionMapContent"></div>
+          </div>
+        </div>
+        <div class="results-info-col">
+          <div class="results-card" id="suggestionsCard">
+            <h3>Suggested Actions</h3>
+            <div id="suggestionsContent"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case study link (shown when viewing fixture) -->
+      <div class="results-card diag-case-link" id="caseStudyLink" style="display:none;">
+        <h3>Read the Full Case Study</h3>
+        <p id="caseStudyLinkText"></p>
+        <a id="caseStudyLinkHref" href="#" class="diag-case-read-btn">View case study &rarr;</a>
+      </div>
+
+      <!-- Export -->
+      <div class="export-actions">
+        <button class="assess-export-btn" onclick="exportPDF()">
+          <span class="export-icon">PDF</span>
+          <span class="export-label">Download PDF Report</span>
+          <span class="export-desc">Full report with charts and recommendations</span>
+        </button>
+        <button class="assess-export-btn" onclick="exportJSON()">
+          <span class="export-icon">JSON</span>
+          <span class="export-label">Download JSON Data</span>
+          <span class="export-desc">Raw data for further analysis</span>
+        </button>
+        <button class="assess-export-btn" onclick="window.print()">
+          <span class="export-icon">Print</span>
+          <span class="export-label">Print Summary</span>
+          <span class="export-desc">Print-optimised view</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="assess-nav" id="assessNav" style="display:none;">
+    <button class="assess-nav-btn assess-nav-prev" id="btnPrev" onclick="prevStep()">Previous</button>
+    <div class="assess-nav-status" id="navStatus"></div>
+    <button class="assess-nav-btn assess-nav-next" id="btnNext" onclick="nextStep()">Next</button>
+  </div>
+
+  <!-- STORAGE CONTROLS -->
+  <div class="assess-storage" id="assessStorage" style="display:none;">
+    <button class="assess-storage-btn" onclick="saveProgress()">Save Progress</button>
+    <button class="assess-storage-btn assess-storage-clear" onclick="clearProgress()">Clear &amp; Restart</button>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  7-Minute Resilience Diagnostic &mdash; A <strong>Visioning Lab</strong> &amp; <strong>UKCRIC</strong> prototype &bull; DEMO &bull; Not for production use
+</div>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="script.js?v=3"></script>
+<script src="assessment-fixtures.js"></script>
+<script src="assessment.js?v=4"></script>
+<div id="google_translate_element" class="translate-widget"></div>
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,zh-CN,fr,de,es,ar,ja,ko,pt',
+    layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

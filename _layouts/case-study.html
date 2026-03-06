@@ -1,0 +1,18 @@
+---
+layout: default
+---
+{% include hero-case-study.html %}
+{% include stat-bar.html %}
+
+<div class="layout">
+  {% include toc.html %}
+  <main class="content">
+    {% include infobox.html %}
+
+    {% for section in page.sections %}
+      {% include section.html section=section %}
+    {% endfor %}
+  </main>
+</div>
+
+{% include related-studies.html %}
