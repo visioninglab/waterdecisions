@@ -2544,6 +2544,8 @@ body {
   margin-right: 6px;
 }
 @keyframes wq-spin { to { transform: rotate(360deg); } }
+.wq-live-card--pending { opacity: 0.6; animation: wq-pulse 1.5s ease-in-out infinite; }
+@keyframes wq-pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 0.8; } }
 .wq-ok { color: #059669; font-weight: 600; }
 .wq-warn { color: #d97706; font-weight: 600; }
 

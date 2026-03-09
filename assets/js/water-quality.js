@@ -207,24 +207,18 @@
     grid.innerHTML = '';
 
     try {
-      // Two parallel API calls: nearby stations + latest readings
-      const [stationsResp, readingsResp] = await Promise.all([
-        fetch(`${EA_API}/id/stations?lat=${region.lat}&long=${region.long}&dist=${region.dist}&_limit=100`, FETCH_OPTS),
-        fetch(`${EA_API}/data/readings?latest&_limit=2000`, FETCH_OPTS)
-      ]);
-
+      // Step 1: Fetch nearby stations first (small, fast response)
+      const stationsResp = await fetch(`${EA_API}/id/stations?lat=${region.lat}&long=${region.long}&dist=${region.dist}&_limit=100`, FETCH_OPTS);
       if (!stationsResp.ok) throw new Error(`Stations API returned ${stationsResp.status}`);
-      if (!readingsResp.ok) throw new Error(`Readings API returned ${readingsResp.status}`);
-
       const stationsData = await stationsResp.json();
-      const readingsData = await readingsResp.json();
-
       const stations = stationsData.items || [];
-      const readings = readingsData.items || [];
 
-      statusEl.innerHTML = `<span class="wq-loading">Found ${stations.length} stations and ${readings.length} readings. Matching&hellip;</span>`;
+      if (stations.length === 0) {
+        statusEl.innerHTML = `<span class="wq-warn">No monitoring stations found near ${region.label}.</span>`;
+        return;
+      }
 
-      // Build a lookup: station reference -> station info
+      // Build station lookup and show station list immediately
       const stationMap = {};
       stations.forEach(s => {
         const ref = s.stationReference || (s['@id'] || '').split('/').pop();
@@ -240,6 +234,32 @@
         }
       });
 
+      // Show stations immediately as placeholder cards
+      const stationList = Object.values(stationMap).sort((a, b) => {
+        const dA = (a.lat && a.long) ? distKm(region.lat, region.long, a.lat, a.long) : 999;
+        const dB = (b.lat && b.long) ? distKm(region.lat, region.long, b.lat, b.long) : 999;
+        return dA - dB;
+      }).slice(0, 20);
+
+      statusEl.innerHTML = `<span class="wq-loading">Found ${stations.length} stations. Fetching latest readings&hellip;</span>`;
+      grid.innerHTML = stationList.map(s => {
+        const km = (s.lat && s.long) ? Math.round(distKm(region.lat, region.long, s.lat, s.long) * 10) / 10 : '';
+        return `
+          <div class="wq-live-card wq-live-card--pending">
+            <div class="wq-live-name">${s.name}</div>
+            <div class="wq-live-river">${[s.river, s.catchment, s.town].filter(Boolean).join(' &bull; ')}</div>
+            <div class="wq-live-value"><span class="wq-live-unit" style="color:var(--muted)">Fetching reading&hellip;</span></div>
+            ${km ? `<div class="wq-live-meta">${km} km away</div>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      // Step 2: Fetch latest readings (larger, slower response)
+      const readingsResp = await fetch(`${EA_API}/data/readings?latest&_limit=2000`, FETCH_OPTS);
+      if (!readingsResp.ok) throw new Error(`Readings API returned ${readingsResp.status}`);
+      const readingsData = await readingsResp.json();
+      const readings = readingsData.items || [];
+
       // Match readings to nearby stations
       const results = [];
       readings.forEach(r => {
@@ -253,7 +273,6 @@
         const s = stationMap[stationRef];
         const km = (s.lat && s.long) ? distKm(region.lat, region.long, s.lat, s.long) : 0;
 
-        // Parse parameter from measure string
         const paramParts = measureId.split('-');
         const param = paramParts.length > 1 ? paramParts[1] : 'level';
 
@@ -270,14 +289,14 @@
       });
 
       if (results.length === 0) {
-        statusEl.innerHTML = `<span class="wq-warn">No live readings matched stations near ${region.label}. The EA API may have limited real-time data. Try London or Oxford for best coverage.</span>`;
+        statusEl.innerHTML = `<span class="wq-warn">${stations.length} stations found near ${region.label} but no live readings available right now. Try again later.</span>`;
         return;
       }
 
       results.sort((a, b) => a.km - b.km);
       const display = results.slice(0, 20);
 
-      statusEl.innerHTML = `<span class="wq-ok">${results.length} readings from ${Object.keys(stationMap).length} stations near ${region.label} &bull; ${new Date().toLocaleTimeString()}</span>`;
+      statusEl.innerHTML = `<span class="wq-ok">${results.length} live readings from ${stations.length} stations near ${region.label} &bull; ${new Date().toLocaleTimeString()}</span>`;
 
       grid.innerHTML = display.map(r => {
         const time = new Date(r.dateTime);
