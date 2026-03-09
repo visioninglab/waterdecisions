@@ -164,104 +164,132 @@
 
   // Regions defined by lat/long centre + search radius (km)
   const REGIONS = {
-    'london':      { lat: 51.51, long: -0.12, dist: 15, label: 'London' },
-    'manchester':  { lat: 53.48, long: -2.24, dist: 20, label: 'Manchester' },
-    'birmingham':  { lat: 52.49, long: -1.89, dist: 20, label: 'Birmingham' },
-    'leeds':       { lat: 53.80, long: -1.55, dist: 20, label: 'Leeds / Yorkshire' },
-    'bristol':     { lat: 51.45, long: -2.59, dist: 20, label: 'Bristol / South West' },
-    'newcastle':   { lat: 54.97, long: -1.61, dist: 20, label: 'Newcastle / North East' },
-    'nottingham':  { lat: 52.95, long: -1.15, dist: 20, label: 'Nottingham / Trent' },
-    'cambridge':   { lat: 52.21, long:  0.12, dist: 25, label: 'Cambridge / Anglian' },
-    'oxford':      { lat: 51.75, long: -1.26, dist: 20, label: 'Oxford / Thames Valley' },
-    'exeter':      { lat: 50.72, long: -3.53, dist: 25, label: 'Exeter / Devon' }
+    'london':      { lat: 51.51, long: -0.12, dist: 30, label: 'London' },
+    'manchester':  { lat: 53.48, long: -2.24, dist: 30, label: 'Manchester' },
+    'birmingham':  { lat: 52.49, long: -1.89, dist: 30, label: 'Birmingham' },
+    'leeds':       { lat: 53.80, long: -1.55, dist: 30, label: 'Leeds / Yorkshire' },
+    'bristol':     { lat: 51.45, long: -2.59, dist: 30, label: 'Bristol / South West' },
+    'newcastle':   { lat: 54.97, long: -1.61, dist: 30, label: 'Newcastle / North East' },
+    'nottingham':  { lat: 52.95, long: -1.15, dist: 30, label: 'Nottingham / Trent' },
+    'cambridge':   { lat: 52.21, long:  0.12, dist: 35, label: 'Cambridge / Anglian' },
+    'oxford':      { lat: 51.75, long: -1.26, dist: 30, label: 'Oxford / Thames Valley' },
+    'exeter':      { lat: 50.72, long: -3.53, dist: 35, label: 'Exeter / Devon' }
   };
+
+  // Haversine distance (km) between two lat/long points
+  function distKm(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLon/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
 
   document.getElementById('liveLoadBtn')?.addEventListener('click', loadLiveData);
 
   async function loadLiveData() {
     const regionKey = document.getElementById('liveRegion').value;
     const grid = document.getElementById('liveGrid');
-    const status = document.getElementById('liveStatus');
+    const statusEl = document.getElementById('liveStatus');
 
     if (!regionKey) {
-      status.innerHTML = '<span class="wq-warn">Please select a region.</span>';
+      statusEl.innerHTML = '<span class="wq-warn">Please select a region.</span>';
       return;
     }
 
     const region = REGIONS[regionKey];
-    status.innerHTML = `<span class="wq-loading">Loading live data for ${region.label} from Environment Agency&hellip;</span>`;
+    statusEl.innerHTML = `<span class="wq-loading">Loading live data for ${region.label} from Environment Agency&hellip;</span>`;
     grid.innerHTML = '';
 
     try {
-      // Find stations within radius of the region centre
-      const url = `${EA_API}/id/stations?lat=${region.lat}&long=${region.long}&dist=${region.dist}&_limit=50`;
-      const resp = await fetch(url);
-      const data = await resp.json();
-      const stations = data.items || [];
+      // Step 1: Fetch all latest readings (the only endpoint that reliably returns data)
+      const readResp = await fetch(`${EA_API}/data/readings?latest&_limit=500`);
+      const readData = await readResp.json();
+      const readings = readData.items || [];
 
-      if (stations.length === 0) {
-        status.innerHTML = '<span class="wq-warn">No stations found near ' + region.label + '.</span>';
+      if (readings.length === 0) {
+        statusEl.innerHTML = '<span class="wq-warn">No readings currently available from the EA API.</span>';
         return;
       }
 
-      status.innerHTML = `<span class="wq-ok">Found ${stations.length} stations near ${region.label}. Loading latest readings&hellip;</span>`;
+      statusEl.innerHTML = `<span class="wq-loading">Got ${readings.length} readings. Looking up stations near ${region.label}&hellip;</span>`;
 
-      // Get latest reading for each station's first measure
-      const readingPromises = stations.slice(0, 16).map(async station => {
-        try {
-          const measures = station.measures;
-          if (!measures || (Array.isArray(measures) && measures.length === 0)) return null;
-          const measure = Array.isArray(measures) ? measures[0] : measures;
-          const measureId = typeof measure === 'string' ? measure : measure['@id'];
-          if (!measureId) return null;
-
-          const readUrl = measureId + '/readings?_sorted&_limit=1';
-          const rResp = await fetch(readUrl);
-          const rData = await rResp.json();
-          const reading = (rData.items || [])[0];
-          if (!reading || reading.value === undefined) return null;
-
-          const paramName = (typeof measure === 'object' ? measure.parameterName : null) || 'Level';
-          const unitName = (typeof measure === 'object' ? measure.unitName : null) || '';
-
-          return {
-            name: station.label || station.notation || 'Unknown',
-            river: station.riverName || '',
-            town: station.town || '',
-            catchment: station.catchmentName || '',
-            value: reading.value,
-            dateTime: reading.dateTime,
-            param: paramName,
-            unit: unitName || (paramName.includes('Rainfall') ? 'mm' : 'mASD')
-          };
-        } catch (e) { return null; }
+      // Step 2: Extract unique station refs from measure URLs
+      const stationReadings = {};
+      readings.forEach(r => {
+        const m = r.measure || '';
+        const parts = m.split('/measures/');
+        if (parts.length < 2) return;
+        const full = parts[1];
+        const sRef = full.split('-')[0];
+        if (!stationReadings[sRef]) {
+          stationReadings[sRef] = { measure: full, value: r.value, dateTime: r.dateTime };
+        }
       });
 
-      const results = (await Promise.all(readingPromises)).filter(Boolean);
+      const stationRefs = Object.keys(stationReadings);
+
+      // Step 3: Fetch station details in parallel (batched) and filter by distance
+      const results = [];
+      const batchSize = 10;
+      for (let i = 0; i < stationRefs.length && results.length < 16; i += batchSize) {
+        const batch = stationRefs.slice(i, i + batchSize);
+        const fetches = batch.map(async ref => {
+          try {
+            const resp = await fetch(`${EA_API}/id/stations/${ref}`);
+            const d = await resp.json();
+            const s = d.items || d;
+            const lat = s.lat;
+            const lng = s.long;
+            if (!lat || !lng) return null;
+            const km = distKm(region.lat, region.long, lat, lng);
+            if (km > region.dist) return null;
+            const rd = stationReadings[ref];
+            return {
+              name: s.label || ref,
+              river: s.riverName || '',
+              town: s.town || '',
+              catchment: s.catchmentName || '',
+              value: rd.value,
+              dateTime: rd.dateTime,
+              measure: rd.measure,
+              km: Math.round(km * 10) / 10
+            };
+          } catch (e) { return null; }
+        });
+        const batchResults = (await Promise.all(fetches)).filter(Boolean);
+        results.push(...batchResults);
+      }
 
       if (results.length === 0) {
-        status.innerHTML = '<span class="wq-warn">No recent readings available for ' + region.label + '.</span>';
+        statusEl.innerHTML = `<span class="wq-warn">No stations with live readings found within ${region.dist} km of ${region.label}. The EA API may have limited data available.</span>`;
         return;
       }
 
-      status.innerHTML = `<span class="wq-ok">${results.length} stations with live data near ${region.label} &bull; Updated: ${new Date().toLocaleTimeString()}</span>`;
+      results.sort((a, b) => a.km - b.km);
+
+      statusEl.innerHTML = `<span class="wq-ok">${results.length} stations with live data near ${region.label} &bull; Updated: ${new Date().toLocaleTimeString()}</span>`;
 
       grid.innerHTML = results.map(r => {
         const time = new Date(r.dateTime);
         const ago = Math.round((Date.now() - time) / 60000);
         const agoText = ago < 60 ? `${ago} min ago` : ago < 1440 ? `${Math.round(ago / 60)}h ago` : `${Math.round(ago / 1440)}d ago`;
+        // Parse parameter from measure string
+        const paramParts = r.measure.split('-');
+        const param = paramParts.length > 1 ? paramParts[1] : 'level';
+        const paramLabel = param === 'level' ? 'Water Level' : param === 'flow' ? 'Flow' : param;
         return `
           <div class="wq-live-card">
             <div class="wq-live-name">${r.name}</div>
             <div class="wq-live-river">${[r.river, r.catchment, r.town].filter(Boolean).join(' &bull; ')}</div>
-            <div class="wq-live-value">${typeof r.value === 'number' ? r.value.toFixed(3) : r.value} <span class="wq-live-unit">${r.unit}</span></div>
-            <div class="wq-live-meta"><span class="wq-live-param">${r.param}</span> &bull; <span class="wq-live-time">${agoText}</span></div>
+            <div class="wq-live-value">${typeof r.value === 'number' ? r.value.toFixed(3) : r.value} <span class="wq-live-unit">${paramLabel}</span></div>
+            <div class="wq-live-meta"><span class="wq-live-param">${r.km} km away</span> &bull; <span class="wq-live-time">${agoText}</span></div>
           </div>
         `;
       }).join('');
 
     } catch (err) {
-      status.innerHTML = `<span class="wq-warn">Error loading data: ${err.message}</span>`;
+      statusEl.innerHTML = `<span class="wq-warn">Error loading data: ${err.message}</span>`;
     }
   }
 
