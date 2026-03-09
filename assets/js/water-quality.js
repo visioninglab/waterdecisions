@@ -200,7 +200,10 @@
     }
 
     const region = REGIONS[regionKey];
-    statusEl.innerHTML = `<span class="wq-loading">Loading live data for ${region.label} from Environment Agency&hellip;</span>`;
+    const btn = document.getElementById('liveLoadBtn');
+    btn.disabled = true;
+    btn.textContent = 'Loading\u2026';
+    statusEl.innerHTML = `<span class="wq-loading">Connecting to Environment Agency API for ${region.label}&hellip;</span>`;
     grid.innerHTML = '';
 
     try {
@@ -294,6 +297,9 @@
     } catch (err) {
       statusEl.innerHTML = `<span class="wq-warn">Error: ${err.message}. Check browser console for details.</span>`;
       console.error('Live monitoring error:', err);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Load Data';
     }
   }
 

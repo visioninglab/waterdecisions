@@ -2532,6 +2532,18 @@ body {
   font-size: 13px;
 }
 .wq-loading { color: var(--accent); font-weight: 600; }
+.wq-loading::before {
+  content: '';
+  display: inline-block;
+  width: 14px; height: 14px;
+  border: 2px solid var(--accent);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: wq-spin 0.8s linear infinite;
+  vertical-align: -2px;
+  margin-right: 6px;
+}
+@keyframes wq-spin { to { transform: rotate(360deg); } }
 .wq-ok { color: #059669; font-weight: 600; }
 .wq-warn { color: #d97706; font-weight: 600; }
 
