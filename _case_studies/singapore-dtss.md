@@ -4,6 +4,23 @@ slug: singapore-dtss
 description: "Singapore Deep Tunnel Sewerage System - National water security through used water reclamation via a 206km deep tunnel system."
 country: Singapore
 sector: water
+sdgs: ["SDG6", "SDG9", "SDG11", "SDG13", "SDG17", "SDG12"]
+sdg_targets: ["6.3", "6.5", "9.1", "11.5", "13.1", "17.17", "12.2"]
+sdg_rationale:
+  - target: "6.3"
+    text: "Supports improved water quality through centralised deep-tunnel sewerage, reducing pollution of waterways and coastal areas."
+  - target: "6.5"
+    text: "Contributes to integrated water resources management by treating and reclaiming used water as NEWater."
+  - target: "9.1"
+    text: "Purpose-built resilient infrastructure designed for a 100-year operational lifespan with future expansion capacity."
+  - target: "11.5"
+    text: "Reduces urban flood risk by consolidating surface-level sewerage into a deep-tunnel system, freeing land for development."
+  - target: "13.1"
+    text: "Strengthens climate resilience by reducing dependence on imported water through closed-loop water reclamation."
+  - target: "17.17"
+    text: "Relies on public-private partnerships and international engineering collaboration for design, construction, and operation."
+  - target: "12.2"
+    text: "Promotes efficient resource use through water reclamation, biosolid recovery, and energy generation from the treatment process."
 status: published
 nav_active: case-studies
 
@@ -47,10 +64,14 @@ card:
     - Water Security
     - National Infrastructure
     - Digital Twin
+    - "SDG 6"
+    - "SDG 9"
+    - "SDG 17"
   filters:
     sector: water
     hazard: flood
     location: singapore
+    sdgs: "SDG6 SDG9 SDG11 SDG13 SDG17 SDG12"
 
 # Sections
 sections:
