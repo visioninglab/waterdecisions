@@ -162,81 +162,100 @@
   /* ── Live Monitoring (EA Flood Monitoring API) ── */
   const EA_API = 'https://environment.data.gov.uk/flood-monitoring';
 
+  // Regions defined by lat/long centre + search radius (km)
+  const REGIONS = {
+    'london':      { lat: 51.51, long: -0.12, dist: 15, label: 'London' },
+    'manchester':  { lat: 53.48, long: -2.24, dist: 20, label: 'Manchester' },
+    'birmingham':  { lat: 52.49, long: -1.89, dist: 20, label: 'Birmingham' },
+    'leeds':       { lat: 53.80, long: -1.55, dist: 20, label: 'Leeds / Yorkshire' },
+    'bristol':     { lat: 51.45, long: -2.59, dist: 20, label: 'Bristol / South West' },
+    'newcastle':   { lat: 54.97, long: -1.61, dist: 20, label: 'Newcastle / North East' },
+    'nottingham':  { lat: 52.95, long: -1.15, dist: 20, label: 'Nottingham / Trent' },
+    'cambridge':   { lat: 52.21, long:  0.12, dist: 25, label: 'Cambridge / Anglian' },
+    'oxford':      { lat: 51.75, long: -1.26, dist: 20, label: 'Oxford / Thames Valley' },
+    'exeter':      { lat: 50.72, long: -3.53, dist: 25, label: 'Exeter / Devon' }
+  };
+
   document.getElementById('liveLoadBtn')?.addEventListener('click', loadLiveData);
 
   async function loadLiveData() {
-    const region = document.getElementById('liveRegion').value;
-    const param = document.getElementById('liveParam').value;
+    const regionKey = document.getElementById('liveRegion').value;
     const grid = document.getElementById('liveGrid');
     const status = document.getElementById('liveStatus');
 
-    if (!region) {
+    if (!regionKey) {
       status.innerHTML = '<span class="wq-warn">Please select a region.</span>';
       return;
     }
 
-    status.innerHTML = '<span class="wq-loading">Loading live data from Environment Agency&hellip;</span>';
+    const region = REGIONS[regionKey];
+    status.innerHTML = `<span class="wq-loading">Loading live data for ${region.label} from Environment Agency&hellip;</span>`;
     grid.innerHTML = '';
 
     try {
-      // Find stations in the region with the selected parameter
-      const url = `${EA_API}/id/stations?parameter=${param}&search=${encodeURIComponent(region)}&_limit=20`;
+      // Find stations within radius of the region centre
+      const url = `${EA_API}/id/stations?lat=${region.lat}&long=${region.long}&dist=${region.dist}&_limit=50`;
       const resp = await fetch(url);
       const data = await resp.json();
       const stations = data.items || [];
 
       if (stations.length === 0) {
-        status.innerHTML = '<span class="wq-warn">No stations found for this region and parameter.</span>';
+        status.innerHTML = '<span class="wq-warn">No stations found near ' + region.label + '.</span>';
         return;
       }
 
-      status.innerHTML = `<span class="wq-ok">Found ${stations.length} stations. Loading latest readings&hellip;</span>`;
+      status.innerHTML = `<span class="wq-ok">Found ${stations.length} stations near ${region.label}. Loading latest readings&hellip;</span>`;
 
-      // Get latest readings for each station
-      const cards = [];
-      const readingPromises = stations.slice(0, 12).map(async station => {
+      // Get latest reading for each station's first measure
+      const readingPromises = stations.slice(0, 16).map(async station => {
         try {
-          const measuresUrl = typeof station.measures === 'string'
-            ? station.measures
-            : (Array.isArray(station.measures) ? station.measures[0]?.['@id'] || station.measures[0] : null);
-          if (!measuresUrl) return null;
+          const measures = station.measures;
+          if (!measures || (Array.isArray(measures) && measures.length === 0)) return null;
+          const measure = Array.isArray(measures) ? measures[0] : measures;
+          const measureId = typeof measure === 'string' ? measure : measure['@id'];
+          if (!measureId) return null;
 
-          const readUrl = (typeof measuresUrl === 'string' ? measuresUrl : measuresUrl['@id']) + '/readings?_sorted&_limit=1';
+          const readUrl = measureId + '/readings?_sorted&_limit=1';
           const rResp = await fetch(readUrl);
           const rData = await rResp.json();
           const reading = (rData.items || [])[0];
-          if (!reading) return null;
+          if (!reading || reading.value === undefined) return null;
+
+          const paramName = (typeof measure === 'object' ? measure.parameterName : null) || 'Level';
+          const unitName = (typeof measure === 'object' ? measure.unitName : null) || '';
 
           return {
             name: station.label || station.notation || 'Unknown',
             river: station.riverName || '',
             town: station.town || '',
+            catchment: station.catchmentName || '',
             value: reading.value,
             dateTime: reading.dateTime,
-            unit: param === 'waterLevel' ? 'mASD' : 'mm'
+            param: paramName,
+            unit: unitName || (paramName.includes('Rainfall') ? 'mm' : 'mASD')
           };
-        } catch { return null; }
+        } catch (e) { return null; }
       });
 
       const results = (await Promise.all(readingPromises)).filter(Boolean);
 
       if (results.length === 0) {
-        status.innerHTML = '<span class="wq-warn">No recent readings available.</span>';
+        status.innerHTML = '<span class="wq-warn">No recent readings available for ' + region.label + '.</span>';
         return;
       }
 
-      status.innerHTML = `<span class="wq-ok">${results.length} stations with live data &bull; ${param === 'waterLevel' ? 'Water Level (mASD)' : 'Rainfall (mm)'} &bull; Updated: ${new Date().toLocaleTimeString()}</span>`;
+      status.innerHTML = `<span class="wq-ok">${results.length} stations with live data near ${region.label} &bull; Updated: ${new Date().toLocaleTimeString()}</span>`;
 
       grid.innerHTML = results.map(r => {
         const time = new Date(r.dateTime);
         const ago = Math.round((Date.now() - time) / 60000);
-        const agoText = ago < 60 ? `${ago} min ago` : `${Math.round(ago / 60)}h ago`;
+        const agoText = ago < 60 ? `${ago} min ago` : ago < 1440 ? `${Math.round(ago / 60)}h ago` : `${Math.round(ago / 1440)}d ago`;
         return `
           <div class="wq-live-card">
             <div class="wq-live-name">${r.name}</div>
-            ${r.river ? `<div class="wq-live-river">${r.river}${r.town ? ' &bull; ' + r.town : ''}</div>` : ''}
+            <div class="wq-live-river">${[r.river, r.catchment, r.town].filter(Boolean).join(' &bull; ')}</div>
             <div class="wq-live-value">${typeof r.value === 'number' ? r.value.toFixed(3) : r.value} <span class="wq-live-unit">${r.unit}</span></div>
-            <div class="wq-live-time">${agoText}</div>
+            <div class="wq-live-meta"><span class="wq-live-param">${r.param}</span> &bull; <span class="wq-live-time">${agoText}</span></div>
           </div>
         `;
       }).join('');

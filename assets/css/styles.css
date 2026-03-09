@@ -2572,6 +2572,15 @@ body {
   font-weight: 400;
   color: var(--muted);
 }
+.wq-live-meta {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: 4px;
+}
+.wq-live-param {
+  color: var(--accent);
+}
 .wq-live-time {
   font-size: 11px;
   color: var(--muted);

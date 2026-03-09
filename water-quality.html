@@ -42,22 +42,20 @@ footer_text: "Water Decisions &bull; CWQ Ontology Explorer &bull; Data: UKTAG EQ
 
 <!-- TAB: Live Monitoring -->
 <div class="wq-panel" id="panel-live">
-  <p class="wq-intro">Real-time river level and rainfall data from the Environment Agency Flood Monitoring API. Select a region to see the latest readings.</p>
+  <p class="wq-intro">Real-time river level and rainfall data from the Environment Agency Flood Monitoring API. Select a region to see the latest readings from nearby monitoring stations.</p>
   <div class="wq-live-controls">
     <select id="liveRegion" aria-label="Select region">
       <option value="">Select a region&hellip;</option>
-      <option value="Thames">Thames</option>
-      <option value="Severn">Severn</option>
-      <option value="Anglian">Anglian</option>
-      <option value="North West">North West</option>
-      <option value="Yorkshire">Yorkshire</option>
-      <option value="North East">North East</option>
-      <option value="South West">South West</option>
-      <option value="South East">South East</option>
-    </select>
-    <select id="liveParam" aria-label="Select parameter">
-      <option value="waterLevel">Water Level</option>
-      <option value="rainfall">Rainfall</option>
+      <option value="london">London</option>
+      <option value="oxford">Oxford / Thames Valley</option>
+      <option value="cambridge">Cambridge / Anglian</option>
+      <option value="birmingham">Birmingham</option>
+      <option value="manchester">Manchester</option>
+      <option value="leeds">Leeds / Yorkshire</option>
+      <option value="nottingham">Nottingham / Trent</option>
+      <option value="newcastle">Newcastle / North East</option>
+      <option value="bristol">Bristol / South West</option>
+      <option value="exeter">Exeter / Devon</option>
     </select>
     <button id="liveLoadBtn" class="wq-btn">Load Data</button>
   </div>
