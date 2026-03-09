@@ -28,6 +28,15 @@
       desc: 'Adapt and transform infrastructure systems to meet changing needs and conditions.' }
   ];
 
+  // SDG inference from principle scores
+  var SDG_INFERENCE = {
+    'SDG 6':  { name: 'Clean Water and Sanitation', color: '#26BDE2', principles: ['p1', 'p3', 'p4', 'p5'] },
+    'SDG 9':  { name: 'Industry, Innovation and Infrastructure', color: '#FD6925', principles: ['p2', 'p6'] },
+    'SDG 11': { name: 'Sustainable Cities and Communities', color: '#FD9D24', principles: ['p2', 'p4', 'p6'] },
+    'SDG 13': { name: 'Climate Action', color: '#3F7E44', principles: ['p1', 'p2', 'p6'] },
+    'SDG 17': { name: 'Partnerships for the Goals', color: '#19486A', principles: ['p4', 'p5'] }
+  };
+
   var DECISION_AREAS = [
     { id: 'strategy', label: 'Strategy', prompt: 'How clear is the strategic direction for resilience?' },
     { id: 'operations', label: 'Operations', prompt: 'How clear are operational decisions and responsibilities?' },
@@ -602,6 +611,26 @@
 
     // Suggestions
     renderSuggestions(scores);
+
+    // SDG Contribution Inference
+    var sdgEl = document.getElementById('sdgInference');
+    if (sdgEl) {
+      var inferred = inferSDGs();
+      if (inferred.length > 0) {
+        var badges = inferred.map(function (s) {
+          return '<span class="sdg-badge" style="background:' + s.color + ';">' + s.sdg + '</span>';
+        }).join(' ');
+        var top3 = inferred.slice(0, 3).map(function (s) { return s.sdg; }).join(', ');
+        sdgEl.innerHTML =
+          '<h4><i data-lucide="globe" style="width:16px;height:16px;display:inline;vertical-align:-2px;margin-right:6px;"></i>Likely SDG Contribution</h4>' +
+          '<p>Based on the principle profile, this assessment most strongly contributes to <strong>' + top3 + '</strong>.</p>' +
+          '<p style="font-size:0.8rem;color:#6b6560;">The six principles remain the core assessment method. SDG mappings indicate areas of contribution rather than formal certification.</p>' +
+          '<div class="sdg-badges">' + badges + '</div>';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      } else {
+        sdgEl.innerHTML = '';
+      }
+    }
   }
 
   function getPrincipleScoresArray() {
@@ -779,6 +808,21 @@
   }
 
   function avg(a, b) { return (a + b) / 2; }
+
+  function inferSDGs() {
+    var result = [];
+    Object.keys(SDG_INFERENCE).forEach(function (sdg) {
+      var info = SDG_INFERENCE[sdg];
+      var scores = info.principles.map(function (p) { return state.principleScores[p] || 0; }).filter(function (s) { return s > 0; });
+      if (scores.length === 0) return;
+      var avg = scores.reduce(function (a, b) { return a + b; }, 0) / scores.length;
+      if (avg >= 2) {
+        result.push({ sdg: sdg, name: info.name, color: info.color, strength: avg });
+      }
+    });
+    result.sort(function (a, b) { return b.strength - a.strength; });
+    return result;
+  }
 
   /* ============ EXPORT ============ */
 
