@@ -8,6 +8,11 @@
   icon: "scale"
   id: "principles"
 
+- label: "SDG Mapping"
+  url: /sdg-mapping.html
+  icon: globe
+  id: sdg-mapping
+
 - label: "Glossary"
   url: "/glossary.html"
   icon: "bookmark"
@@ -32,4 +37,3 @@
   url: "/about.html"
   icon: "info"
   id: "about"
-
