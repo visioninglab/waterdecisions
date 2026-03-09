@@ -12,7 +12,7 @@
       <div class="sdg-goal-card" style="border-left: 4px solid {{ goal.color }};">
         <div class="sdg-goal-header">
           <span class="sdg-goal-num" style="background:{{ goal.color }};">{{ goal.number }}</span>
-          <span class="sdg-goal-name">{{ goal.name }}</span>
+          <a href="{{ goal.url }}" target="_blank" rel="noopener noreferrer" class="sdg-goal-name-link">{{ goal.name }}</a>
         </div>
         {% if page.sdg_rationale %}
           {% for r in page.sdg_rationale %}
