@@ -32,7 +32,8 @@ var CASE_STUDY_FIXTURES = {
       p3: 'Tuas WRP integrates water and waste; NEWater supplies 55% of needs.',
       p5: 'Centralised PUB governance with Four National Taps strategy.'
     },
-    decisionClarity: { strategy: 5, operations: 5, investment: 5, coordination: 4, monitoring: 4 }
+    decisionClarity: { strategy: 5, operations: 5, investment: 5, coordination: 4, monitoring: 4 },
+    sdgs: ['SDG 6', 'SDG 9', 'SDG 11', 'SDG 13', 'SDG 17']
   },
 
   'china-hydraulic': {
@@ -64,7 +65,8 @@ var CASE_STUDY_FIXTURES = {
       p3: 'Zero environmental impact \u2014 works with natural river dynamics, no dam.',
       p4: '2003: public campaign halted the destructive Yangliuhu dam project.'
     },
-    decisionClarity: { strategy: 4, operations: 5, investment: 3, coordination: 3, monitoring: 4 }
+    decisionClarity: { strategy: 4, operations: 5, investment: 3, coordination: 3, monitoring: 4 },
+    sdgs: ['SDG 6', 'SDG 9', 'SDG 11', 'SDG 13']
   },
 
   'usa-broward-county': {
@@ -96,6 +98,7 @@ var CASE_STUDY_FIXTURES = {
       p5: 'Multi-stakeholder coordination: county acted with autonomy from state/federal.',
       p6: 'McKinsey cost-benefit shows 9%+ ROI; multiple adaptation tiers assessed.'
     },
-    decisionClarity: { strategy: 5, operations: 3, investment: 4, coordination: 4, monitoring: 3 }
+    decisionClarity: { strategy: 5, operations: 3, investment: 4, coordination: 4, monitoring: 3 },
+    sdgs: ['SDG 6', 'SDG 11', 'SDG 13', 'SDG 17']
   }
 };
