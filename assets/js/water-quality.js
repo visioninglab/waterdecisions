@@ -190,25 +190,26 @@
   const FETCH_OPTS = { headers: { 'Accept': 'application/json' } };
 
   // Map EA measure parameters to related CWQ determinands
+  const PARAM_DETERMINAND_MAP = {
+    'level': ['Dissolved Oxygen (DO)', 'Turbidity', 'Total Suspended Solids (TSS)'],
+    'flow': ['Dissolved Oxygen (DO)', 'Biochemical Oxygen Demand (BOD, 5-day)', 'Ammonia (as N)'],
+    'rainfall': ['Escherichia coli (E. coli)', 'Combined Sewer Overflow Event Duration', 'Turbidity'],
+    'temperature': ['Temperature'],
+    'dissolved oxygen': ['Dissolved Oxygen (DO)'],
+    'ph': ['pH'],
+    'turbidity': ['Turbidity'],
+    'conductivity': ['Conductivity'],
+    'ammonium': ['Ammonia (as N)'],
+    'nitrate': ['Nitrate (as N)'],
+  };
+
   function findRelatedDeterminands(param, qualifier) {
-    if (!DATA) return [];
+    if (!DATA || !DATA.thresholds) return [];
     const p = (param || '').toLowerCase();
     const q = (qualifier || '').toLowerCase();
-    const map = {
-      'level': ['Dissolved Oxygen (DO)', 'Turbidity', 'Total Suspended Solids (TSS)'],
-      'flow': ['Dissolved Oxygen (DO)', 'Biochemical Oxygen Demand (BOD, 5-day)', 'Ammonia (as N)'],
-      'rainfall': ['Escherichia coli (E. coli)', 'Combined Sewer Overflow Event Duration', 'Turbidity'],
-      'temperature': ['Temperature'],
-      'dissolved oxygen': ['Dissolved Oxygen (DO)'],
-      'ph': ['pH'],
-      'turbidity': ['Turbidity'],
-      'conductivity': ['Conductivity'],
-      'ammonium': ['Ammonia (as N)'],
-      'nitrate': ['Nitrate (as N)'],
-    };
-    const key = Object.keys(map).find(k => p.includes(k) || q.includes(k));
+    const key = Object.keys(PARAM_DETERMINAND_MAP).find(k => p.includes(k) || q.includes(k));
     if (!key) return [];
-    return map[key]
+    return PARAM_DETERMINAND_MAP[key]
       .map(name => DATA.thresholds.find(t => t.determinand === name))
       .filter(Boolean);
   }
@@ -282,6 +283,9 @@
         } catch { return null; }
       });
 
+      // Ensure CWQ data is loaded before matching determinands
+      await dataReady;
+
       // Update cards as readings arrive
       let loaded = 0;
       fetches.forEach(p => p.then(result => {
@@ -329,5 +333,5 @@
   }
 
   /* ── Init ── */
-  loadData();
+  const dataReady = loadData();
 })();
