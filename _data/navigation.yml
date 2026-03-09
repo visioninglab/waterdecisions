@@ -17,6 +17,7 @@
   url: "/water-quality.html"
   icon: "droplets"
   id: "water-quality"
+- label: "Dashboard"  url: "/water-dashboard.html"  icon: "bar-chart-2"  id: "water-dashboard"
 
 - label: "Assessment"
   url: "/assessment.html"
