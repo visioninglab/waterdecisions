@@ -2205,3 +2205,384 @@ body {
   .assess-score-btn.active { background: #c8962d !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .diag-maturity-card { background: #1e2330 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+/* ============================================================
+   WATER QUALITY ONTOLOGY EXPLORER
+   ============================================================ */
+
+/* --- Tabs --- */
+.wq-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0;
+}
+.wq-tab {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.15s;
+}
+.wq-tab:hover { color: var(--ink); }
+.wq-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* --- Panels --- */
+.wq-panel { display: none; }
+.wq-panel.active { display: block; animation: fadeUp 0.3s ease both; }
+
+.wq-intro {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* --- Search --- */
+.wq-search {
+  margin-bottom: 1rem;
+}
+.wq-search input {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--card-bg);
+  color: var(--ink);
+  transition: border-color 0.15s;
+}
+.wq-search input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0,101,189,0.12);
+}
+
+/* --- Determinand grid --- */
+.wq-det-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+}
+.wq-det-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  transition: all 0.15s;
+}
+.wq-det-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.wq-det-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+.wq-det-header h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+.wq-det-unit {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--paper);
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.wq-det-def {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* --- Threshold bar --- */
+.wq-threshold-bar {
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+.wq-th-segment {
+  flex: 1;
+  padding: 8px 6px;
+  text-align: center;
+  min-width: 0;
+}
+.wq-th-good { background: #d1fae5; }
+.wq-th-moderate { background: #fef3c7; }
+.wq-th-poor { background: #fee2e2; }
+.wq-th-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+}
+.wq-th-good .wq-th-label { color: #065f46; }
+.wq-th-moderate .wq-th-label { color: #92400e; }
+.wq-th-poor .wq-th-label { color: #991b1b; }
+.wq-th-value {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+.wq-th-good .wq-th-value { color: #047857; }
+.wq-th-moderate .wq-th-value { color: #b45309; }
+.wq-th-poor .wq-th-value { color: #dc2626; }
+
+/* --- Determinand meta --- */
+.wq-det-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.wq-det-source, .wq-det-stat {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.wq-det-onto {
+  margin-top: 4px;
+}
+.wq-det-onto code {
+  font-size: 11px;
+  background: var(--paper);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--muted);
+}
+
+/* --- Category filter buttons --- */
+.wq-filter-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.wq-cat-btn {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--card-bg);
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--muted);
+  transition: all 0.15s;
+}
+.wq-cat-btn:hover { border-color: var(--accent); color: var(--accent); }
+.wq-cat-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* --- Glossary items --- */
+.wq-gloss-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  transition: border-color 0.15s;
+}
+.wq-gloss-item:hover { border-color: var(--accent); }
+.wq-gloss-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.wq-gloss-cat {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+.wq-gloss-head h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+.wq-gloss-code {
+  font-size: 11px;
+  background: var(--paper);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--muted);
+}
+.wq-gloss-item > p {
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+.wq-gloss-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--muted);
+}
+.wq-gloss-meta code {
+  font-size: 11px;
+  background: var(--paper);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+.wq-gloss-notes {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.25rem;
+}
+
+/* --- Section 82 --- */
+.wq-s82-content {
+  max-width: 720px;
+}
+.wq-s82-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+.wq-s82-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 1.5rem 0 0.5rem;
+}
+.wq-s82-content p {
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+/* --- Live monitoring --- */
+.wq-live-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.wq-live-controls select {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--card-bg);
+  color: var(--ink);
+}
+.wq-live-controls select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.wq-btn {
+  padding: 8px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+.wq-btn:hover { background: var(--accent-dark); }
+
+.wq-live-status {
+  margin-bottom: 1rem;
+  font-size: 13px;
+}
+.wq-loading { color: var(--accent); font-weight: 600; }
+.wq-ok { color: #059669; font-weight: 600; }
+.wq-warn { color: #d97706; font-weight: 600; }
+
+.wq-live-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+.wq-live-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: border-color 0.15s;
+}
+.wq-live-card:hover { border-color: var(--accent); }
+.wq-live-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.wq-live-river {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.wq-live-value {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.wq-live-unit {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.wq-live-time {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* --- WQ responsive --- */
+@media (max-width: 800px) {
+  .wq-tabs { overflow-x: auto; }
+  .wq-tab { white-space: nowrap; padding: 8px 14px; font-size: 13px; }
+  .wq-det-grid { grid-template-columns: 1fr; }
+  .wq-live-grid { grid-template-columns: 1fr; }
+  .wq-live-controls { flex-direction: column; }
+}

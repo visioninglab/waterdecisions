@@ -1,0 +1,68 @@
+---
+layout: page
+title: "Water Quality Ontology"
+description: "Continuous Water Quality ontology explorer with determinand thresholds, glossary, and live Environment Agency monitoring data."
+nav_active: water-quality
+hero_title: "Water Quality Ontology"
+hero_subtitle: "Explore the Continuous Water Quality (CWQ) ontology — determinand thresholds from UKTAG EQS, glossary of terms, and live Environment Agency monitoring data. Based on Section 82 of the Environment Act 2021."
+narrow: false
+footer_text: "Water Decisions &bull; CWQ Ontology Explorer &bull; Data: UKTAG EQS, Environment Agency"
+---
+
+<!-- Tabs -->
+<div class="wq-tabs">
+  <button class="wq-tab active" data-tab="determinands"><i data-lucide="activity" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Determinands</button>
+  <button class="wq-tab" data-tab="glossary"><i data-lucide="book-open" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Glossary</button>
+  <button class="wq-tab" data-tab="section82"><i data-lucide="scale" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Section 82</button>
+  <button class="wq-tab" data-tab="live"><i data-lucide="radio" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Live Monitoring</button>
+</div>
+
+<!-- TAB: Determinands -->
+<div class="wq-panel active" id="panel-determinands">
+  <div class="wq-search">
+    <input type="text" id="detSearch" placeholder="Search determinands&hellip;" aria-label="Filter determinands">
+  </div>
+  <p class="wq-intro">40 water quality determinands with Good / Moderate / Poor thresholds from UKTAG Environmental Quality Standards (EQS) aligned to the Water Framework Directive.</p>
+  <div class="wq-det-grid" id="detGrid"></div>
+</div>
+
+<!-- TAB: Glossary -->
+<div class="wq-panel" id="panel-glossary">
+  <div class="wq-search">
+    <input type="text" id="glossarySearchWQ" placeholder="Search CWQ terms&hellip;" aria-label="Filter glossary">
+  </div>
+  <div class="wq-filter-row" id="catFilters"></div>
+  <div class="wq-glossary-list" id="wqGlossaryList"></div>
+</div>
+
+<!-- TAB: Section 82 -->
+<div class="wq-panel" id="panel-section82">
+  <div class="wq-s82-content" id="s82Content"></div>
+</div>
+
+<!-- TAB: Live Monitoring -->
+<div class="wq-panel" id="panel-live">
+  <p class="wq-intro">Real-time river level and rainfall data from the Environment Agency Flood Monitoring API. Select a region to see the latest readings.</p>
+  <div class="wq-live-controls">
+    <select id="liveRegion" aria-label="Select region">
+      <option value="">Select a region&hellip;</option>
+      <option value="Thames">Thames</option>
+      <option value="Severn">Severn</option>
+      <option value="Anglian">Anglian</option>
+      <option value="North West">North West</option>
+      <option value="Yorkshire">Yorkshire</option>
+      <option value="North East">North East</option>
+      <option value="South West">South West</option>
+      <option value="South East">South East</option>
+    </select>
+    <select id="liveParam" aria-label="Select parameter">
+      <option value="waterLevel">Water Level</option>
+      <option value="rainfall">Rainfall</option>
+    </select>
+    <button id="liveLoadBtn" class="wq-btn">Load Data</button>
+  </div>
+  <div id="liveStatus" class="wq-live-status"></div>
+  <div class="wq-live-grid" id="liveGrid"></div>
+</div>
+
+<script src="{{ '/assets/js/water-quality.js' | relative_url }}"></script>

@@ -13,6 +13,11 @@
   icon: "bookmark"
   id: "glossary"
 
+- label: "Water Quality"
+  url: "/water-quality.html"
+  icon: "droplets"
+  id: "water-quality"
+
 - label: "Assessment"
   url: "/assessment.html"
   icon: "clipboard-check"
