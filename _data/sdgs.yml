@@ -1,0 +1,87 @@
+# UN Sustainable Development Goals — reference data
+# Only goals relevant to water infrastructure resilience are included.
+
+goals:
+  SDG6:
+    number: 6
+    name: "Clean Water and Sanitation"
+    short: "Clean Water"
+    color: "#26BDE2"
+    icon: "droplets"
+    primary: true
+
+  SDG9:
+    number: 9
+    name: "Industry, Innovation and Infrastructure"
+    short: "Infrastructure"
+    color: "#FD6925"
+    icon: "building-2"
+    primary: true
+
+  SDG11:
+    number: 11
+    name: "Sustainable Cities and Communities"
+    short: "Sustainable Cities"
+    color: "#FD9D24"
+    icon: "landmark"
+    primary: true
+
+  SDG12:
+    number: 12
+    name: "Responsible Consumption and Production"
+    short: "Responsible Production"
+    color: "#BF8B2E"
+    icon: "recycle"
+    primary: false
+
+  SDG13:
+    number: 13
+    name: "Climate Action"
+    short: "Climate Action"
+    color: "#3F7E44"
+    icon: "thermometer-sun"
+    primary: true
+
+  SDG14:
+    number: 14
+    name: "Life Below Water"
+    short: "Life Below Water"
+    color: "#0A97D9"
+    icon: "fish"
+    primary: false
+
+  SDG15:
+    number: 15
+    name: "Life on Land"
+    short: "Life on Land"
+    color: "#56C02B"
+    icon: "trees"
+    primary: false
+
+  SDG17:
+    number: 17
+    name: "Partnerships for the Goals"
+    short: "Partnerships"
+    color: "#19486A"
+    icon: "handshake"
+    primary: true
+
+crosswalk:
+  - principle: "Continuously Learning"
+    targets: ["6.3", "6.5", "13.3"]
+    sdgs: ["SDG6", "SDG13"]
+  - principle: "Proactively Protected"
+    targets: ["9.1", "11.5", "13.1"]
+    sdgs: ["SDG9", "SDG11", "SDG13"]
+  - principle: "Environmentally Integrated"
+    targets: ["6.6", "12.2", "14.1", "15.1"]
+    sdgs: ["SDG6", "SDG12", "SDG14", "SDG15"]
+  - principle: "Socially Engaged"
+    targets: ["6.b", "11.3", "16.7"]
+    sdgs: ["SDG6", "SDG11"]
+  - principle: "Shared Responsibility"
+    targets: ["6.5", "16.6", "17.17"]
+    sdgs: ["SDG6", "SDG17"]
+  - principle: "Adaptively Transforming"
+    targets: ["9.4", "11.b", "13.1"]
+    sdgs: ["SDG9", "SDG11", "SDG13"]
