@@ -2850,3 +2850,100 @@ body {
   .wq-export-buttons { flex-direction: column; }
   .wq-det-controls { flex-direction: column; }
 }
+
+/* ============================================================
+   SDG Layer — Badges, Contribution Section, Mapping Page
+   ============================================================ */
+
+/* --- SDG Badges (reusable chips) --- */
+.sdg-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.sdg-badge {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 12px;
+  font-size: 0.72rem; font-weight: 600; color: #fff;
+  white-space: nowrap; line-height: 1.4;
+}
+
+/* --- SDG Contribution Section (case study detail) --- */
+.sdg-contribution { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid #e5e3df; }
+.sdg-contribution-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.sdg-contribution-intro { font-size: 0.88rem; color: #6b6560; margin-bottom: 1.5rem; line-height: 1.6; }
+
+.sdg-goal-grid { display: grid; gap: 1rem; }
+.sdg-goal-card {
+  background: #faf9f7; border-radius: 8px; padding: 1rem 1.2rem;
+  border: 1px solid #e5e3df;
+}
+.sdg-goal-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.6rem; }
+.sdg-goal-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 6px;
+  font-size: 0.8rem; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+.sdg-goal-name { font-weight: 600; font-size: 0.92rem; }
+
+.sdg-target-item { display: flex; gap: 8px; margin-top: 0.5rem; font-size: 0.84rem; line-height: 1.5; }
+.sdg-target-num {
+  flex-shrink: 0; font-weight: 600; color: #4a4540;
+  min-width: 70px;
+}
+.sdg-target-text { color: #6b6560; }
+
+/* --- SDG Mapping Page --- */
+.sdg-mapping-page h2 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.3rem; }
+.sdg-mapping-intro { margin-bottom: 2rem; }
+.sdg-mapping-intro p { font-size: 0.92rem; color: #4a4540; line-height: 1.7; margin-bottom: 0.8rem; }
+.sdg-mapping-note { font-size: 0.85rem; color: #6b6560; margin-bottom: 1.2rem; font-style: italic; }
+
+.sdg-crosswalk { display: grid; gap: 1rem; margin-bottom: 2rem; }
+.sdg-crosswalk-row {
+  display: grid; grid-template-columns: 200px 1fr; gap: 1rem;
+  padding: 1rem; background: #faf9f7; border-radius: 8px; border: 1px solid #e5e3df;
+  align-items: start;
+}
+.sdg-crosswalk-principle { font-size: 0.92rem; padding-top: 2px; }
+.sdg-crosswalk-targets { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.sdg-crosswalk-target-list {
+  width: 100%; font-size: 0.8rem; color: #6b6560; margin-top: 4px;
+}
+
+.sdg-goal-overview { display: grid; gap: 0.75rem; margin-bottom: 2rem; }
+.sdg-overview-card {
+  display: flex; align-items: center; gap: 12px;
+  padding: 0.75rem 1rem; background: #faf9f7; border-radius: 8px;
+  border: 1px solid #e5e3df;
+}
+.sdg-overview-card.sdg-secondary { opacity: 0.75; }
+.sdg-overview-label {
+  display: inline-block; font-size: 0.7rem; font-weight: 600;
+  padding: 1px 8px; border-radius: 10px; margin-left: 8px;
+  background: #e8e6e2; color: #6b6560;
+}
+
+.sdg-case-matrix { display: grid; gap: 0.5rem; margin-bottom: 2rem; }
+.sdg-matrix-row {
+  display: grid; grid-template-columns: 200px 1fr; gap: 1rem;
+  padding: 0.6rem 0; border-bottom: 1px solid #eae8e4;
+  align-items: center;
+}
+.sdg-matrix-goal { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; }
+.sdg-matrix-studies { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 0.88rem; }
+.sdg-matrix-link { color: var(--accent, #b45309); text-decoration: none; }
+.sdg-matrix-link:hover { text-decoration: underline; }
+.sdg-matrix-count { font-size: 0.78rem; color: #6b6560; }
+
+/* --- SDG Filter (homepage) --- */
+.sdg-filter-group { margin-top: 8px; }
+
+/* --- SDG in assessment results --- */
+.sdg-inference { margin-top: 1.5rem; padding: 1rem 1.2rem; background: #faf9f7; border-radius: 8px; border: 1px solid #e5e3df; }
+.sdg-inference h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.sdg-inference p { font-size: 0.88rem; color: #6b6560; line-height: 1.6; margin-bottom: 0.75rem; }
+.sdg-inference .sdg-badges { margin-top: 8px; }
+
+/* --- Responsive --- */
+@media (max-width: 700px) {
+  .sdg-crosswalk-row { grid-template-columns: 1fr; }
+  .sdg-matrix-row { grid-template-columns: 1fr; }
+  .sdg-goal-grid { grid-template-columns: 1fr; }
+}
