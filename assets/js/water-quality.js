@@ -189,6 +189,30 @@
 
   const FETCH_OPTS = { headers: { 'Accept': 'application/json' } };
 
+  // Map EA measure parameters to related CWQ determinands
+  function findRelatedDeterminands(param, qualifier) {
+    if (!DATA) return [];
+    const p = (param || '').toLowerCase();
+    const q = (qualifier || '').toLowerCase();
+    const map = {
+      'level': ['Dissolved Oxygen (DO)', 'Turbidity', 'Total Suspended Solids (TSS)'],
+      'flow': ['Dissolved Oxygen (DO)', 'Biochemical Oxygen Demand (BOD, 5-day)', 'Ammonia (as N)'],
+      'rainfall': ['Escherichia coli (E. coli)', 'Combined Sewer Overflow Event Duration', 'Turbidity'],
+      'temperature': ['Temperature'],
+      'dissolved oxygen': ['Dissolved Oxygen (DO)'],
+      'ph': ['pH'],
+      'turbidity': ['Turbidity'],
+      'conductivity': ['Conductivity'],
+      'ammonium': ['Ammonia (as N)'],
+      'nitrate': ['Nitrate (as N)'],
+    };
+    const key = Object.keys(map).find(k => p.includes(k) || q.includes(k));
+    if (!key) return [];
+    return map[key]
+      .map(name => DATA.thresholds.find(t => t.determinand === name))
+      .filter(Boolean);
+  }
+
   async function loadLiveData() {
     const regionKey = document.getElementById('liveRegion').value;
     const grid = document.getElementById('liveGrid');
@@ -245,6 +269,7 @@
         const m = measures[0];
         const mId = (m['@id'] || m).split('/measures/').pop();
         const param = m.parameterName || m.parameter || mId.split('-')[1] || 'level';
+        const qualifier = m.qualifier || '';
         const unit = m.unitName || '';
         try {
           const resp = await fetch(`${EA_API}/id/measures/${mId}/readings?latest`, FETCH_OPTS);
@@ -253,7 +278,7 @@
           const items = data.items || [];
           if (items.length === 0) return null;
           const r = items[0];
-          return { ref: s.stationReference, value: r.value, dateTime: r.dateTime, param, unit };
+          return { ref: s.stationReference, value: r.value, dateTime: r.dateTime, param, qualifier, unit };
         } catch { return null; }
       });
 
@@ -273,6 +298,22 @@
         const metaEl = card.querySelector('.wq-live-meta');
         valEl.innerHTML = `${typeof result.value === 'number' ? result.value.toFixed(3) : result.value} <span class="wq-live-unit">${result.param}${result.unit ? ' (' + result.unit + ')' : ''}</span>`;
         metaEl.innerHTML += ` &bull; <span class="wq-live-time">${agoText}</span>`;
+
+        // Show related CWQ determinands
+        const related = findRelatedDeterminands(result.param, result.qualifier);
+        if (related.length > 0) {
+          const detHtml = related.map(d => `
+            <div class="wq-live-det">
+              <span class="wq-live-det-name">${d.determinand}</span>
+              <span class="wq-live-det-thresholds">
+                <span class="wq-th-dot wq-th-dot--good" title="Good: ${d.good}"></span>${d.good}
+                <span class="wq-th-dot wq-th-dot--mod" title="Moderate: ${d.moderate}"></span>${d.moderate}
+                <span class="wq-th-dot wq-th-dot--poor" title="Poor: ${d.poor}"></span>${d.poor}
+              </span>
+            </div>
+          `).join('');
+          card.insertAdjacentHTML('beforeend', `<div class="wq-live-dets">${detHtml}</div>`);
+        }
       }));
 
       await Promise.all(fetches);

@@ -2601,6 +2601,46 @@ body {
   font-weight: 600;
 }
 
+/* --- WQ live card determinands --- */
+.wq-live-dets {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.wq-live-det {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 11px;
+  line-height: 1.6;
+  gap: 6px;
+}
+.wq-live-det-name {
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.wq-live-det-thresholds {
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: 10px;
+}
+.wq-th-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  margin-right: 2px;
+  margin-left: 6px;
+  vertical-align: 1px;
+}
+.wq-th-dot--good { background: #16a34a; }
+.wq-th-dot--mod { background: #d97706; }
+.wq-th-dot--poor { background: #dc2626; }
+
 /* --- WQ responsive --- */
 @media (max-width: 800px) {
   .wq-tabs { overflow-x: auto; }
