@@ -4,6 +4,19 @@ slug: china-hydraulic
 description: "Dujiangyan Irrigation System - A 2,300-year-old hydraulic engineering masterpiece controlling flooding without a dam."
 country: China
 sector: water
+sdgs: ["SDG6", "SDG9", "SDG11", "SDG13", "SDG15"]
+sdg_targets: ["6.5", "9.1", "11.5", "13.1", "15.1"]
+sdg_rationale:
+  - target: "6.5"
+    text: "Demonstrates integrated water resources management through a system that coordinates irrigation, flood control, and navigation across a single river basin."
+  - target: "9.1"
+    text: "A resilient infrastructure system that has supported essential agricultural and urban services for over 2,300 years."
+  - target: "11.5"
+    text: "Reduces flood risk for downstream urban communities through engineered water diversion."
+  - target: "13.1"
+    text: "Adapts to changing hydrological patterns through flexible, nature-based design principles."
+  - target: "15.1"
+    text: "Supports freshwater ecosystem health by maintaining natural river flows and sediment transport."
 status: published
 nav_active: case-studies
 
@@ -47,10 +60,14 @@ card:
   tags:
     - Ancient Infrastructure
     - World Heritage
+    - "SDG 6"
+    - "SDG 9"
+    - "SDG 13"
   filters:
     sector: water
     hazard: "natural seismic flood"
     location: china
+    sdgs: "SDG6 SDG9 SDG11 SDG13 SDG15"
 
 # Sections
 sections:
