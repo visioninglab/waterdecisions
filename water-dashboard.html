@@ -1,0 +1,140 @@
+---
+layout: default
+title: Water Quality Dashboard
+description: Real-time water quality monitoring across all UK Environment Agency stations with flood warnings, trend analysis, and determinand thresholds.
+nav_active: water-quality
+extra_head: '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>'
+---
+
+<!-- DATA FRESHNESS BAR -->
+<div class="wq-freshness-bar">
+  <div class="wq-freshness-inner">
+    <span class="wq-freshness-dot" id="wqFreshnessDot"></span>
+    <span id="wqFreshnessText">Loading data status...</span>
+    <span class="wq-freshness-right">
+      <span id="wqStationCount">—</span> stations &bull;
+      <span id="wqReadingCount">—</span> readings &bull;
+      <span id="wqWarningCount">—</span> warnings
+    </span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="wq-hero">
+  <div class="wq-hero-inner">
+    <h1>Water Quality Dashboard</h1>
+    <p class="wq-hero-sub">Comprehensive monitoring data from the Environment Agency across all UK stations. Pre-fetched via GitHub Actions — always available, never dependent on live API.</p>
+  </div>
+</div>
+
+<!-- MAIN DASHBOARD -->
+<div class="wq-dashboard">
+  <div class="wq-dashboard-inner">
+
+    <!-- LEFT: MAP -->
+    <div class="wq-map-col">
+      <div class="wq-card">
+        <div class="wq-card-header">
+          <h3>Monitoring Stations</h3>
+          <div class="wq-map-controls">
+            <select id="wqCatchmentFilter" class="wq-select">
+              <option value="">All catchments</option>
+            </select>
+            <input type="text" id="wqSearchInput" class="wq-search" placeholder="Search station or river...">
+          </div>
+        </div>
+        <div id="wqMap" class="wq-map"></div>
+        <div class="wq-summary-bar" id="wqSummaryBar">
+          <span class="wq-summary-item wq-good"><span id="wqGoodPct">—</span>% Active</span>
+          <span class="wq-summary-item wq-moderate"><span id="wqTotalStations">—</span> stations</span>
+          <span class="wq-summary-item wq-info"><span id="wqTotalCatchments">—</span> catchments</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: STATION DETAIL / SUMMARY -->
+    <div class="wq-detail-col">
+      <!-- STATION DETAIL PANEL (hidden by default) -->
+      <div id="wqStationDetail" class="wq-card" style="display:none;">
+        <div class="wq-card-header">
+          <h3 id="wqDetailTitle">Station Detail</h3>
+          <button class="wq-btn-close" onclick="closeStationDetail()">&times;</button>
+        </div>
+        <div class="wq-detail-body">
+          <div class="wq-detail-meta" id="wqDetailMeta"></div>
+          <div class="wq-detail-readings" id="wqDetailReadings"></div>
+          <canvas id="wqDetailChart" height="200"></canvas>
+        </div>
+      </div>
+
+      <!-- STATION CARDS -->
+      <div class="wq-card">
+        <div class="wq-card-header">
+          <h3>Station Readings</h3>
+          <span class="wq-badge" id="wqFilteredCount">—</span>
+        </div>
+        <div id="wqStationCards" class="wq-station-grid">
+          <div class="wq-loading">Loading station data...</div>
+        </div>
+        <div class="wq-pagination" id="wqPagination"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETERMINANDS REFERENCE -->
+<div class="wq-section">
+  <div class="wq-section-inner">
+    <div class="wq-section-toggle" onclick="toggleSection('wqDeterminands')">
+      <h2><i data-lucide="flask-conical" style="width:20px;height:20px;display:inline;vertical-align:-3px;margin-right:6px;"></i>Determinands Reference — UKTAG EQS Thresholds</h2>
+      <i data-lucide="chevron-down" class="wq-toggle-icon" id="wqDeterminandsIcon"></i>
+    </div>
+    <div id="wqDeterminands" class="wq-collapsible">
+      <div class="wq-det-controls">
+        <input type="text" id="wqDetSearch" class="wq-search" placeholder="Search determinands..." oninput="filterDeterminands()">
+        <select id="wqDetCategory" class="wq-select" onchange="filterDeterminands()">
+          <option value="">All categories</option>
+          <option value="physical">Physical</option>
+          <option value="chemical">Chemical</option>
+          <option value="biological">Biological</option>
+        </select>
+      </div>
+      <div class="wq-table-wrap">
+        <table class="wq-table" id="wqDetTable">
+          <thead>
+            <tr>
+              <th onclick="sortDetTable(0)">Determinand</th>
+              <th onclick="sortDetTable(1)">Category</th>
+              <th onclick="sortDetTable(2)">Unit</th>
+              <th class="wq-th-good">Good</th>
+              <th class="wq-th-mod">Moderate</th>
+              <th class="wq-th-poor">Poor</th>
+              <th>Water Body</th>
+            </tr>
+          </thead>
+          <tbody id="wqDetBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORT -->
+<div class="wq-section wq-export-section">
+  <div class="wq-section-inner">
+    <h2><i data-lucide="download" style="width:20px;height:20px;display:inline;vertical-align:-3px;margin-right:6px;"></i>Export Data</h2>
+    <div class="wq-export-buttons">
+      <button class="wq-btn" onclick="exportCSV()"><i data-lucide="file-text" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>CSV</button>
+      <button class="wq-btn" onclick="exportJSON()"><i data-lucide="braces" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>JSON</button>
+      <button class="wq-btn" onclick="exportPDF()"><i data-lucide="file-down" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>PDF Briefing</button>
+      <button class="wq-btn" onclick="copyClipboard()"><i data-lucide="clipboard" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Copy Summary</button>
+    </div>
+  </div>
+</div>
+
+<!-- ATTRIBUTION -->
+<div class="wq-attribution">
+  Contains Environment Agency flood and river level data from the real-time data API (Beta). Licensed under the Open Government Licence v3.0. Map data &copy; OpenStreetMap contributors.
+</div>
+
+<script src="{{ '/assets/js/water-dashboard.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
