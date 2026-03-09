@@ -59,6 +59,15 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
     <button class="filter-btn" onclick="setFilter('hazard','flood',this)">Flood</button>
     <button class="filter-btn" onclick="setFilter('hazard','climate',this)">Climate</button>
   </div>
+  <div class="filter-group sdg-filter-group" id="sdgFilter">
+    <label>SDG:</label>
+    <button class="filter-btn active" onclick="setFilter('sdg','all',this)">All</button>
+    <button class="filter-btn" onclick="setFilter('sdg','SDG6',this)">SDG 6</button>
+    <button class="filter-btn" onclick="setFilter('sdg','SDG9',this)">SDG 9</button>
+    <button class="filter-btn" onclick="setFilter('sdg','SDG11',this)">SDG 11</button>
+    <button class="filter-btn" onclick="setFilter('sdg','SDG13',this)">SDG 13</button>
+    <button class="filter-btn" onclick="setFilter('sdg','SDG17',this)">SDG 17</button>
+  </div>
 
   <!-- LOCATION MAP -->
   <div class="map-section">
@@ -92,7 +101,7 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
   <div class="studies-grid" id="studiesGrid">
     {% assign studies = site.case_studies | sort: "slug" %}
     {% for study in studies %}
-    <a href="{{ study.url | relative_url }}" class="study-card" data-sector="{{ study.card.filters.sector }}" data-hazard="{{ study.card.filters.hazard }}" data-location="{{ study.card.filters.location }}">
+    <a href="{{ study.url | relative_url }}" class="study-card" data-sector="{{ study.card.filters.sector }}" data-hazard="{{ study.card.filters.hazard }}" data-location="{{ study.card.filters.location }}" data-sdg="{{ study.card.filters.sdgs }}">
       <div class="study-card-banner" style="background: {{ study.card.banner_gradient }};"></div>
       <div class="study-card-body">
         <div class="study-card-category">{{ study.card.category }}</div>
@@ -102,6 +111,14 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
           {% for tag in study.card.tags %}
           <span class="study-card-tag">{{ tag }}</span>
           {% endfor %}
+        {% if study.sdgs %}
+          {% for sdg_key in study.sdgs limit:3 %}
+            {% assign goal = site.data.sdgs.goals[sdg_key] %}
+            {% if goal %}
+            <span class="sdg-badge" style="background:{{ goal.color }};">SDG {{ goal.number }}</span>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
           {% if study.status == "draft" %}
           <span class="study-card-tag" style="background:#fef3c7;color:#92400e;">Draft</span>
           {% endif %}
