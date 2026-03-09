@@ -5,7 +5,7 @@ description: Real-time water quality monitoring across all UK Environment Agency
 nav_active: water-quality
 extra_head: '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>'
 ---
-
+<div class="wq-dashboard-page">
 <!-- DATA FRESHNESS BAR -->
 <div class="wq-freshness-bar">
   <div class="wq-freshness-inner">
@@ -138,3 +138,4 @@ extra_head: '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/l
 </div>
 
 <script src="{{ '/assets/js/water-dashboard.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+</div>
