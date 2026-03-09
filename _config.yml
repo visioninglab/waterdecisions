@@ -3,7 +3,7 @@ description: >
   Exploring resilience through real-world infrastructure case studies
   assessed against UNDRR Principles and ISO 22372.
 url: "https://visioninglab.github.io"
-baseurl: "/DIRwiki"
+baseurl: "/waterdecisions"
 
 # Collections
 collections:

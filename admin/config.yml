@@ -7,14 +7,14 @@
 # Setup:
 #   1. Register a GitHub OAuth App at https://github.com/settings/developers
 #      - Application name: DIR Wiki CMS
-#      - Homepage URL: https://visioninglab.github.io/DIRwiki/
-#      - Authorization callback URL: https://visioninglab.github.io/DIRwiki/admin/
+#      - Homepage URL: https://visioninglab.github.io/waterdecisions/
+#      - Authorization callback URL: https://visioninglab.github.io/waterdecisions/admin/
 #   2. Copy the Client ID into the "app_id" field below
 # ============================================================
 
 backend:
   name: github
-  repo: visioninglab/DIRwiki
+  repo: visioninglab/waterdecisions
   branch: master
   auth_type: pkce
   app_id: Ov23liv8hsOrJoDVvert
@@ -22,11 +22,11 @@ backend:
 publish_mode: editorial_workflow
 
 media_folder: "assets/images"
-public_folder: "/DIRwiki/assets/images"
+public_folder: "/waterdecisions/assets/images"
 
-site_url: "https://visioninglab.github.io/DIRwiki"
-display_url: "https://visioninglab.github.io/DIRwiki"
-logo_url: "https://visioninglab.github.io/DIRwiki/favicon.svg"
+site_url: "https://visioninglab.github.io/waterdecisions"
+display_url: "https://visioninglab.github.io/waterdecisions"
+logo_url: "https://visioninglab.github.io/waterdecisions/favicon.svg"
 
 slug:
   encoding: "ascii"
