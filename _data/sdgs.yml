@@ -9,6 +9,7 @@ goals:
     color: "#26BDE2"
     icon: "droplets"
     primary: true
+    url: "https://sdgs.un.org/goals/goal6"
 
   SDG9:
     number: 9
@@ -17,6 +18,7 @@ goals:
     color: "#FD6925"
     icon: "building-2"
     primary: true
+    url: "https://sdgs.un.org/goals/goal9"
 
   SDG11:
     number: 11
@@ -25,6 +27,7 @@ goals:
     color: "#FD9D24"
     icon: "landmark"
     primary: true
+    url: "https://sdgs.un.org/goals/goal11"
 
   SDG12:
     number: 12
@@ -33,6 +36,7 @@ goals:
     color: "#BF8B2E"
     icon: "recycle"
     primary: false
+    url: "https://sdgs.un.org/goals/goal12"
 
   SDG13:
     number: 13
@@ -41,6 +45,7 @@ goals:
     color: "#3F7E44"
     icon: "thermometer-sun"
     primary: true
+    url: "https://sdgs.un.org/goals/goal13"
 
   SDG14:
     number: 14
@@ -49,6 +54,7 @@ goals:
     color: "#0A97D9"
     icon: "fish"
     primary: false
+    url: "https://sdgs.un.org/goals/goal14"
 
   SDG15:
     number: 15
@@ -57,6 +63,7 @@ goals:
     color: "#56C02B"
     icon: "trees"
     primary: false
+    url: "https://sdgs.un.org/goals/goal15"
 
   SDG17:
     number: 17
@@ -65,6 +72,7 @@ goals:
     color: "#19486A"
     icon: "handshake"
     primary: true
+    url: "https://sdgs.un.org/goals/goal17"
 
 crosswalk:
   - principle: "Continuously Learning"
