@@ -1,0 +1,33 @@
+{% if page.sdgs %}
+<div class="sdg-contribution">
+  <h3 class="sdg-contribution-title">
+    <i data-lucide="globe" style="width:18px;height:18px;display:inline;vertical-align:-3px;margin-right:6px;"></i>SDG Contribution
+  </h3>
+  <p class="sdg-contribution-intro">This case study contributes to the following UN Sustainable Development Goals. The six resilience principles remain the core assessment method; SDG mappings indicate areas of contribution rather than formal certification.</p>
+
+  <div class="sdg-goal-grid">
+    {% for sdg_key in page.sdgs %}
+      {% assign goal = site.data.sdgs.goals[sdg_key] %}
+      {% if goal %}
+      <div class="sdg-goal-card" style="border-left: 4px solid {{ goal.color }};">
+        <div class="sdg-goal-header">
+          <span class="sdg-goal-num" style="background:{{ goal.color }};">{{ goal.number }}</span>
+          <span class="sdg-goal-name">{{ goal.name }}</span>
+        </div>
+        {% if page.sdg_rationale %}
+          {% for r in page.sdg_rationale %}
+            {% assign target_prefix = sdg_key | remove: "SDG" | append: "." %}
+            {% if r.target contains target_prefix or goal.number == r.target | split: "." | first %}
+            <div class="sdg-target-item">
+              <span class="sdg-target-num">Target {{ r.target }}</span>
+              <span class="sdg-target-text">{{ r.text }}</span>
+            </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
