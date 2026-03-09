@@ -207,8 +207,8 @@
     grid.innerHTML = '';
 
     try {
-      // Step 1: Fetch nearby stations first (small, fast response)
-      const stationsResp = await fetch(`${EA_API}/id/stations?lat=${region.lat}&long=${region.long}&dist=${region.dist}&_limit=100`, FETCH_OPTS);
+      // Step 1: Fetch nearby stations (fast, includes measure IDs)
+      const stationsResp = await fetch(`${EA_API}/id/stations?lat=${region.lat}&long=${region.long}&dist=${region.dist}&_limit=50`, FETCH_OPTS);
       if (!stationsResp.ok) throw new Error(`Stations API returned ${stationsResp.status}`);
       const stationsData = await stationsResp.json();
       const stations = stationsData.items || [];
@@ -218,100 +218,65 @@
         return;
       }
 
-      // Build station lookup and show station list immediately
-      const stationMap = {};
-      stations.forEach(s => {
-        const ref = s.stationReference || (s['@id'] || '').split('/').pop();
-        if (ref) {
-          stationMap[ref] = {
-            name: s.label || ref,
-            river: s.riverName || '',
-            town: s.town || '',
-            catchment: s.catchmentName || '',
-            lat: s.lat,
-            long: s.long
-          };
-        }
+      // Sort by distance, pick closest 15 with measures
+      const sorted = stations
+        .filter(s => s.measures && (Array.isArray(s.measures) ? s.measures.length : true))
+        .map(s => ({
+          ...s,
+          km: (s.lat && s.long) ? distKm(region.lat, region.long, s.lat, s.long) : 999
+        }))
+        .sort((a, b) => a.km - b.km)
+        .slice(0, 15);
+
+      // Show placeholder cards immediately
+      statusEl.innerHTML = `<span class="wq-loading">Found ${stations.length} stations. Fetching readings&hellip;</span>`;
+      grid.innerHTML = sorted.map(s => `
+        <div class="wq-live-card wq-live-card--pending" id="card-${s.stationReference}">
+          <div class="wq-live-name">${s.label || s.stationReference}</div>
+          <div class="wq-live-river">${[s.riverName, s.catchmentName, s.town].filter(Boolean).join(' &bull; ')}</div>
+          <div class="wq-live-value"><span class="wq-live-unit" style="color:var(--muted)">Loading&hellip;</span></div>
+          <div class="wq-live-meta">${Math.round(s.km * 10) / 10} km away</div>
+        </div>
+      `).join('');
+
+      // Step 2: Fetch latest reading for each station's first measure (all in parallel, tiny requests)
+      const fetches = sorted.map(async s => {
+        const measures = Array.isArray(s.measures) ? s.measures : [s.measures];
+        const m = measures[0];
+        const mId = (m['@id'] || m).split('/measures/').pop();
+        const param = m.parameterName || m.parameter || mId.split('-')[1] || 'level';
+        const unit = m.unitName || '';
+        try {
+          const resp = await fetch(`${EA_API}/id/measures/${mId}/readings?latest`, FETCH_OPTS);
+          if (!resp.ok) return null;
+          const data = await resp.json();
+          const items = data.items || [];
+          if (items.length === 0) return null;
+          const r = items[0];
+          return { ref: s.stationReference, value: r.value, dateTime: r.dateTime, param, unit };
+        } catch { return null; }
       });
 
-      // Show stations immediately as placeholder cards
-      const stationList = Object.values(stationMap).sort((a, b) => {
-        const dA = (a.lat && a.long) ? distKm(region.lat, region.long, a.lat, a.long) : 999;
-        const dB = (b.lat && b.long) ? distKm(region.lat, region.long, b.lat, b.long) : 999;
-        return dA - dB;
-      }).slice(0, 20);
-
-      statusEl.innerHTML = `<span class="wq-loading">Found ${stations.length} stations. Fetching latest readings&hellip;</span>`;
-      grid.innerHTML = stationList.map(s => {
-        const km = (s.lat && s.long) ? Math.round(distKm(region.lat, region.long, s.lat, s.long) * 10) / 10 : '';
-        return `
-          <div class="wq-live-card wq-live-card--pending">
-            <div class="wq-live-name">${s.name}</div>
-            <div class="wq-live-river">${[s.river, s.catchment, s.town].filter(Boolean).join(' &bull; ')}</div>
-            <div class="wq-live-value"><span class="wq-live-unit" style="color:var(--muted)">Fetching reading&hellip;</span></div>
-            ${km ? `<div class="wq-live-meta">${km} km away</div>` : ''}
-          </div>
-        `;
-      }).join('');
-
-      // Step 2: Fetch latest readings (larger, slower response)
-      const readingsResp = await fetch(`${EA_API}/data/readings?latest&_limit=2000`, FETCH_OPTS);
-      if (!readingsResp.ok) throw new Error(`Readings API returned ${readingsResp.status}`);
-      const readingsData = await readingsResp.json();
-      const readings = readingsData.items || [];
-
-      // Match readings to nearby stations
-      const results = [];
-      readings.forEach(r => {
-        const measureUrl = (typeof r.measure === 'string') ? r.measure : (r.measure?.['@id'] || '');
-        const parts = measureUrl.split('/measures/');
-        if (parts.length < 2) return;
-        const measureId = parts[1];
-        const stationRef = measureId.split('-')[0];
-
-        if (!stationMap[stationRef]) return;
-        const s = stationMap[stationRef];
-        const km = (s.lat && s.long) ? distKm(region.lat, region.long, s.lat, s.long) : 0;
-
-        const paramParts = measureId.split('-');
-        const param = paramParts.length > 1 ? paramParts[1] : 'level';
-
-        results.push({
-          name: s.name,
-          river: s.river,
-          town: s.town,
-          catchment: s.catchment,
-          value: r.value,
-          dateTime: r.dateTime,
-          param: param,
-          km: Math.round(km * 10) / 10
-        });
-      });
-
-      if (results.length === 0) {
-        statusEl.innerHTML = `<span class="wq-warn">${stations.length} stations found near ${region.label} but no live readings available right now. Try again later.</span>`;
-        return;
-      }
-
-      results.sort((a, b) => a.km - b.km);
-      const display = results.slice(0, 20);
-
-      statusEl.innerHTML = `<span class="wq-ok">${results.length} live readings from ${stations.length} stations near ${region.label} &bull; ${new Date().toLocaleTimeString()}</span>`;
-
-      grid.innerHTML = display.map(r => {
-        const time = new Date(r.dateTime);
+      // Update cards as readings arrive
+      let loaded = 0;
+      fetches.forEach(p => p.then(result => {
+        loaded++;
+        statusEl.innerHTML = `<span class="wq-loading">${loaded} of ${sorted.length} readings loaded&hellip;</span>`;
+        if (!result) return;
+        const card = document.getElementById('card-' + result.ref);
+        if (!card) return;
+        card.classList.remove('wq-live-card--pending');
+        const time = new Date(result.dateTime);
         const ago = Math.round((Date.now() - time) / 60000);
         const agoText = ago < 60 ? `${ago} min ago` : ago < 1440 ? `${Math.round(ago / 60)}h ago` : `${Math.round(ago / 1440)}d ago`;
-        const paramLabel = r.param === 'level' ? 'Water Level' : r.param === 'flow' ? 'Flow' : r.param === 'rainfall' ? 'Rainfall' : r.param;
-        return `
-          <div class="wq-live-card">
-            <div class="wq-live-name">${r.name}</div>
-            <div class="wq-live-river">${[r.river, r.catchment, r.town].filter(Boolean).join(' &bull; ')}</div>
-            <div class="wq-live-value">${typeof r.value === 'number' ? r.value.toFixed(3) : r.value} <span class="wq-live-unit">${paramLabel}</span></div>
-            <div class="wq-live-meta"><span class="wq-live-param">${r.km} km away</span> &bull; <span class="wq-live-time">${agoText}</span></div>
-          </div>
-        `;
-      }).join('');
+        const valEl = card.querySelector('.wq-live-value');
+        const metaEl = card.querySelector('.wq-live-meta');
+        valEl.innerHTML = `${typeof result.value === 'number' ? result.value.toFixed(3) : result.value} <span class="wq-live-unit">${result.param}${result.unit ? ' (' + result.unit + ')' : ''}</span>`;
+        metaEl.innerHTML += ` &bull; <span class="wq-live-time">${agoText}</span>`;
+      }));
+
+      await Promise.all(fetches);
+      statusEl.innerHTML = `<span class="wq-ok">${sorted.length} stations near ${region.label} &bull; ${new Date().toLocaleTimeString()}</span>`;
 
     } catch (err) {
       statusEl.innerHTML = `<span class="wq-warn">Error: ${err.message}. Check browser console for details.</span>`;
