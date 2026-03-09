@@ -187,6 +187,8 @@
 
   document.getElementById('liveLoadBtn')?.addEventListener('click', loadLiveData);
 
+  const FETCH_OPTS = { headers: { 'Accept': 'application/json' } };
+
   async function loadLiveData() {
     const regionKey = document.getElementById('liveRegion').value;
     const grid = document.getElementById('liveGrid');
@@ -202,82 +204,83 @@
     grid.innerHTML = '';
 
     try {
-      // Step 1: Fetch all latest readings (the only endpoint that reliably returns data)
-      const readResp = await fetch(`${EA_API}/data/readings?latest&_limit=500`);
-      const readData = await readResp.json();
-      const readings = readData.items || [];
+      // Two parallel API calls: nearby stations + latest readings
+      const [stationsResp, readingsResp] = await Promise.all([
+        fetch(`${EA_API}/id/stations?lat=${region.lat}&long=${region.long}&dist=${region.dist}&_limit=100`, FETCH_OPTS),
+        fetch(`${EA_API}/data/readings?latest&_limit=2000`, FETCH_OPTS)
+      ]);
 
-      if (readings.length === 0) {
-        statusEl.innerHTML = '<span class="wq-warn">No readings currently available from the EA API.</span>';
-        return;
-      }
+      if (!stationsResp.ok) throw new Error(`Stations API returned ${stationsResp.status}`);
+      if (!readingsResp.ok) throw new Error(`Readings API returned ${readingsResp.status}`);
 
-      statusEl.innerHTML = `<span class="wq-loading">Got ${readings.length} readings. Looking up stations near ${region.label}&hellip;</span>`;
+      const stationsData = await stationsResp.json();
+      const readingsData = await readingsResp.json();
 
-      // Step 2: Extract unique station refs from measure URLs
-      const stationReadings = {};
-      readings.forEach(r => {
-        const m = r.measure || '';
-        const parts = m.split('/measures/');
-        if (parts.length < 2) return;
-        const full = parts[1];
-        const sRef = full.split('-')[0];
-        if (!stationReadings[sRef]) {
-          stationReadings[sRef] = { measure: full, value: r.value, dateTime: r.dateTime };
+      const stations = stationsData.items || [];
+      const readings = readingsData.items || [];
+
+      statusEl.innerHTML = `<span class="wq-loading">Found ${stations.length} stations and ${readings.length} readings. Matching&hellip;</span>`;
+
+      // Build a lookup: station reference -> station info
+      const stationMap = {};
+      stations.forEach(s => {
+        const ref = s.stationReference || (s['@id'] || '').split('/').pop();
+        if (ref) {
+          stationMap[ref] = {
+            name: s.label || ref,
+            river: s.riverName || '',
+            town: s.town || '',
+            catchment: s.catchmentName || '',
+            lat: s.lat,
+            long: s.long
+          };
         }
       });
 
-      const stationRefs = Object.keys(stationReadings);
-
-      // Step 3: Fetch station details in parallel (batched) and filter by distance
+      // Match readings to nearby stations
       const results = [];
-      const batchSize = 10;
-      for (let i = 0; i < stationRefs.length && results.length < 16; i += batchSize) {
-        const batch = stationRefs.slice(i, i + batchSize);
-        const fetches = batch.map(async ref => {
-          try {
-            const resp = await fetch(`${EA_API}/id/stations/${ref}`);
-            const d = await resp.json();
-            const s = d.items || d;
-            const lat = s.lat;
-            const lng = s.long;
-            if (!lat || !lng) return null;
-            const km = distKm(region.lat, region.long, lat, lng);
-            if (km > region.dist) return null;
-            const rd = stationReadings[ref];
-            return {
-              name: s.label || ref,
-              river: s.riverName || '',
-              town: s.town || '',
-              catchment: s.catchmentName || '',
-              value: rd.value,
-              dateTime: rd.dateTime,
-              measure: rd.measure,
-              km: Math.round(km * 10) / 10
-            };
-          } catch (e) { return null; }
+      readings.forEach(r => {
+        const measureUrl = (typeof r.measure === 'string') ? r.measure : (r.measure?.['@id'] || '');
+        const parts = measureUrl.split('/measures/');
+        if (parts.length < 2) return;
+        const measureId = parts[1];
+        const stationRef = measureId.split('-')[0];
+
+        if (!stationMap[stationRef]) return;
+        const s = stationMap[stationRef];
+        const km = (s.lat && s.long) ? distKm(region.lat, region.long, s.lat, s.long) : 0;
+
+        // Parse parameter from measure string
+        const paramParts = measureId.split('-');
+        const param = paramParts.length > 1 ? paramParts[1] : 'level';
+
+        results.push({
+          name: s.name,
+          river: s.river,
+          town: s.town,
+          catchment: s.catchment,
+          value: r.value,
+          dateTime: r.dateTime,
+          param: param,
+          km: Math.round(km * 10) / 10
         });
-        const batchResults = (await Promise.all(fetches)).filter(Boolean);
-        results.push(...batchResults);
-      }
+      });
 
       if (results.length === 0) {
-        statusEl.innerHTML = `<span class="wq-warn">No stations with live readings found within ${region.dist} km of ${region.label}. The EA API may have limited data available.</span>`;
+        statusEl.innerHTML = `<span class="wq-warn">No live readings matched stations near ${region.label}. The EA API may have limited real-time data. Try London or Oxford for best coverage.</span>`;
         return;
       }
 
       results.sort((a, b) => a.km - b.km);
+      const display = results.slice(0, 20);
 
-      statusEl.innerHTML = `<span class="wq-ok">${results.length} stations with live data near ${region.label} &bull; Updated: ${new Date().toLocaleTimeString()}</span>`;
+      statusEl.innerHTML = `<span class="wq-ok">${results.length} readings from ${Object.keys(stationMap).length} stations near ${region.label} &bull; ${new Date().toLocaleTimeString()}</span>`;
 
-      grid.innerHTML = results.map(r => {
+      grid.innerHTML = display.map(r => {
         const time = new Date(r.dateTime);
         const ago = Math.round((Date.now() - time) / 60000);
         const agoText = ago < 60 ? `${ago} min ago` : ago < 1440 ? `${Math.round(ago / 60)}h ago` : `${Math.round(ago / 1440)}d ago`;
-        // Parse parameter from measure string
-        const paramParts = r.measure.split('-');
-        const param = paramParts.length > 1 ? paramParts[1] : 'level';
-        const paramLabel = param === 'level' ? 'Water Level' : param === 'flow' ? 'Flow' : param;
+        const paramLabel = r.param === 'level' ? 'Water Level' : r.param === 'flow' ? 'Flow' : r.param === 'rainfall' ? 'Rainfall' : r.param;
         return `
           <div class="wq-live-card">
             <div class="wq-live-name">${r.name}</div>
@@ -289,7 +292,8 @@
       }).join('');
 
     } catch (err) {
-      statusEl.innerHTML = `<span class="wq-warn">Error loading data: ${err.message}</span>`;
+      statusEl.innerHTML = `<span class="wq-warn">Error: ${err.message}. Check browser console for details.</span>`;
+      console.error('Live monitoring error:', err);
     }
   }
 
