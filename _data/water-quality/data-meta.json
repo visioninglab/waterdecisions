@@ -1,0 +1,12 @@
+{
+  "lastFetch": "2026-03-09T14:28:10Z",
+  "fetchType": "floods",
+  "stationCount": 0,
+  "readingCount": 0,
+  "warningCount": 65,
+  "historyDays": 0
+0,
+  "apiVersion": "0.9",
+  "source": "EA Flood Monitoring API",
+  "licence": "Open Government Licence v3.0"
+}
