@@ -23,7 +23,7 @@
   // --- Data Loading ---
   async function loadData() {
     const base = document.querySelector('link[rel="icon"]')?.href?.replace(/favicon\.svg.*/, '') || './';
-    const dataBase = base + '_data/water-quality/';
+    const dataBase = base + 'assets/data/water-quality/';
 
     // Try loading from Jekyll-injected data first, fall back to fetch
     try {
