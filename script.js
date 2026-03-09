@@ -75,7 +75,7 @@
   }
 
   /* --- Homepage: multi-dimensional filters + search --- */
-  var activeFilters = { sector: 'all', hazard: 'all', location: 'all' };
+  var activeFilters = { sector: 'all', hazard: 'all', location: 'all', sdg: 'all' };
   var searchQuery = '';
 
   function setFilter(dimension, value, btn) {
@@ -111,11 +111,13 @@
     activeFilters.sector = 'all';
     activeFilters.hazard = 'all';
     activeFilters.location = 'all';
+    activeFilters.sdg = 'all';
     searchQuery = '';
     var searchInput = document.getElementById('studySearch');
     if (searchInput) searchInput.value = '';
     activateButton('sectorFilter', 'all');
     activateButton('hazardFilter', 'all');
+    activateButton('sdgFilter', 'all');
     updateMap();
     applyFilters();
     updateURL();
@@ -126,7 +128,7 @@
   function updateResetBtn() {
     var btn = document.getElementById('resetFilters');
     if (!btn) return;
-    var hasFilters = activeFilters.sector !== 'all' || activeFilters.hazard !== 'all' || activeFilters.location !== 'all' || searchQuery !== '';
+    var hasFilters = activeFilters.sector !== 'all' || activeFilters.hazard !== 'all' || activeFilters.location !== 'all' || activeFilters.sdg !== 'all' || searchQuery !== '';
     btn.style.display = hasFilters ? '' : 'none';
   }
 
@@ -170,8 +172,9 @@
       var matchSector = (sector === 'all' || card.dataset.sector === sector);
       var matchHazard = (hazard === 'all' || (card.dataset.hazard && card.dataset.hazard.split(' ').indexOf(hazard) !== -1));
       var matchLocation = (location === 'all' || card.dataset.location === location);
+      var matchSdg = (activeFilters.sdg === 'all' || (card.dataset.sdg && card.dataset.sdg.split(/\s+/).indexOf(activeFilters.sdg) !== -1));
       var matchSearch = !query || card.textContent.toLowerCase().indexOf(query) !== -1;
-      var visible = matchSector && matchHazard && matchLocation && matchSearch;
+      var visible = matchSector && matchHazard && matchLocation && matchSdg && matchSearch;
       card.style.display = visible ? '' : 'none';
       if (visible) visibleCount++;
     });
@@ -213,8 +216,12 @@
       activeFilters.location = location;
       updateMap();
     }
+    if (params.get('sdg')) {
+      activeFilters.sdg = params.get('sdg');
+      activateButton('sdgFilter', params.get('sdg'));
+    }
 
-    if (sector || hazard || location) {
+    if (sector || hazard || location || params.get('sdg')) {
       applyFilters();
       updateResetBtn();
     }
@@ -240,6 +247,7 @@
     if (activeFilters.sector !== 'all') params.set('sector', activeFilters.sector);
     if (activeFilters.hazard !== 'all') params.set('hazard', activeFilters.hazard);
     if (activeFilters.location !== 'all') params.set('location', activeFilters.location);
+    if (activeFilters.sdg !== 'all') params.set('sdg', activeFilters.sdg);
     var qs = params.toString();
     var url = window.location.pathname + (qs ? '?' + qs : '');
     history.replaceState(null, '', url);
