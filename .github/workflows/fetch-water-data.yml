@@ -1,0 +1,88 @@
+name: Fetch Water Quality Data
+
+on:
+  schedule:
+    # Readings + rainfall: every 6 hours
+    - cron: '15 */6 * * *'
+    # Flood warnings: every 2 hours
+    - cron: '5 */2 * * *'
+    # Stations + measures: weekly Sunday 02:00 UTC
+    - cron: '0 2 * * 0'
+    # Daily archive snapshot: 23:55 UTC
+    - cron: '55 23 * * *'
+  workflow_dispatch:
+    inputs:
+      fetch_type:
+        description: 'Data to fetch'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - readings
+          - floods
+          - stations
+          - archive
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine fetch type
+        id: fetch-type
+        run: |
+          CRON="${{ github.event.schedule }}"
+          MANUAL="${{ github.event.inputs.fetch_type }}"
+
+          if [ -n "$MANUAL" ]; then
+            echo "type=$MANUAL" >> $GITHUB_OUTPUT
+          elif [ "$CRON" = "15 */6 * * *" ]; then
+            echo "type=readings" >> $GITHUB_OUTPUT
+          elif [ "$CRON" = "5 */2 * * *" ]; then
+            echo "type=floods" >> $GITHUB_OUTPUT
+          elif [ "$CRON" = "0 2 * * 0" ]; then
+            echo "type=stations" >> $GITHUB_OUTPUT
+          elif [ "$CRON" = "55 23 * * *" ]; then
+            echo "type=archive" >> $GITHUB_OUTPUT
+          else
+            echo "type=all" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create data directory
+        run: mkdir -p _data/water-quality/history
+
+      - name: Fetch stations (weekly)
+        if: steps.fetch-type.outputs.type == 'stations' || steps.fetch-type.outputs.type == 'all'
+        run: bash scripts/fetch-stations.sh
+
+      - name: Fetch latest readings (6-hourly)
+        if: steps.fetch-type.outputs.type == 'readings' || steps.fetch-type.outputs.type == 'all'
+        run: bash scripts/fetch-readings.sh
+
+      - name: Fetch flood warnings (2-hourly)
+        if: steps.fetch-type.outputs.type == 'floods' || steps.fetch-type.outputs.type == 'all' || steps.fetch-type.outputs.type == 'readings'
+        run: bash scripts/fetch-floods.sh
+
+      - name: Archive daily snapshot
+        if: steps.fetch-type.outputs.type == 'archive' || steps.fetch-type.outputs.type == 'all'
+        run: bash scripts/archive-snapshot.sh
+
+      - name: Update data meta
+        run: bash scripts/update-meta.sh "${{ steps.fetch-type.outputs.type }}"
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _data/water-quality/
+          if git diff --cached --quiet; then
+            echo "No data changes to commit"
+          else
+            git commit -m "chore: update water quality data [$(date -u +%Y-%m-%dT%H:%M:%SZ)] [${{ steps.fetch-type.outputs.type }}]"
+            git push
+          fi
