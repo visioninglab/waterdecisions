@@ -115,7 +115,7 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
           {% for sdg_key in study.sdgs limit:3 %}
             {% assign goal = site.data.sdgs.goals[sdg_key] %}
             {% if goal %}
-            <span class="sdg-badge" style="background:{{ goal.color }};">SDG {{ goal.number }}</span>
+            <a href="{{ goal.url }}" target="_blank" rel="noopener noreferrer" class="sdg-badge" style="background:{{ goal.color }};" onclick="event.stopPropagation();">SDG {{ goal.number }}</a>
             {% endif %}
           {% endfor %}
         {% endif %}
