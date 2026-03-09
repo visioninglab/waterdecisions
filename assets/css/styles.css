@@ -2649,3 +2649,204 @@ body {
   .wq-live-grid { grid-template-columns: 1fr; }
   .wq-live-controls { flex-direction: column; }
 }
+
+
+/* ============================================================
+   WATER QUALITY DASHBOARD (from DIRwiki)
+   Appended for water-dashboard.html
+   Conflicting selectors (.wq-search, .wq-btn, .wq-loading)
+   are scoped under .wq-dashboard-page
+   ============================================================ */
+
+   WATER QUALITY DASHBOARD
+   ============================================================ */
+
+/* --- Freshness Bar --- */
+.wq-freshness-bar {
+  background: var(--stallion); color: #fff; font-size: 12px; padding: 6px 2rem;
+  border-bottom: 1px solid rgba(200,150,45,0.15);
+}
+.wq-freshness-inner { display: flex; align-items: center; gap: 8px; max-width: 1400px; margin: 0 auto; }
+.wq-freshness-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.wq-freshness-dot.wq-fresh { background: #10b981; box-shadow: 0 0 6px rgba(16,185,129,0.5); }
+.wq-freshness-dot.wq-stale { background: #f59e0b; }
+.wq-freshness-dot.wq-old { background: #ef4444; }
+.wq-freshness-right { margin-left: auto; opacity: 0.7; }
+
+/* --- Hero --- */
+.wq-hero {
+  background: linear-gradient(135deg, var(--stallion) 0%, #2a3142 100%);
+  color: #fff; padding: 2.5rem 2rem 2rem; text-align: center;
+}
+.wq-hero-inner { max-width: 700px; margin: 0 auto; }
+.wq-hero h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;
+  background-image: linear-gradient(135deg, hsl(38,75%,55%), hsl(28,70%,45%));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.wq-hero-sub { font-size: 14px; opacity: 0.7; line-height: 1.5; }
+
+/* --- Flood Panel --- */
+.wq-flood-panel { background: #fef2f2; border-bottom: 2px solid #fca5a5; padding: 1rem 2rem; }
+.wq-section-inner { max-width: 1400px; margin: 0 auto; }
+.wq-flood-panel h2 { font-size: 16px; margin-bottom: 0.75rem; color: #991b1b; }
+.wq-flood-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 0.75rem; }
+.wq-flood-card { padding: 0.75rem 1rem; border-radius: 8px; font-size: 13px; }
+.wq-flood-severe { background: #fee2e2; border-left: 4px solid #ef4444; }
+.wq-flood-warning { background: #fff7ed; border-left: 4px solid #f59e0b; }
+.wq-flood-alert { background: #fefce8; border-left: 4px solid #eab308; }
+.wq-flood-header { font-weight: 600; margin-bottom: 4px; }
+.wq-flood-msg { opacity: 0.8; margin-bottom: 4px; }
+.wq-flood-time { font-size: 11px; opacity: 0.6; }
+
+/* --- Dashboard Layout --- */
+.wq-dashboard { padding: 1.5rem 2rem; background: var(--paper); }
+.wq-dashboard-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 1400px; margin: 0 auto; }
+
+/* --- Cards --- */
+.wq-card {
+  background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border);
+  box-shadow: var(--card-shadow); overflow: hidden;
+}
+.wq-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); gap: 0.75rem;
+}
+.wq-card-header h3 { font-size: 14px; font-weight: 700; margin: 0; }
+.wq-badge { background: var(--accent); color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+
+/* --- Map --- */
+.wq-map { height: 420px; }
+.wq-map-controls { display: flex; gap: 0.5rem; flex-shrink: 0; }
+.wq-select {
+  font-size: 12px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 6px;
+  background: #fff; font-family: inherit; max-width: 200px;
+}
+.wq-dashboard-page .wq-search {
+  font-size: 12px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 6px;
+  background: #fff; font-family: inherit; width: 180px;
+}
+.wq-summary-bar {
+  display: flex; gap: 1rem; padding: 8px 1rem; background: #f8f9fa; font-size: 12px; font-weight: 600;
+}
+.wq-summary-item { display: flex; align-items: center; gap: 4px; }
+.wq-summary-item.wq-good::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #059669; }
+.wq-summary-item.wq-moderate::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.wq-summary-item.wq-info::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #6366f1; }
+
+/* --- Station Cards Grid --- */
+.wq-station-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem; padding: 1rem; max-height: 500px; overflow-y: auto;
+}
+.wq-station-card {
+  background: #fff; border: 1px solid var(--border); border-radius: 8px;
+  padding: 0.75rem; cursor: pointer; transition: box-shadow 0.15s, border-color 0.15s;
+  font-size: 13px;
+}
+.wq-station-card:hover { box-shadow: var(--card-hover-shadow); border-color: var(--accent); }
+.wq-sc-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.wq-sc-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.wq-dot-active { background: #059669; }
+.wq-dot-inactive { background: #9ca3af; }
+.wq-sc-river { font-size: 11px; color: var(--muted); }
+.wq-sc-reading { font-size: 18px; font-weight: 700; margin: 6px 0; color: var(--ink); }
+.wq-sc-value { color: var(--accent-dark); }
+.wq-sc-nodata { font-size: 12px; color: var(--muted); font-weight: 400; }
+.wq-sc-trend { font-size: 14px; opacity: 0.5; }
+.wq-sc-catchment { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.wq-sc-footer { font-size: 10px; color: var(--muted); margin-top: 4px; border-top: 1px solid var(--border); padding-top: 4px; }
+
+/* --- Pagination --- */
+.wq-pagination { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 0.75rem; font-size: 13px; }
+.wq-pagination button {
+  background: var(--accent); color: #fff; border: none; padding: 4px 12px;
+  border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;
+}
+.wq-pagination button:hover { background: var(--accent-dark); }
+
+/* --- Station Detail --- */
+.wq-btn-close {
+  background: none; border: none; font-size: 20px; cursor: pointer; color: var(--muted);
+  padding: 0 4px; line-height: 1;
+}
+.wq-detail-body { padding: 1rem; }
+.wq-dm-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1rem; font-size: 12px; }
+.wq-dm-grid strong { display: block; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+
+/* --- Sections --- */
+.wq-section { padding: 0 2rem; margin-bottom: 1rem; }
+.wq-section-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer; padding: 1rem 0; border-bottom: 1px solid var(--border);
+}
+.wq-section-toggle h2 { font-size: 16px; margin: 0; }
+.wq-toggle-icon { transition: transform 0.2s; width: 20px; height: 20px; }
+.wq-collapsible { display: none; padding: 1rem 0; }
+.wq-collapsible.wq-open { display: block; }
+
+/* --- Determinands Table --- */
+.wq-det-controls { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+.wq-table-wrap { overflow-x: auto; }
+.wq-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wq-table th {
+  background: var(--stallion); color: #fff; padding: 8px 12px; text-align: left;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer;
+  position: sticky; top: 0;
+}
+.wq-table th:hover { background: #2a3142; }
+.wq-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.wq-table td small { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
+.wq-table tbody tr:hover { background: var(--accent-light); }
+.wq-table-sm { font-size: 12px; }
+.wq-table-sm th, .wq-table-sm td { padding: 6px 8px; }
+.wq-th-good { color: #10b981 !important; }
+.wq-th-mod { color: #f59e0b !important; }
+.wq-th-poor { color: #ef4444 !important; }
+.wq-td-good { color: #059669; font-weight: 600; }
+.wq-td-mod { color: #d97706; font-weight: 600; }
+.wq-td-poor { color: #dc2626; font-weight: 600; }
+.wq-cat-badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+.wq-cat-physical { background: #dbeafe; color: #1e40af; }
+.wq-cat-chemical { background: #fef3c7; color: #92400e; }
+.wq-cat-biological { background: #d1fae5; color: #065f46; }
+
+/* --- Export --- */
+.wq-export-section { padding-bottom: 2rem; }
+.wq-export-section h2 { font-size: 16px; margin-bottom: 0.75rem; }
+.wq-export-buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.wq-dashboard-page .wq-btn {
+  background: var(--card-bg); border: 1px solid var(--border); padding: 8px 16px;
+  border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: all 0.15s;
+}
+.wq-dashboard-page .wq-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* --- Attribution --- */
+.wq-attribution {
+  background: var(--stallion); color: rgba(255,255,255,0.5); font-size: 11px;
+  padding: 1rem 2rem; text-align: center; line-height: 1.5;
+}
+
+/* --- Loading state --- */
+.wq-dashboard-page .wq-loading { padding: 2rem; text-align: center; color: var(--muted); font-size: 13px; }
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .wq-dashboard-inner { grid-template-columns: 1fr; }
+  .wq-map { height: 300px; }
+  .wq-dm-grid { grid-template-columns: repeat(2, 1fr); }
+  .wq-map-controls { flex-direction: column; }
+  .wq-dashboard-page .wq-search { width: 100%; }
+  .wq-station-grid { grid-template-columns: 1fr 1fr; }
+  .wq-freshness-inner { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .wq-freshness-right { margin-left: 0; }
+}
+@media (max-width: 500px) {
+  .wq-hero h1 { font-size: 1.5rem; }
+  .wq-station-grid { grid-template-columns: 1fr; }
+  .wq-dm-grid { grid-template-columns: 1fr; }
+  .wq-export-buttons { flex-direction: column; }
+  .wq-det-controls { flex-direction: column; }
+}
