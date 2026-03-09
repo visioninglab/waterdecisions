@@ -1,0 +1,98 @@
+---
+layout: page
+title: "SDG Mapping"
+description: "How the six resilience principles relate to the UN Sustainable Development Goals — a policy and communication layer for water infrastructure case studies."
+nav_active: sdg-mapping
+hero_title: "SDG Mapping"
+hero_subtitle: "How the resilience principles connect to the UN Sustainable Development Goals. The six principles remain the core assessment method — SDG mappings provide a policy translation and communication layer."
+narrow: true
+footer_text: "Water Decisions &bull; SDG Mapping &bull; Indicative alignments, not formal certification"
+---
+
+<div class="sdg-mapping-page">
+
+  <div class="sdg-mapping-intro">
+    <h2>Approach</h2>
+    <p>The six resilience principles — drawn from the <a href="https://www.undrr.org/publication/handbook-implementing-principles-resilient-infrastructure" target="_blank" rel="noopener">UNDRR Handbook</a> and <a href="https://www.iso.org/standard/50275.html" target="_blank" rel="noopener">ISO 22372</a> — remain the core analytical framework for every case study on this site.</p>
+    <p>The SDGs provide a supporting layer for policy translation, communication, filtering and summary views. Each principle maps indicatively to a set of SDG targets. These are areas of likely contribution, not rigid one-to-one assignments or formal certification.</p>
+    <p>Some case studies also connect to selected secondary SDGs — such as SDG 12 (Responsible Consumption and Production), SDG 14 (Life Below Water) and SDG 15 (Life on Land) — where the evidence supports it.</p>
+  </div>
+
+  <h2>Principle–SDG Crosswalk</h2>
+  <p class="sdg-mapping-note">Each principle commonly contributes to the SDG targets listed below. Individual case studies may connect to additional or fewer targets depending on context.</p>
+
+  <div class="sdg-crosswalk">
+    {% for item in site.data.sdgs.crosswalk %}
+    <div class="sdg-crosswalk-row">
+      <div class="sdg-crosswalk-principle">
+        <strong>{{ item.principle }}</strong>
+      </div>
+      <div class="sdg-crosswalk-targets">
+        {% for sdg_key in item.sdgs %}
+          {% assign goal = site.data.sdgs.goals[sdg_key] %}
+          <span class="sdg-badge" style="background:{{ goal.color }};" title="SDG {{ goal.number }}: {{ goal.name }}">
+            <i data-lucide="{{ goal.icon }}" style="width:12px;height:12px;display:inline;vertical-align:-1px;margin-right:3px;"></i>SDG {{ goal.number }}
+          </span>
+        {% endfor %}
+        <div class="sdg-crosswalk-target-list">
+          Targets: {{ item.targets | join: ", " }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <h2>Prioritised Goals</h2>
+  <div class="sdg-goal-overview">
+    {% for pair in site.data.sdgs.goals %}
+      {% assign key = pair[0] %}
+      {% assign goal = pair[1] %}
+      {% if goal.primary %}
+      <div class="sdg-overview-card" style="border-left: 4px solid {{ goal.color }};">
+        <span class="sdg-goal-num" style="background:{{ goal.color }};">{{ goal.number }}</span>
+        <div>
+          <strong>{{ goal.name }}</strong>
+          <span class="sdg-overview-label">Primary</span>
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+    {% for pair in site.data.sdgs.goals %}
+      {% assign key = pair[0] %}
+      {% assign goal = pair[1] %}
+      {% unless goal.primary %}
+      <div class="sdg-overview-card sdg-secondary" style="border-left: 4px solid {{ goal.color }};">
+        <span class="sdg-goal-num" style="background:{{ goal.color }};">{{ goal.number }}</span>
+        <div>
+          <strong>{{ goal.name }}</strong>
+          <span class="sdg-overview-label">Secondary</span>
+        </div>
+      </div>
+      {% endunless %}
+    {% endfor %}
+  </div>
+
+  <h2>Case Studies by SDG</h2>
+  <div class="sdg-case-matrix">
+    {% for pair in site.data.sdgs.goals %}
+      {% assign key = pair[0] %}
+      {% assign goal = pair[1] %}
+      {% assign matching = site.case_studies | where_exp: "s", "s.sdgs contains key" %}
+      {% if matching.size > 0 %}
+      <div class="sdg-matrix-row">
+        <div class="sdg-matrix-goal">
+          <span class="sdg-badge" style="background:{{ goal.color }};">SDG {{ goal.number }}</span>
+          <span>{{ goal.short }}</span>
+        </div>
+        <div class="sdg-matrix-studies">
+          {% for s in matching %}
+          <a href="{{ s.url | relative_url }}" class="sdg-matrix-link">{{ s.card.short_title | default: s.title }}</a>
+          {% endfor %}
+          <span class="sdg-matrix-count">({{ matching.size }})</span>
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+</div>
