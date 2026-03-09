@@ -15,6 +15,7 @@ footer_text: "Water Decisions &bull; SDG Mapping &bull; Indicative alignments, n
     <h2>Approach</h2>
     <p>The six resilience principles — drawn from the <a href="https://www.undrr.org/publication/handbook-implementing-principles-resilient-infrastructure" target="_blank" rel="noopener">UNDRR Handbook</a> and <a href="https://www.iso.org/standard/50275.html" target="_blank" rel="noopener">ISO 22372</a> — remain the core analytical framework for every case study on this site.</p>
     <p>The SDGs provide a supporting layer for policy translation, communication, filtering and summary views. Each principle maps indicatively to a set of SDG targets. These are areas of likely contribution, not rigid one-to-one assignments or formal certification.</p>
+    <p>For full details on each goal, see <a href="https://sdgs.un.org/goals" target="_blank" rel="noopener noreferrer">sdgs.un.org/goals</a>.</p>
     <p>Some case studies also connect to selected secondary SDGs — such as SDG 12 (Responsible Consumption and Production), SDG 14 (Life Below Water) and SDG 15 (Life on Land) — where the evidence supports it.</p>
   </div>
 
@@ -30,9 +31,9 @@ footer_text: "Water Decisions &bull; SDG Mapping &bull; Indicative alignments, n
       <div class="sdg-crosswalk-targets">
         {% for sdg_key in item.sdgs %}
           {% assign goal = site.data.sdgs.goals[sdg_key] %}
-          <span class="sdg-badge" style="background:{{ goal.color }};" title="SDG {{ goal.number }}: {{ goal.name }}">
+          <a href="{{ goal.url }}" target="_blank" rel="noopener noreferrer" class="sdg-badge" style="background:{{ goal.color }};" title="SDG {{ goal.number }}: {{ goal.name }}">
             <i data-lucide="{{ goal.icon }}" style="width:12px;height:12px;display:inline;vertical-align:-1px;margin-right:3px;"></i>SDG {{ goal.number }}
-          </span>
+          </a>
         {% endfor %}
         <div class="sdg-crosswalk-target-list">
           Targets: {{ item.targets | join: ", " }}
@@ -51,7 +52,7 @@ footer_text: "Water Decisions &bull; SDG Mapping &bull; Indicative alignments, n
       <div class="sdg-overview-card" style="border-left: 4px solid {{ goal.color }};">
         <span class="sdg-goal-num" style="background:{{ goal.color }};">{{ goal.number }}</span>
         <div>
-          <strong>{{ goal.name }}</strong>
+          <a href="{{ goal.url }}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;"><strong>{{ goal.name }}</strong></a>
           <span class="sdg-overview-label">Primary</span>
         </div>
       </div>
@@ -64,7 +65,7 @@ footer_text: "Water Decisions &bull; SDG Mapping &bull; Indicative alignments, n
       <div class="sdg-overview-card sdg-secondary" style="border-left: 4px solid {{ goal.color }};">
         <span class="sdg-goal-num" style="background:{{ goal.color }};">{{ goal.number }}</span>
         <div>
-          <strong>{{ goal.name }}</strong>
+          <a href="{{ goal.url }}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;"><strong>{{ goal.name }}</strong></a>
           <span class="sdg-overview-label">Secondary</span>
         </div>
       </div>
@@ -81,7 +82,7 @@ footer_text: "Water Decisions &bull; SDG Mapping &bull; Indicative alignments, n
       {% if matching.size > 0 %}
       <div class="sdg-matrix-row">
         <div class="sdg-matrix-goal">
-          <span class="sdg-badge" style="background:{{ goal.color }};">SDG {{ goal.number }}</span>
+          <a href="{{ goal.url }}" target="_blank" rel="noopener noreferrer" class="sdg-badge" style="background:{{ goal.color }};">SDG {{ goal.number }}</a>
           <span>{{ goal.short }}</span>
         </div>
         <div class="sdg-matrix-studies">
