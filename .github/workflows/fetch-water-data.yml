@@ -54,7 +54,7 @@ jobs:
           fi
 
       - name: Create data directory
-        run: mkdir -p _data/water-quality/history
+        run: mkdir -p assets/data/water-quality/history
 
       - name: Fetch stations (weekly)
         if: steps.fetch-type.outputs.type == 'stations' || steps.fetch-type.outputs.type == 'all'
@@ -79,7 +79,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add _data/water-quality/
+          git add assets/data/water-quality/
           if git diff --cached --quiet; then
             echo "No data changes to commit"
           else
