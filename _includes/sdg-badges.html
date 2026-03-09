@@ -1,0 +1,12 @@
+{% if page.sdgs %}
+<div class="sdg-badges">
+  {% for sdg_key in page.sdgs %}
+    {% assign goal = site.data.sdgs.goals[sdg_key] %}
+    {% if goal %}
+    <span class="sdg-badge" style="background:{{ goal.color }};" title="SDG {{ goal.number }}: {{ goal.name }}">
+      <i data-lucide="{{ goal.icon }}" style="width:12px;height:12px;display:inline;vertical-align:-1px;margin-right:3px;"></i>SDG {{ goal.number }}
+    </span>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
