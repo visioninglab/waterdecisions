@@ -2947,3 +2947,9 @@ body {
   .sdg-matrix-row { grid-template-columns: 1fr; }
   .sdg-goal-grid { grid-template-columns: 1fr; }
 }
+
+/* SDG link styling */
+.sdg-badge { text-decoration: none; cursor: pointer; transition: opacity 0.15s; }
+.sdg-badge:hover { opacity: 0.85; }
+.sdg-goal-name-link { color: inherit; text-decoration: none; }
+.sdg-goal-name-link:hover { text-decoration: underline; }
