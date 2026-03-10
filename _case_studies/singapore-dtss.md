@@ -172,6 +172,14 @@ sections:
         status: todo
         content: "Details pending."
 
+  - id: more-info
+    content: |
+      **Further reading on Singapore&rsquo;s Deep Tunnel Sewerage System:**
+
+      - <a href="https://www.pub.gov.sg/Professionals/Requirements/Used-Water/DTSS" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">PUB Singapore &mdash; Deep Tunnel Sewerage System</a> &mdash; official overview from Singapore&rsquo;s National Water Agency.
+      - <a href="https://www.nlb.gov.sg/main/article-detail?cmsuuid=bd1c9112-6334-4660-8d41-a488f70c2c54" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">National Library Board Singapore &mdash; Deep Tunnel Sewerage System</a> &mdash; detailed history and context from Singapore&rsquo;s national reference resource.
+      - <a href="https://www.nas.gov.sg/archivesonline/data/pdfdoc/20171120003/2_DTSS2%2520Factsheet_20Nov2017.pdf" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">DTSS Phase 2 Factsheet (PDF)</a> &mdash; official government factsheet on the second phase of the project.
+
   - id: futures
     content: |
       Intentions for monitoring of water security using digital methods are under consideration. <span class="status-tag todo">To Do</span>
