@@ -45,3 +45,9 @@ futures:
   icon: "sparkles"
   icon_bg: "#fdf4ff"
   icon_color: "#a855f7"
+
+more-info:
+  title: "More Information"
+  icon: "external-link"
+  icon_bg: "#f0f9ff"
+  icon_color: "#0369a1"
