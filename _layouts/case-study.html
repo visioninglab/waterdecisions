@@ -9,6 +9,26 @@ layout: default
   <main class="content">
     {% include infobox.html %}
 
+    {% if page.decision_context %}
+    <div class="section" id="decision-context">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-icon" style="background:#fef3c7;color:#d97706;"><i data-lucide="compass"></i></div>
+        <h2>Decision Context</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+      </div>
+      <div class="section-body">
+        <table style="width:100%;border-collapse:collapse;font-size:14px;">
+          {% if page.decision_context.scenario %}<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.6rem 0.75rem;font-weight:600;width:160px;vertical-align:top;">Scenario</td><td style="padding:0.6rem 0.75rem;">{{ page.decision_context.scenario }}</td></tr>{% endif %}
+          {% if page.decision_context.infrastructure %}<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.6rem 0.75rem;font-weight:600;vertical-align:top;">Infrastructure</td><td style="padding:0.6rem 0.75rem;">{{ page.decision_context.infrastructure }}</td></tr>{% endif %}
+          {% if page.decision_context.hazard %}<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.6rem 0.75rem;font-weight:600;vertical-align:top;">Hazard</td><td style="padding:0.6rem 0.75rem;">{{ page.decision_context.hazard }}</td></tr>{% endif %}
+          {% if page.decision_context.monitoring %}<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.6rem 0.75rem;font-weight:600;vertical-align:top;">Monitoring</td><td style="padding:0.6rem 0.75rem;">{{ page.decision_context.monitoring }}</td></tr>{% endif %}
+          {% if page.decision_context.regulation %}<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.6rem 0.75rem;font-weight:600;vertical-align:top;">Regulation</td><td style="padding:0.6rem 0.75rem;">{{ page.decision_context.regulation }}</td></tr>{% endif %}
+          {% if page.decision_context.decision_pattern %}<tr style="border-bottom:1px solid var(--border);"><td style="padding:0.6rem 0.75rem;font-weight:600;vertical-align:top;">Decision Pattern</td><td style="padding:0.6rem 0.75rem;">{{ page.decision_context.decision_pattern }}</td></tr>{% endif %}
+          {% if page.decision_context.use_case %}<tr><td style="padding:0.6rem 0.75rem;font-weight:600;vertical-align:top;">Use Case</td><td style="padding:0.6rem 0.75rem;">{{ page.decision_context.use_case }}</td></tr>{% endif %}
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
     {% for section in page.sections %}
       {% include section.html section=section %}
     {% endfor %}
