@@ -156,7 +156,7 @@ sections:
   - id: principles
     type: principles
     assessments:
-      - principle: "Shared Responsibility (P5)"
+      - principle: "Clearly Defined Accountabilities and Shared Responsibilities (P1)"
         status: done
         content: "Public utility leadership demonstrated by a portfolio approach to water security and long-term planning."
       - principle: "Proactively Protected (P2)"
@@ -168,10 +168,10 @@ sections:
       - principle: "Socially Engaged (P4)"
         status: todo
         content: "National government engagement with society &mdash; details pending."
-      - principle: "Adaptively Transforming (P6)"
+      - principle: "Adaptively Transforming (P5)"
         status: todo
         content: "Details pending."
-      - principle: "Continuously Learning (P1)"
+      - principle: "Continually Learning and Improving (P6)"
         status: todo
         content: "Details pending."
 
