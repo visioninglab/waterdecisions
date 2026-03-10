@@ -14,18 +14,18 @@
   ];
 
   var PRINCIPLES = [
-    { id: 'p1', num: 'P1', name: 'Continuously Learning',
-      desc: 'Develop and update understanding and insight into infrastructure resilience through monitoring, analysis and stress testing.' },
+    { id: 'p1', num: 'P1', name: 'Clearly Defined Accountabilities and Shared Responsibilities',
+      desc: 'Share information and expertise for coordinated benefits with clear accountability.' },
     { id: 'p2', num: 'P2', name: 'Proactively Protected',
       desc: 'Proactively plan, design, build and operate infrastructure prepared for current and future hazards.' },
     { id: 'p3', num: 'P3', name: 'Environmentally Integrated',
       desc: 'Work in a positively integrated way with the natural environment using nature-based solutions.' },
     { id: 'p4', num: 'P4', name: 'Socially Engaged',
       desc: 'Develop active engagement, involvement and participation across all levels of society.' },
-    { id: 'p5', num: 'P5', name: 'Shared Responsibility',
-      desc: 'Share information and expertise for coordinated benefits with clear accountability.' },
-    { id: 'p6', num: 'P6', name: 'Adaptively Transforming',
-      desc: 'Adapt and transform infrastructure systems to meet changing needs and conditions.' }
+    { id: 'p5', num: 'P5', name: 'Adaptively Transforming',
+      desc: 'Adapt and transform infrastructure systems to meet changing needs and conditions.' },
+    { id: 'p6', num: 'P6', name: 'Continually Learning and Improving',
+      desc: 'Develop and update understanding and insight into infrastructure resilience through monitoring, analysis and stress testing.' }
   ];
 
   var DECISION_AREAS = [
@@ -689,12 +689,12 @@
     if (!container) return;
     container.innerHTML = '';
 
-    // Derived PDCA: Plan = avg(P1,P5), Do = avg(P2,P3), Check = avg(P1,P4), Act = avg(P5,P6)
+    // Derived PDCA: Plan = avg(P6,P1), Do = avg(P2,P3), Check = avg(P6,P4), Act = avg(P1,P5)
     var pdca = [
-      { label: 'Plan', score: avg(scores[0], scores[4]), desc: 'avg(P1, P5)' },
+      { label: 'Plan', score: avg(scores[5], scores[0]), desc: 'avg(P6, P1)' },
       { label: 'Do', score: avg(scores[1], scores[2]), desc: 'avg(P2, P3)' },
-      { label: 'Check', score: avg(scores[0], scores[3]), desc: 'avg(P1, P4)' },
-      { label: 'Act', score: avg(scores[4], scores[5]), desc: 'avg(P5, P6)' }
+      { label: 'Check', score: avg(scores[5], scores[3]), desc: 'avg(P6, P4)' },
+      { label: 'Act', score: avg(scores[0], scores[4]), desc: 'avg(P1, P5)' }
     ];
 
     var grid = el('div', { className: 'diag-pdca-grid' });
