@@ -75,21 +75,21 @@ goals:
     url: "https://sdgs.un.org/goals/goal17"
 
 crosswalk:
-  - principle: "Continuously Learning"
+  - principle: "Continually Learning and Improving (P6)"
     targets: ["6.3", "6.5", "13.3"]
     sdgs: ["SDG6", "SDG13"]
-  - principle: "Proactively Protected"
+  - principle: "Proactively Protected (P2)"
     targets: ["9.1", "11.5", "13.1"]
     sdgs: ["SDG9", "SDG11", "SDG13"]
-  - principle: "Environmentally Integrated"
+  - principle: "Environmentally Integrated (P3)"
     targets: ["6.6", "12.2", "14.1", "15.1"]
     sdgs: ["SDG6", "SDG12", "SDG14", "SDG15"]
-  - principle: "Socially Engaged"
+  - principle: "Socially Engaged (P4)"
     targets: ["6.b", "11.3", "16.7"]
     sdgs: ["SDG6", "SDG11"]
-  - principle: "Shared Responsibility"
+  - principle: "Clearly Defined Accountabilities and Shared Responsibilities (P1)"
     targets: ["6.5", "16.6", "17.17"]
     sdgs: ["SDG6", "SDG17"]
-  - principle: "Adaptively Transforming"
+  - principle: "Adaptively Transforming (P5)"
     targets: ["9.4", "11.b", "13.1"]
     sdgs: ["SDG9", "SDG11", "SDG13"]
