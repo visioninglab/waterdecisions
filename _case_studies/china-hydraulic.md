@@ -135,6 +135,14 @@ sections:
         status: todo
         content: "Details pending."
 
+  - id: more-info
+    content: |
+      **Further reading on the Dujiangyan Irrigation System:**
+
+      - <a href="https://whc.unesco.org/pg.cfm?cid=31&id_site=1001" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">UNESCO World Heritage &mdash; Mount Qingcheng and the Dujiangyan Irrigation System</a> &mdash; official World Heritage listing and description.
+      - <a href="https://www.sciencedirect.com/science/article/abs/pii/S1570644309000719" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">Dujiangyan Irrigation System &mdash; a world cultural heritage corresponding to concepts of modern hydraulic science</a> &mdash; peer-reviewed paper in the Journal of Hydro-environment Research.
+      - <a href="https://en.wikipedia.org/wiki/Dujiangyan" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;">Wikipedia &mdash; Dujiangyan</a> &mdash; comprehensive overview of the system&rsquo;s history, engineering, and preservation.
+
   - id: futures
     content: |
       The original Dujiangyan irrigation system was destroyed in 1933 by the Diexi earthquake and was rebuilt in the same year. Although susceptible to seismic hazards, its simple architecture creates high resilience. The 2002 renovation was designed to allow the system to operate for another 2,000 years.
