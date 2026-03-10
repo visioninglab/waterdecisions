@@ -119,7 +119,7 @@ sections:
   - id: principles
     type: principles
     assessments:
-      - principle: "Shared Responsibility (P5)"
+      - principle: "Clearly Defined Accountabilities and Shared Responsibilities (P1)"
         status: todo
         content: "Details pending."
       - principle: "Proactively Protected (P2)"
@@ -131,10 +131,10 @@ sections:
       - principle: "Socially Engaged (P4)"
         status: done
         content: "In 2003, Sichuan provincial authorities halted the Yangliuhu project, noting &ldquo;this is the first time in China that the general public has had a say in a decision on an important project.&rdquo;"
-      - principle: "Adaptively Transforming (P6)"
+      - principle: "Adaptively Transforming (P5)"
         status: todo
         content: "Details pending."
-      - principle: "Continuously Learning (P1)"
+      - principle: "Continually Learning and Improving (P6)"
         status: todo
         content: "Details pending."
 
