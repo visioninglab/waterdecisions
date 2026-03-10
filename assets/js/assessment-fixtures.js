@@ -25,8 +25,8 @@ var CASE_STUDY_FIXTURES = {
         'AECOM / Black & Veatch (Phase 2 JV)'
       ]
     },
-    principleScores: { p1: 4, p2: 5, p3: 4, p4: 3, p5: 5, p6: 4 },
-    principleConfidence: { p1: 'medium', p2: 'high', p3: 'high', p4: 'medium', p5: 'high', p6: 'high' },
+    principleScores: { p1: 5, p2: 5, p3: 4, p4: 3, p5: 4, p6: 4 },
+    principleConfidence: { p1: 'high', p2: 'high', p3: 'high', p4: 'medium', p5: 'high', p6: 'medium' },
     principleReflections: {
       p2: 'Deep tunnels at 30\u201360m provide flood resilience; 206km gravity-flow network.',
       p3: 'Tuas WRP integrates water and waste; NEWater supplies 55% of needs.',
@@ -57,8 +57,8 @@ var CASE_STUDY_FIXTURES = {
         'UNESCO World Heritage Committee'
       ]
     },
-    principleScores: { p1: 5, p2: 5, p3: 5, p4: 4, p5: 3, p6: 5 },
-    principleConfidence: { p1: 'high', p2: 'high', p3: 'high', p4: 'medium', p5: 'medium', p6: 'high' },
+    principleScores: { p1: 3, p2: 5, p3: 5, p4: 4, p5: 5, p6: 5 },
+    principleConfidence: { p1: 'medium', p2: 'high', p3: 'high', p4: 'medium', p5: 'high', p6: 'high' },
     principleReflections: {
       p1: '2,300 years of empirical learning through annual dredging and maintenance.',
       p3: 'Zero environmental impact \u2014 works with natural river dynamics, no dam.',
@@ -89,12 +89,12 @@ var CASE_STUDY_FIXTURES = {
         'Hazen & Sawyer / McKinsey (advisors)'
       ]
     },
-    principleScores: { p1: 3, p2: 3, p3: 3, p4: 4, p5: 4, p6: 4 },
-    principleConfidence: { p1: 'medium', p2: 'medium', p3: 'medium', p4: 'high', p5: 'high', p6: 'high' },
+    principleScores: { p1: 4, p2: 3, p3: 3, p4: 4, p5: 4, p6: 3 },
+    principleConfidence: { p1: 'high', p2: 'medium', p3: 'medium', p4: 'high', p5: 'high', p6: 'medium' },
     principleReflections: {
+      p1: 'Multi-stakeholder coordination: county acted with autonomy from state/federal.',
       p4: 'Exemplary CRO-led Steering Committee with community, finance and engineering.',
-      p5: 'Multi-stakeholder coordination: county acted with autonomy from state/federal.',
-      p6: 'McKinsey cost-benefit shows 9%+ ROI; multiple adaptation tiers assessed.'
+      p5: 'McKinsey cost-benefit shows 9%+ ROI; multiple adaptation tiers assessed.'
     },
     decisionClarity: { strategy: 5, operations: 3, investment: 4, coordination: 4, monitoring: 3 }
   }
