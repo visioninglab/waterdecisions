@@ -116,9 +116,6 @@ sections:
   - id: principles
     type: principles
     assessments:
-      - principle: "Clearly Defined Accountabilities and Shared Responsibilities (P1)"
-        status: todo
-        content: "Details pending."
       - principle: "Proactively Protected (P2)"
         status: done
         content: "Unlike dams which risk uncontrolled water release due to structural collapse, foundation instability, or overtopping, the design strategy of working with the natural environment strengthens its resilience."
@@ -128,13 +125,6 @@ sections:
       - principle: "Socially Engaged (P4)"
         status: done
         content: "In 2003, Sichuan provincial authorities halted the Yangliuhu project, noting &ldquo;this is the first time in China that the general public has had a say in a decision on an important project.&rdquo;"
-      - principle: "Adaptively Transforming (P5)"
-        status: todo
-        content: "Details pending."
-      - principle: "Continually Learning and Improving (P6)"
-        status: todo
-        content: "Details pending."
-
   - id: more-info
     content: |
       **Further reading on the Dujiangyan Irrigation System:**
