@@ -17,110 +17,159 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
 <!-- CONTENT -->
 <div class="page-content">
 
-  <!-- FRAMEWORK DIAGRAM -->
-  <div class="principle-card" style="text-align:center;padding:2rem 1.5rem;margin-bottom:2rem;">
-    <h2 style="font-family:'Playfair Display',Georgia,serif;margin-bottom:1.25rem;">Knowledge Framework</h2>
-    <div style="font-size:1rem;line-height:2.4;">
-      <a href="ontology/index.html" style="color:var(--accent);text-decoration:none;font-weight:600;font-size:1.1rem;">Ontology</a><br>
-      <span style="color:var(--muted);">Core concepts &amp; knowledge domains</span><br>
-      <span style="font-size:1.4rem;color:var(--accent);">&darr;</span><br>
-      <a href="use-cases/index.html" style="color:var(--accent);text-decoration:none;font-weight:600;font-size:1.1rem;">Use Cases</a><br>
-      <span style="color:var(--muted);">Operational scenarios</span><br>
-      <span style="font-size:1.4rem;color:var(--accent);">&darr;</span><br>
-      <a href="decision-patterns/index.html" style="color:var(--accent);text-decoration:none;font-weight:600;font-size:1.1rem;">Decision Patterns</a><br>
-      <span style="color:var(--muted);">Proven infrastructure strategies</span><br>
-      <span style="font-size:1.4rem;color:var(--accent);">&darr;</span><br>
-      <a href="case-studies/index.html" style="color:var(--accent);text-decoration:none;font-weight:600;font-size:1.1rem;">Case Studies</a><br>
-      <span style="color:var(--muted);">Real-world evidence</span>
+  <!-- FRAMEWORK FLOW -->
+  <style>
+    .fw-flow { display:grid; grid-template-columns:1fr; gap:0; margin:0 auto 2.5rem; max-width:680px; }
+    .fw-step { display:grid; grid-template-columns:56px 1fr; gap:0 1.25rem; align-items:start; }
+    .fw-step-line { display:flex; flex-direction:column; align-items:center; }
+    .fw-step-dot { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .fw-step-dot i { width:20px; height:20px; color:#fff; }
+    .fw-step-bar { width:2px; flex:1; min-height:24px; background:var(--border); }
+    .fw-step-content { padding:0.25rem 0 1.5rem; }
+    .fw-step-content h3 { font-family:'Playfair Display',Georgia,serif; font-size:1.15rem; margin:0 0 0.25rem; }
+    .fw-step-content h3 a { color:var(--ink); text-decoration:none; }
+    .fw-step-content h3 a:hover { color:var(--accent); }
+    .fw-step-content p { color:var(--muted); font-size:14px; margin:0 0 0.5rem; line-height:1.5; }
+    .fw-step-content .fw-tags { display:flex; flex-wrap:wrap; gap:0.35rem; }
+    .fw-step-content .fw-tag { font-size:11.5px; padding:2px 10px; border-radius:100px; background:var(--sidebar-bg); color:var(--muted); font-weight:500; }
+    .fw-step:last-child .fw-step-bar { display:none; }
+    .fw-step:last-child .fw-step-content { padding-bottom:0; }
+    @media(max-width:600px) { .fw-step { grid-template-columns:44px 1fr; } .fw-step-dot { width:32px; height:32px; } .fw-step-dot i { width:16px; height:16px; } }
+  </style>
+
+  <div class="fw-flow">
+    <div class="fw-step">
+      <div class="fw-step-line">
+        <div class="fw-step-dot" style="background:#0284c7;"><i data-lucide="network"></i></div>
+        <div class="fw-step-bar"></div>
+      </div>
+      <div class="fw-step-content">
+        <h3><a href="ontology/index.html">Ontology</a></h3>
+        <p>Core concepts organised into four domains &mdash; infrastructure, monitoring, regulation, and hazards.</p>
+        <div class="fw-tags">
+          <span class="fw-tag">4 domains</span>
+          <span class="fw-tag">24 concepts</span>
+        </div>
+      </div>
+    </div>
+    <div class="fw-step">
+      <div class="fw-step-line">
+        <div class="fw-step-dot" style="background:#059669;"><i data-lucide="target"></i></div>
+        <div class="fw-step-bar"></div>
+      </div>
+      <div class="fw-step-content">
+        <h3><a href="use-cases/index.html">Use Cases</a></h3>
+        <p>Operational scenarios where water infrastructure decisions must be made.</p>
+        <div class="fw-tags">
+          <span class="fw-tag">10 scenarios</span>
+          <span class="fw-tag">Cross-linked</span>
+        </div>
+      </div>
+    </div>
+    <div class="fw-step">
+      <div class="fw-step-line">
+        <div class="fw-step-dot" style="background:#7c3aed;"><i data-lucide="git-branch"></i></div>
+        <div class="fw-step-bar"></div>
+      </div>
+      <div class="fw-step-content">
+        <h3><a href="decision-patterns/index.html">Decision Patterns</a></h3>
+        <p>Proven infrastructure strategies with typical monitoring methods and evidence.</p>
+        <div class="fw-tags">
+          <span class="fw-tag">9 patterns</span>
+          <span class="fw-tag">Evidence-based</span>
+        </div>
+      </div>
+    </div>
+    <div class="fw-step">
+      <div class="fw-step-line">
+        <div class="fw-step-dot" style="background:#c8962d;"><i data-lucide="book-open"></i></div>
+      </div>
+      <div class="fw-step-content">
+        <h3><a href="case-studies/index.html">Case Studies</a></h3>
+        <p>Real-world water infrastructure assessed against resilience principles.</p>
+        <div class="fw-tags">
+          <span class="fw-tag">2 published</span>
+          <span class="fw-tag">6 principles</span>
+          <span class="fw-tag">SDG mapped</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- SECTION CARDS -->
-  <h2 style="font-family:'Playfair Display',Georgia,serif;margin-bottom:1rem;">Explore the Framework</h2>
-  <p style="margin-bottom:1.5rem;color:var(--muted);">Each layer of the framework connects to the others, creating a navigable knowledge structure for water infrastructure decision-making.</p>
+  <!-- CASE STUDIES -->
+  <h2 style="font-family:'Playfair Display',Georgia,serif;margin-bottom:0.5rem;">Case Studies</h2>
+  <p style="margin-bottom:1.25rem;color:var(--muted);font-size:14.5px;">Each case study is assessed against <a href="principles.html" style="color:var(--accent);text-decoration:none;">UNDRR/ISO 22372 resilience principles</a> and mapped to the knowledge framework above.</p>
 
-  <div class="studies-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
-
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='ontology/index.html'">
+  <div class="studies-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='china-hydraulic.html'">
       <div class="study-card-banner" style="background:linear-gradient(90deg,#0284c7,#0e4d6e);"></div>
       <div class="study-card-body">
-        <div class="study-card-category">Layer 1</div>
-        <div class="study-card-title">Ontology</div>
-        <div class="study-card-desc">Foundational concepts organised into four domains: infrastructure systems, monitoring &amp; data, regulation &amp; policy, and hazards &amp; risks.</div>
+        <div class="study-card-category">Water &bull; China</div>
+        <div class="study-card-title">Dujiangyan Irrigation System</div>
+        <div class="study-card-desc">A 2,300-year-old hydraulic engineering masterpiece that controls flooding and provides irrigation without a dam.</div>
         <div class="study-card-tags">
-          <span class="study-card-tag">4 domains</span>
-          <span class="study-card-tag">30+ concepts</span>
+          <span class="study-card-tag">Ancient Infrastructure</span>
+          <span class="study-card-tag">World Heritage</span>
         </div>
       </div>
+      <div class="study-card-footer">
+        <span>2,300 years old &bull; Built 256 BC &bull; Still operational</span>
+        <span class="status"><span class="status-dot active"></span> Published</span>
+      </div>
     </div>
-
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='use-cases/index.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#059669,#065f46);"></div>
+    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='singapore-dtss.html'">
+      <div class="study-card-banner" style="background:linear-gradient(90deg,#0284c7,#0e4d6e);"></div>
       <div class="study-card-body">
-        <div class="study-card-category">Layer 2</div>
-        <div class="study-card-title">Use Cases</div>
-        <div class="study-card-desc">Operational scenarios where water infrastructure decisions must be made &mdash; from flood management to leak detection.</div>
+        <div class="study-card-category">Water &bull; Singapore</div>
+        <div class="study-card-title">Deep Tunnel Sewerage System</div>
+        <div class="study-card-desc">National water security through used water reclamation via 206 km of deep tunnels and three reclamation plants.</div>
         <div class="study-card-tags">
-          <span class="study-card-tag">10 scenarios</span>
-          <span class="study-card-tag">Cross-linked</span>
+          <span class="study-card-tag">Water Security</span>
+          <span class="study-card-tag">Digital Twin</span>
         </div>
       </div>
-    </div>
-
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='decision-patterns/index.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#7c3aed,#4c1d95);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Layer 3</div>
-        <div class="study-card-title">Decision Patterns</div>
-        <div class="study-card-desc">Proven infrastructure strategies &mdash; deep tunnels, flood barriers, smart networks, reuse systems &mdash; with typical monitoring methods.</div>
-        <div class="study-card-tags">
-          <span class="study-card-tag">9 patterns</span>
-          <span class="study-card-tag">Evidence-based</span>
-        </div>
+      <div class="study-card-footer">
+        <span>$10B &bull; 206 km &bull; 100-year design life</span>
+        <span class="status"><span class="status-dot active"></span> Published</span>
       </div>
     </div>
-
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='case-studies/index.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#c8962d,#8a6520);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Layer 4</div>
-        <div class="study-card-title">Case Studies</div>
-        <div class="study-card-desc">Real-world water infrastructure assessed against UNDRR/ISO 22372 resilience principles and mapped to the knowledge framework.</div>
-        <div class="study-card-tags">
-          <span class="study-card-tag">2 published</span>
-          <span class="study-card-tag">6 principles</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <!-- TOOLS -->
-  <h2 style="font-family:'Playfair Display',Georgia,serif;margin:2.5rem 0 1rem;">Tools &amp; Resources</h2>
+  <h2 style="font-family:'Playfair Display',Georgia,serif;margin:2.5rem 0 0.5rem;">Tools &amp; Resources</h2>
+  <p style="margin-bottom:1.25rem;color:var(--muted);font-size:14.5px;">Interactive tools and reference material supporting the framework.</p>
 
-  <div class="studies-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+  <div class="studies-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
     <div class="study-card" style="cursor:pointer;" onclick="window.location.href='assessment.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#f59e0b,#d97706);"></div>
+      <div class="study-card-banner" style="background:linear-gradient(90deg,#f59e0b,#d97706);height:6px;"></div>
       <div class="study-card-body">
         <div class="study-card-category">Tool</div>
         <div class="study-card-title">Resilience Assessment</div>
-        <div class="study-card-desc">7-minute diagnostic tool scoring water infrastructure against six resilience principles, with radar charts and PDF export.</div>
+        <div class="study-card-desc">7-minute diagnostic with radar charts and PDF export.</div>
       </div>
     </div>
     <div class="study-card" style="cursor:pointer;" onclick="window.location.href='principles.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#16a34a,#065f46);"></div>
+      <div class="study-card-banner" style="background:linear-gradient(90deg,#16a34a,#065f46);height:6px;"></div>
       <div class="study-card-body">
         <div class="study-card-category">Reference</div>
         <div class="study-card-title">Resilience Principles</div>
-        <div class="study-card-desc">The six UNDRR/ISO 22372 principles used to assess infrastructure resilience across all case studies.</div>
+        <div class="study-card-desc">Six UNDRR/ISO 22372 principles for infrastructure resilience.</div>
+      </div>
+    </div>
+    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='sdg-mapping.html'">
+      <div class="study-card-banner" style="background:linear-gradient(90deg,#0284c7,#06b6d4);height:6px;"></div>
+      <div class="study-card-body">
+        <div class="study-card-category">Reference</div>
+        <div class="study-card-title">SDG Mapping</div>
+        <div class="study-card-desc">UN Sustainable Development Goals crosswalk with resilience principles.</div>
       </div>
     </div>
     <div class="study-card" style="cursor:pointer;" onclick="window.location.href='glossary.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#6366f1,#4338ca);"></div>
+      <div class="study-card-banner" style="background:linear-gradient(90deg,#6366f1,#4338ca);height:6px;"></div>
       <div class="study-card-body">
         <div class="study-card-category">Reference</div>
         <div class="study-card-title">Glossary</div>
-        <div class="study-card-desc">Searchable glossary of terms used across the Water Decisions framework.</div>
+        <div class="study-card-desc">Searchable glossary of water infrastructure terms.</div>
       </div>
     </div>
   </div>
