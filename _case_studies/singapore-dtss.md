@@ -64,9 +64,6 @@ card:
     - Water Security
     - National Infrastructure
     - Digital Twin
-    - "SDG 6"
-    - "SDG 9"
-    - "SDG 17"
   filters:
     sector: water
     hazard: flood
