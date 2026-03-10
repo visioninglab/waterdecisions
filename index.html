@@ -101,7 +101,7 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
   <div class="studies-grid" id="studiesGrid">
     {% assign studies = site.case_studies | sort: "slug" %}
     {% for study in studies %}
-    <a href="{{ study.url | relative_url }}" class="study-card" data-sector="{{ study.card.filters.sector }}" data-hazard="{{ study.card.filters.hazard }}" data-location="{{ study.card.filters.location }}" data-sdg="{{ study.card.filters.sdgs }}">
+    <div onclick="window.location.href=&apos;{{ study.url | relative_url }}&apos;" class="study-card" style="cursor:pointer;" data-sector="{{ study.card.filters.sector }}" data-hazard="{{ study.card.filters.hazard }}" data-location="{{ study.card.filters.location }}" data-sdg="{{ study.card.filters.sdgs }}">
       <div class="study-card-banner" style="background: {{ study.card.banner_gradient }};"></div>
       <div class="study-card-body">
         <div class="study-card-category">{{ study.card.category }}</div>
@@ -132,7 +132,7 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
         <span class="status"><span class="status-dot active"></span> Published</span>
         {% endif %}
       </div>
-    </a>
+    </div>
     {% endfor %}
 
     <!-- No Results -->
