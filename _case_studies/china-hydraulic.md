@@ -19,6 +19,16 @@ sdg_rationale:
     text: "Supports freshwater ecosystem health by maintaining natural river flows and sediment transport."
 status: published
 nav_active: case-studies
+# Decision Context
+decision_context:
+  scenario: "Agricultural irrigation and flood control"
+  infrastructure: "Gravity-fed irrigation network with natural water diversion"
+  hazard: "Flooding, seismic activity"
+  monitoring: "None (physical engineering principles only)"
+  regulation: "UNESCO World Heritage protection"
+  decision_pattern: "Flood barriers (natural levee), floodplain restoration"
+  use_case: "Water supply security, flood risk management"
+
 
 # Hero
 subtitle: "A 2,300-year-old hydraulic engineering masterpiece that controls flooding and provides irrigation without using a dam, working with natural forces of the Min River."
