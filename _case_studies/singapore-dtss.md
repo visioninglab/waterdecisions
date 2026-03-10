@@ -23,6 +23,16 @@ sdg_rationale:
     text: "Promotes efficient resource use through water reclamation, biosolid recovery, and energy generation from the treatment process."
 status: published
 nav_active: case-studies
+# Decision Context
+decision_context:
+  scenario: "National water security through used water reclamation"
+  infrastructure: "Deep tunnel sewerage system with centralised water reclamation plants"
+  hazard: "Water scarcity, population growth, infrastructure degradation"
+  monitoring: "Digital twin, SCADA, 1200+ sensor data streams, fibre optic structural monitoring"
+  regulation: "National water policy (PUB), Four National Taps strategy"
+  decision_pattern: "Deep storage tunnels, water reuse systems, desalination supply"
+  use_case: "Water supply security, sewage overflow monitoring"
+
 
 # Hero
 subtitle: "National provision of water security through used water reclamation via a deep tunnel sewage system and three water reclamation plants, due to be fully operational in 2028."
