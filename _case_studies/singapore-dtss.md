@@ -162,16 +162,6 @@ sections:
       - principle: "Environmentally Integrated (P3)"
         status: done
         content: "At Tuas, the WRP and the Integrated Waste Management Facility (IWMF) will integrate used water and solid waste treatment processes to maximise synergies for both energy and resource recovery. The DTSS uses gravity to reduce the need for active energy pumping and the risk of pollution from rainwater catchments."
-      - principle: "Socially Engaged (P4)"
-        status: todo
-        content: "National government engagement with society &mdash; details pending."
-      - principle: "Adaptively Transforming (P5)"
-        status: todo
-        content: "Details pending."
-      - principle: "Continually Learning and Improving (P6)"
-        status: todo
-        content: "Details pending."
-
   - id: more-info
     content: |
       **Further reading on Singapore&rsquo;s Deep Tunnel Sewerage System:**
@@ -182,7 +172,7 @@ sections:
 
   - id: futures
     content: |
-      Intentions for monitoring of water security using digital methods are under consideration. <span class="status-tag todo">To Do</span>
+      Intentions for monitoring of water security using digital methods are under consideration.
 
 # Related studies
 related_studies:
