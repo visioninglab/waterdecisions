@@ -60,9 +60,6 @@ card:
   tags:
     - Ancient Infrastructure
     - World Heritage
-    - "SDG 6"
-    - "SDG 9"
-    - "SDG 13"
   filters:
     sector: water
     hazard: "natural seismic flood"
