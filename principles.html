@@ -1,15 +1,15 @@
 ---
 layout: page
 title: "Resilience Principles"
-description: "Resilience Principles - Six UNDRR principles for assessing infrastructure resilience: clearly defined accountabilities and shared responsibilities, proactively protected, environmentally integrated, socially engaged, adaptively transforming, and continually learning and improving."
+description: "Six UNDRR / ISO 22372 principles for assessing water infrastructure resilience, with links to assessed case studies."
 nav_active: principles
 hero_title: "Principles of Resilient Infrastructure"
 hero_subtitle: "A framework for assessing how infrastructure systems are designed, governed, and maintained to withstand and adapt to disruption."
-footer_text: "DIR Case Study Wiki &bull; Principles of Resilient Infrastructure &bull; Last updated February 2026"
+footer_text: "Water Decisions &bull; Principles of Resilient Infrastructure &bull; Last updated March 2026"
 ---
 
   <div class="intro-text">
-    <p>Each case study in the DIR Wiki is assessed against the <a href="https://www.undrr.org/publication/handbook-implementing-principles-resilient-infrastructure" target="_blank" rel="noopener">UNDRR Principles for Resilient Infrastructure</a>. These six principles provide a consistent lens for evaluating how infrastructure systems anticipate, absorb, adapt to, and recover from hazards and disruptions.</p>
+    <p>Each case study in Water Decisions is assessed against the <a href="https://www.undrr.org/publication/handbook-implementing-principles-resilient-infrastructure" target="_blank" rel="noopener">UNDRR Principles for Resilient Infrastructure</a>. These six principles provide a consistent lens for evaluating how infrastructure systems anticipate, absorb, adapt to, and recover from hazards and disruptions.</p>
     <p>The principles are codified in <a href="https://www.iso.org/standard/50275.html" target="_blank" rel="noopener">ISO 22372:2025</a> &mdash; the first international standard for infrastructure resilience &mdash; developed by ISO/TC 292 with the contribution of the United Nations Office for Disaster Risk Reduction (UNDRR). They are aligned with the <a href="https://www.undrr.org/implementing-sendai-framework/what-sendai-framework" target="_blank" rel="noopener">Sendai Framework for Disaster Risk Reduction</a> and UN Sustainable Development Goal 9.</p>
     <p>The principles are not hierarchical &mdash; resilient infrastructure typically demonstrates strength across all six dimensions, though the balance varies by context, sector, and geography.</p>
   </div>
@@ -26,8 +26,9 @@ footer_text: "DIR Case Study Wiki &bull; Principles of Resilient Infrastructure 
       </div>
       <div class="principle-card-footer">
         <div class="principle-card-links">
-          <a href="china-hydraulic.html">China Hydraulic</a>
-          <a href="singapore-dtss.html">Singapore DTSS</a>
+          {% for study in site.case_studies %}{% for s in study.sections %}{% if s.type == "principles" %}{% for p in s.assessments %}{% if p.status == "done" %}{% if p.principle contains "Shared Responsibilit" %}
+          <a href="{{ study.url | relative_url }}">{{ study.card.short_title }}</a>
+          {% endif %}{% endif %}{% endfor %}{% endif %}{% endfor %}{% endfor %}
         </div>
       </div>
     </div>
@@ -42,8 +43,9 @@ footer_text: "DIR Case Study Wiki &bull; Principles of Resilient Infrastructure 
       </div>
       <div class="principle-card-footer">
         <div class="principle-card-links">
-          <a href="china-hydraulic.html">China Hydraulic</a>
-          <a href="singapore-dtss.html">Singapore DTSS</a>
+          {% for study in site.case_studies %}{% for s in study.sections %}{% if s.type == "principles" %}{% for p in s.assessments %}{% if p.status == "done" %}{% if p.principle contains "Proactively Protected" %}
+          <a href="{{ study.url | relative_url }}">{{ study.card.short_title }}</a>
+          {% endif %}{% endif %}{% endfor %}{% endif %}{% endfor %}{% endfor %}
         </div>
       </div>
     </div>
@@ -58,8 +60,9 @@ footer_text: "DIR Case Study Wiki &bull; Principles of Resilient Infrastructure 
       </div>
       <div class="principle-card-footer">
         <div class="principle-card-links">
-          <a href="china-hydraulic.html">China Hydraulic</a>
-          <a href="singapore-dtss.html">Singapore DTSS</a>
+          {% for study in site.case_studies %}{% for s in study.sections %}{% if s.type == "principles" %}{% for p in s.assessments %}{% if p.status == "done" %}{% if p.principle contains "Environmentally Integrated" %}
+          <a href="{{ study.url | relative_url }}">{{ study.card.short_title }}</a>
+          {% endif %}{% endif %}{% endfor %}{% endif %}{% endfor %}{% endfor %}
         </div>
       </div>
     </div>
@@ -74,8 +77,9 @@ footer_text: "DIR Case Study Wiki &bull; Principles of Resilient Infrastructure 
       </div>
       <div class="principle-card-footer">
         <div class="principle-card-links">
-          <a href="china-hydraulic.html">China Hydraulic</a>
-          <a href="singapore-dtss.html">Singapore DTSS</a>
+          {% for study in site.case_studies %}{% for s in study.sections %}{% if s.type == "principles" %}{% for p in s.assessments %}{% if p.status == "done" %}{% if p.principle contains "Socially Engaged" %}
+          <a href="{{ study.url | relative_url }}">{{ study.card.short_title }}</a>
+          {% endif %}{% endif %}{% endfor %}{% endif %}{% endfor %}{% endfor %}
         </div>
       </div>
     </div>
@@ -90,8 +94,9 @@ footer_text: "DIR Case Study Wiki &bull; Principles of Resilient Infrastructure 
       </div>
       <div class="principle-card-footer">
         <div class="principle-card-links">
-          <a href="china-hydraulic.html">China Hydraulic</a>
-          <a href="singapore-dtss.html">Singapore DTSS</a>
+          {% for study in site.case_studies %}{% for s in study.sections %}{% if s.type == "principles" %}{% for p in s.assessments %}{% if p.status == "done" %}{% if p.principle contains "Adaptively Transforming" %}
+          <a href="{{ study.url | relative_url }}">{{ study.card.short_title }}</a>
+          {% endif %}{% endif %}{% endfor %}{% endif %}{% endfor %}{% endfor %}
         </div>
       </div>
     </div>
@@ -106,8 +111,9 @@ footer_text: "DIR Case Study Wiki &bull; Principles of Resilient Infrastructure 
       </div>
       <div class="principle-card-footer">
         <div class="principle-card-links">
-          <a href="china-hydraulic.html">China Hydraulic</a>
-          <a href="singapore-dtss.html">Singapore DTSS</a>
+          {% for study in site.case_studies %}{% for s in study.sections %}{% if s.type == "principles" %}{% for p in s.assessments %}{% if p.status == "done" %}{% if p.principle contains "Continuously Learning" or p.principle contains "Continually Learning" %}
+          <a href="{{ study.url | relative_url }}">{{ study.card.short_title }}</a>
+          {% endif %}{% endif %}{% endfor %}{% endif %}{% endfor %}{% endfor %}
         </div>
       </div>
     </div>
