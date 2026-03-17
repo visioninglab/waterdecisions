@@ -62,9 +62,13 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
     #csTableView a { color:var(--accent); text-decoration:none; font-weight:600; }
     .cs-no-results { display:none; text-align:center; padding:3rem 1rem; color:var(--muted); }
     .cs-no-results h3 { font-family:'Playfair Display',Georgia,serif; margin-bottom:0.5rem; color:var(--ink); }
-    .cs-active-filter { display:none; margin-bottom:1rem; font-size:13px; color:var(--muted); }
-    .cs-active-filter span { font-weight:600; color:var(--ink); }
-    .cs-active-filter button { background:none; border:none; color:var(--accent); cursor:pointer; font-size:13px; text-decoration:underline; margin-left:0.5rem; }
+    .cs-filter-bar { display:none; margin-bottom:1rem; font-size:13.5px; color:var(--muted); padding:0.6rem 1rem; background:var(--sidebar-bg); border-radius:6px; align-items:center; gap:0.5rem; flex-wrap:wrap; }
+    .cs-filter-bar.visible { display:flex; }
+    .cs-filter-bar strong { color:var(--ink); margin-right:0.25rem; }
+    .cs-filter-chip { display:inline-flex; align-items:center; gap:4px; background:var(--accent); color:#fff; font-size:12px; font-weight:600; padding:3px 10px; border-radius:100px; }
+    .cs-filter-chip button { background:none; border:none; color:#fff; cursor:pointer; font-size:14px; line-height:1; padding:0; margin-left:2px; opacity:0.8; }
+    .cs-filter-chip button:hover { opacity:1; }
+    .cs-filter-bar .cs-reset-link { color:var(--accent); cursor:pointer; text-decoration:underline; margin-left:auto; background:none; border:none; font-size:13px; white-space:nowrap; }
   </style>
 
   <div class="cs-toolbar">
@@ -77,29 +81,51 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
     </div>
   </div>
 
-  <!-- SINGLE ROW OF FILTER PILLS -->
-  <div class="cs-pills" id="csPills">
-    <button class="cs-pill active" data-filter="all">All</button>
+  <!-- COUNTRY PILLS -->
+  <div class="cs-pills" id="csCountryPills">
+    <button class="cs-pill active" data-filter="all" data-group="country">All Countries</button>
     <span class="cs-pill-divider"></span>
-    <button class="cs-pill" data-filter="flood">Flood Protection</button>
-    <button class="cs-pill" data-filter="drought">Drought &amp; Scarcity</button>
-    <button class="cs-pill" data-filter="supply">Water Supply</button>
-    <button class="cs-pill" data-filter="reuse">Reuse &amp; Recycling</button>
-    <button class="cs-pill" data-filter="irrigation">Irrigation</button>
-    <button class="cs-pill" data-filter="transfer">Water Transfer</button>
-    <button class="cs-pill" data-filter="governance">Governance</button>
+    <button class="cs-pill" data-filter="UK" data-group="country">UK</button>
+    <button class="cs-pill" data-filter="Netherlands" data-group="country">Netherlands</button>
+    <button class="cs-pill" data-filter="Spain" data-group="country">Spain</button>
+    <button class="cs-pill" data-filter="USA" data-group="country">USA</button>
+    <button class="cs-pill" data-filter="Singapore" data-group="country">Singapore</button>
+    <button class="cs-pill" data-filter="China" data-group="country">China</button>
+    <button class="cs-pill" data-filter="Japan" data-group="country">Japan</button>
+    <button class="cs-pill" data-filter="Australia" data-group="country">Australia</button>
+    <button class="cs-pill" data-filter="Israel" data-group="country">Israel</button>
+    <button class="cs-pill" data-filter="South Africa" data-group="country">South Africa</button>
+    <button class="cs-pill" data-filter="Pakistan" data-group="country">Pakistan</button>
+    <button class="cs-pill" data-filter="Bangladesh" data-group="country">Bangladesh</button>
+    <button class="cs-pill" data-filter="Nepal" data-group="country">Nepal</button>
   </div>
 
-  <div class="cs-active-filter" id="csActiveFilter">
-    Showing: <span id="csActiveLabel"></span> (<span id="csCount"></span> studies)
-    <button onclick="csReset()">Show all</button>
+  <!-- THEME PILLS -->
+  <div class="cs-pills" id="csThemePills">
+    <button class="cs-pill active" data-filter="all" data-group="theme">All Themes</button>
+    <span class="cs-pill-divider"></span>
+    <button class="cs-pill" data-filter="flood" data-group="theme">Flood Protection</button>
+    <button class="cs-pill" data-filter="drought" data-group="theme">Drought &amp; Scarcity</button>
+    <button class="cs-pill" data-filter="supply" data-group="theme">Water Supply</button>
+    <button class="cs-pill" data-filter="reuse" data-group="theme">Reuse &amp; Recycling</button>
+    <button class="cs-pill" data-filter="irrigation" data-group="theme">Irrigation</button>
+    <button class="cs-pill" data-filter="transfer" data-group="theme">Water Transfer</button>
+    <button class="cs-pill" data-filter="governance" data-group="theme">Governance</button>
+  </div>
+
+  <!-- ACTIVE FILTERS BAR -->
+  <div class="cs-filter-bar" id="csFilterBar">
+    <strong>Filters chosen:</strong>
+    <span id="csFilterChips"></span>
+    <span style="margin-left:0.5rem;color:var(--muted);">(<span id="csCount"></span> studies)</span>
+    <button class="cs-reset-link" onclick="csReset()">Reset all</button>
   </div>
 
   <!-- CARD VIEW -->
   <div class="studies-grid" id="csCardView" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">
     {% assign studies = site.case_studies | sort: "title" %}
     {% for study in studies %}
-    <a href="{{ study.url | relative_url }}" class="study-card" data-search="{{ study.card.short_title }} {{ study.country }} {{ study.card.short_desc }} {{ study.card.tags | join: ' ' }}" data-tags="{{ study.card.tags | join: '|' | downcase }}">
+    <a href="{{ study.url | relative_url }}" class="study-card" data-country="{{ study.country }}" data-search="{{ study.card.short_title }} {{ study.country }} {{ study.card.short_desc }} {{ study.card.tags | join: ' ' }}" data-tags="{{ study.card.tags | join: '|' | downcase }}">
       <div class="study-card-banner" style="background: {{ study.card.banner_gradient }};"></div>
       <div class="study-card-body">
         <div class="study-card-category">{{ study.card.category }}</div>
@@ -132,7 +158,7 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
       </thead>
       <tbody>
         {% for study in studies %}
-        <tr data-search="{{ study.card.short_title }} {{ study.country }} {{ study.card.short_desc }} {{ study.card.tags | join: ' ' }}" data-tags="{{ study.card.tags | join: '|' | downcase }}">
+        <tr data-country="{{ study.country }}" data-search="{{ study.card.short_title }} {{ study.country }} {{ study.card.short_desc }} {{ study.card.tags | join: ' ' }}" data-tags="{{ study.card.tags | join: '|' | downcase }}">
           <td><a href="{{ study.url | relative_url }}">{{ study.card.short_title }}</a></td>
           <td style="font-size:13px;color:var(--muted);">{{ study.country }}</td>
           <td style="font-size:13px;">{{ study.card.tags | first }}</td>
@@ -153,7 +179,6 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
 
 <script>
 (function(){
-  // Theme keyword map — each filter maps to keywords found in tags
   var themeMap = {
     flood: ['flood','storm surge','barrier','typhoon','early warning','disaster'],
     drought: ['drought','scarcity','desalination','day zero','conservation','demand','water security','arid','rationing'],
@@ -164,15 +189,15 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
     governance: ['governance','governance failure','sgma','groundwater governance','community governance','water allocation','basin plan','water markets']
   };
 
-  var activeFilter = 'all';
+  var filters = { country: 'all', theme: 'all' };
   var query = '';
 
-  function matchesTheme(tags, filter) {
-    if(filter === 'all') return true;
+  function matchesTheme(text, filter) {
+    if (filter === 'all') return true;
     var keywords = themeMap[filter] || [];
-    var t = tags.toLowerCase();
-    for(var i = 0; i < keywords.length; i++) {
-      if(t.indexOf(keywords[i]) !== -1) return true;
+    var t = text.toLowerCase();
+    for (var i = 0; i < keywords.length; i++) {
+      if (t.indexOf(keywords[i]) !== -1) return true;
     }
     return false;
   }
@@ -186,43 +211,90 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
     function check(el) {
       var search = (el.dataset.search || '').toLowerCase();
       var tags = el.dataset.tags || '';
-      var mTheme = matchesTheme(tags + ' ' + search, activeFilter);
+      var country = el.dataset.country || '';
+      var mCountry = filters.country === 'all' || country === filters.country;
+      var mTheme = matchesTheme(tags + ' ' + search, filters.theme);
       var mSearch = !q || search.indexOf(q) !== -1;
-      return mTheme && mSearch;
+      return mCountry && mTheme && mSearch;
     }
 
-    cards.forEach(function(el){ var v = check(el); el.style.display = v ? '' : 'none'; if(v) count++; });
-    rows.forEach(function(el){ var v = check(el); el.style.display = v ? '' : 'none'; });
+    cards.forEach(function(el) { var v = check(el); el.style.display = v ? '' : 'none'; if (v) count++; });
+    rows.forEach(function(el) { var v = check(el); el.style.display = v ? '' : 'none'; });
 
     document.getElementById('csNoResults').style.display = count === 0 ? 'block' : 'none';
+    updateFilterBar(count);
+  }
 
-    var af = document.getElementById('csActiveFilter');
-    if(activeFilter !== 'all' || query) {
-      af.style.display = 'block';
-      var label = activeFilter !== 'all' ? document.querySelector('.cs-pill[data-filter="'+activeFilter+'"]').textContent : 'Search results';
-      document.getElementById('csActiveLabel').textContent = label;
+  function updateFilterBar(count) {
+    var bar = document.getElementById('csFilterBar');
+    var chips = document.getElementById('csFilterChips');
+    var hasFilter = filters.country !== 'all' || filters.theme !== 'all' || query;
+
+    if (hasFilter) {
+      bar.classList.add('visible');
+      var html = '';
+      if (filters.country !== 'all') {
+        html += '<span class="cs-filter-chip">' + filters.country + ' <button onclick="csClearFilter(\'country\')">&times;</button></span> ';
+      }
+      if (filters.theme !== 'all') {
+        var label = document.querySelector('#csThemePills .cs-pill[data-filter="' + filters.theme + '"]').textContent;
+        html += '<span class="cs-filter-chip">' + label + ' <button onclick="csClearFilter(\'theme\')">&times;</button></span> ';
+      }
+      if (query) {
+        html += '<span class="cs-filter-chip">&ldquo;' + query + '&rdquo; <button onclick="csClearFilter(\'search\')">&times;</button></span> ';
+      }
+      chips.innerHTML = html;
       document.getElementById('csCount').textContent = count;
     } else {
-      af.style.display = 'none';
+      bar.classList.remove('visible');
     }
   }
 
-  // Pill click handling
-  document.getElementById('csPills').addEventListener('click', function(e) {
+  window.csClearFilter = function(type) {
+    if (type === 'country') {
+      filters.country = 'all';
+      var cg = document.getElementById('csCountryPills');
+      cg.querySelectorAll('.cs-pill').forEach(function(b) { b.classList.remove('active'); });
+      cg.querySelector('.cs-pill[data-filter="all"]').classList.add('active');
+    } else if (type === 'theme') {
+      filters.theme = 'all';
+      var tg = document.getElementById('csThemePills');
+      tg.querySelectorAll('.cs-pill').forEach(function(b) { b.classList.remove('active'); });
+      tg.querySelector('.cs-pill[data-filter="all"]').classList.add('active');
+    } else if (type === 'search') {
+      query = '';
+      document.getElementById('csSearch').value = '';
+    }
+    apply();
+  };
+
+  // Pill click — country
+  document.getElementById('csCountryPills').addEventListener('click', function(e) {
     var btn = e.target.closest('.cs-pill');
-    if(!btn) return;
-    var f = btn.dataset.filter;
-    activeFilter = f;
-    document.querySelectorAll('.cs-pill').forEach(function(b){ b.classList.remove('active'); });
+    if (!btn) return;
+    filters.country = btn.dataset.filter;
+    this.querySelectorAll('.cs-pill').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    apply();
+  });
+
+  // Pill click — theme
+  document.getElementById('csThemePills').addEventListener('click', function(e) {
+    var btn = e.target.closest('.cs-pill');
+    if (!btn) return;
+    filters.theme = btn.dataset.filter;
+    this.querySelectorAll('.cs-pill').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
     apply();
   });
 
   window.csReset = function() {
-    activeFilter = 'all'; query = '';
+    filters.country = 'all';
+    filters.theme = 'all';
+    query = '';
     document.getElementById('csSearch').value = '';
-    document.querySelectorAll('.cs-pill').forEach(function(b){ b.classList.remove('active'); });
-    document.querySelector('.cs-pill[data-filter="all"]').classList.add('active');
+    document.querySelectorAll('.cs-pill').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.cs-pill[data-filter="all"]').forEach(function(b) { b.classList.add('active'); });
     apply();
   };
 
@@ -234,11 +306,11 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
   };
 
   var input = document.getElementById('csSearch');
-  if(input) {
+  if (input) {
     var timer;
-    input.addEventListener('input', function(){
+    input.addEventListener('input', function() {
       clearTimeout(timer);
-      timer = setTimeout(function(){ query = input.value.trim(); apply(); }, 150);
+      timer = setTimeout(function() { query = input.value.trim(); apply(); }, 150);
     });
   }
 })();
