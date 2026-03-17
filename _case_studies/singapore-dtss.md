@@ -191,16 +191,16 @@ related_studies:
     title: "Dujiangyan Irrigation System"
     desc: "2,300-year-old hydraulic masterpiece still in operation."
     banner_gradient: "linear-gradient(90deg, #0284c7, #0e4d6e)"
-  - slug: usa-broward-county
-    category: "Climate &bull; USA"
-    title: "Broward County Resilience Plan"
-    desc: "County-wide flood and heat risk resilience in South Florida."
-    banner_gradient: "linear-gradient(90deg, #f59e0b, #dc2626)"
-  - slug: australia-bridge
-    category: "Transport &bull; Australia"
-    title: "New Fitzroy River Bridge"
-    desc: "Critical transport link rebuilt 6x stronger after flooding."
-    banner_gradient: "linear-gradient(90deg, #10b981, #059669)"
+  - slug: singapore-newater
+    category: "Water &bull; Singapore"
+    title: "NEWater"
+    desc: "Advanced water recycling supplying 40% of demand."
+    banner_gradient: "linear-gradient(90deg, #0284c7, #06b6d4)"
+  - slug: singapore-marina-barrage
+    category: "Water &bull; Singapore"
+    title: "Marina Barrage"
+    desc: "Urban dam creating Singapore&rsquo;s largest freshwater reservoir."
+    banner_gradient: "linear-gradient(90deg, #0284c7, #06b6d4)"
 
 footer_text: "DIR Case Study Wiki &mdash; Singapore Water Security &amp; DTSS &bull; Last updated February 2026"
 ---

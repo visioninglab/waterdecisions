@@ -154,16 +154,16 @@ related_studies:
     title: "Deep Tunnel Sewerage System"
     desc: "National water security through 206 km deep tunnel sewage system."
     banner_gradient: "linear-gradient(90deg, #0284c7, #0e4d6e)"
-  - slug: china-ev-charging
-    category: "Energy &bull; China"
-    title: "EV Charging Infrastructure"
-    desc: "Three-year plan to build 28M charging facilities nationwide."
-    banner_gradient: "linear-gradient(90deg, #f59e0b, #ea580c)"
-  - slug: australia-bridge
-    category: "Transport &bull; Australia"
-    title: "New Fitzroy River Bridge"
-    desc: "Critical transport link rebuilt 6x stronger after flooding."
-    banner_gradient: "linear-gradient(90deg, #10b981, #059669)"
+  - slug: china-south-north-transfer
+    category: "Water &bull; China"
+    title: "South&ndash;North Water Transfer"
+    desc: "Mega water transfer infrastructure for regional balancing."
+    banner_gradient: "linear-gradient(90deg, #dc2626, #f59e0b)"
+  - slug: pakistan-indus-irrigation
+    category: "Water &bull; Pakistan"
+    title: "Indus Basin Irrigation System"
+    desc: "World&rsquo;s largest contiguous irrigation network."
+    banner_gradient: "linear-gradient(90deg, #0d9488, #2dd4bf)"
 
 footer_text: "DIR Case Study Wiki &mdash; China Hydraulic Engineering &bull; Last updated February 2026 &bull; <a href='https://github.com/visioninglab/DIRwiki/issues' style='color:var(--accent);text-decoration:none;'>Suggest an edit</a>"
 ---
