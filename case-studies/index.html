@@ -4,20 +4,68 @@ title: "Case Studies"
 description: "22 real-world water infrastructure case studies across 15 countries, assessed against UNDRR/ISO 22372 resilience principles."
 nav_active: case-studies
 footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026"
+extra_head: '<link rel="canonical" href="https://visioninglab.github.io/waterdecisions/case-studies/index.html"><meta property="og:url" content="https://visioninglab.github.io/waterdecisions/case-studies/index.html"><meta property="og:image" content="https://visioninglab.github.io/waterdecisions/favicon.svg"><meta name="twitter:card" content="summary">'
 ---
 
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Water Infrastructure Case Studies",
+  "description": "22 real-world water infrastructure case studies across 15 countries, assessed against UNDRR/ISO 22372 resilience principles.",
+  "url": "https://visioninglab.github.io/waterdecisions/case-studies/index.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Water Decisions",
+    "url": "https://visioninglab.github.io/waterdecisions/"
+  },
+  "about": {
+    "@type": "Thing",
+    "name": "Water Infrastructure Resilience"
+  },
+  "numberOfItems": {{ site.case_studies | size }},
+  "hasPart": [
+    {% assign studies = site.case_studies | sort: "title" %}{% for study in studies %}{
+      "@type": "Article",
+      "name": "{{ study.card.short_title | xml_escape }}",
+      "description": "{{ study.card.short_desc | xml_escape }}",
+      "url": "{{ study.url | absolute_url }}",
+      "spatialCoverage": {
+        "@type": "Place",
+        "name": "{{ study.country }}"
+      },
+      "about": [{% for tag in study.card.tags %}{ "@type": "Thing", "name": "{{ tag | xml_escape }}" }{% unless forloop.last %},{% endunless %}{% endfor %}]
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+
+<!-- Breadcrumb JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Water Decisions", "item": "https://visioninglab.github.io/waterdecisions/" },
+    { "@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://visioninglab.github.io/waterdecisions/case-studies/index.html" }
+  ]
+}
+</script>
+
 <!-- HERO -->
-<div class="hero">
+<header class="hero" role="banner">
   <div class="hero-inner">
     <h1>Case Studies</h1>
     <p class="hero-subtitle">Real-world water infrastructure assessed against <a href="../principles.html" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">UNDRR / ISO 22372 resilience principles</a> and mapped to the <a href="../ontology/index.html" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">Water Decisions knowledge framework</a>.</p>
   </div>
-</div>
+</header>
 
-<div class="page-content">
+<main class="page-content">
 
   <!-- STATS BAR -->
-  <div class="overview-stats">
+  <div class="overview-stats" role="region" aria-label="Collection statistics">
     <div class="overview-stat">
       <i data-lucide="book-open" class="overview-stat-icon"></i>
       <div class="overview-stat-num">{{ site.case_studies | size }}</div>
@@ -53,6 +101,7 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
     .cs-pill { font-size:12.5px; padding:5px 14px; border-radius:100px; border:1px solid var(--border); background:var(--card-bg); color:var(--muted); cursor:pointer; font-weight:500; transition:all 0.15s; white-space:nowrap; }
     .cs-pill:hover { border-color:var(--accent); color:var(--accent); }
     .cs-pill.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .cs-pill[aria-pressed="true"] { background:var(--accent); color:#fff; border-color:var(--accent); }
     .cs-pill-divider { width:1px; background:var(--border); margin:0 0.25rem; align-self:stretch; }
     #csTableView { display:none; }
     #csTableView table { width:100%; border-collapse:collapse; font-size:14px; }
@@ -71,50 +120,51 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
     .cs-filter-bar .cs-reset-link { color:var(--accent); cursor:pointer; text-decoration:underline; margin-left:auto; background:none; border:none; font-size:13px; white-space:nowrap; }
   </style>
 
-  <div class="cs-toolbar">
+  <div class="cs-toolbar" role="search" aria-label="Search case studies">
     <div class="search-bar">
-      <input type="text" id="csSearch" placeholder="Search case studies&hellip;" aria-label="Search case studies">
+      <label for="csSearch" class="sr-only">Search case studies</label>
+      <input type="search" id="csSearch" placeholder="Search case studies&hellip;" aria-label="Search case studies">
     </div>
-    <div class="cs-view-toggle">
-      <button class="cs-view-btn active" id="btnCardView" onclick="csSetView('cards')" title="Card view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
-      <button class="cs-view-btn" id="btnTableView" onclick="csSetView('table')" title="Table view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <div class="cs-view-toggle" role="group" aria-label="View mode">
+      <button class="cs-view-btn active" id="btnCardView" onclick="csSetView('cards')" aria-label="Card view" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+      <button class="cs-view-btn" id="btnTableView" onclick="csSetView('table')" aria-label="Table view" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
     </div>
   </div>
 
   <!-- COUNTRY PILLS -->
-  <div class="cs-pills" id="csCountryPills">
-    <button class="cs-pill active" data-filter="all" data-group="country">All Countries</button>
-    <span class="cs-pill-divider"></span>
-    <button class="cs-pill" data-filter="UK" data-group="country">UK</button>
-    <button class="cs-pill" data-filter="Netherlands" data-group="country">Netherlands</button>
-    <button class="cs-pill" data-filter="Spain" data-group="country">Spain</button>
-    <button class="cs-pill" data-filter="USA" data-group="country">USA</button>
-    <button class="cs-pill" data-filter="Singapore" data-group="country">Singapore</button>
-    <button class="cs-pill" data-filter="China" data-group="country">China</button>
-    <button class="cs-pill" data-filter="Japan" data-group="country">Japan</button>
-    <button class="cs-pill" data-filter="Australia" data-group="country">Australia</button>
-    <button class="cs-pill" data-filter="Israel" data-group="country">Israel</button>
-    <button class="cs-pill" data-filter="South Africa" data-group="country">South Africa</button>
-    <button class="cs-pill" data-filter="Pakistan" data-group="country">Pakistan</button>
-    <button class="cs-pill" data-filter="Bangladesh" data-group="country">Bangladesh</button>
-    <button class="cs-pill" data-filter="Nepal" data-group="country">Nepal</button>
-  </div>
+  <nav class="cs-pills" id="csCountryPills" role="group" aria-label="Filter by country">
+    <button class="cs-pill active" data-filter="all" data-group="country" aria-pressed="true">All Countries</button>
+    <span class="cs-pill-divider" aria-hidden="true"></span>
+    <button class="cs-pill" data-filter="UK" data-group="country" aria-pressed="false">UK</button>
+    <button class="cs-pill" data-filter="Netherlands" data-group="country" aria-pressed="false">Netherlands</button>
+    <button class="cs-pill" data-filter="Spain" data-group="country" aria-pressed="false">Spain</button>
+    <button class="cs-pill" data-filter="USA" data-group="country" aria-pressed="false">USA</button>
+    <button class="cs-pill" data-filter="Singapore" data-group="country" aria-pressed="false">Singapore</button>
+    <button class="cs-pill" data-filter="China" data-group="country" aria-pressed="false">China</button>
+    <button class="cs-pill" data-filter="Japan" data-group="country" aria-pressed="false">Japan</button>
+    <button class="cs-pill" data-filter="Australia" data-group="country" aria-pressed="false">Australia</button>
+    <button class="cs-pill" data-filter="Israel" data-group="country" aria-pressed="false">Israel</button>
+    <button class="cs-pill" data-filter="South Africa" data-group="country" aria-pressed="false">South Africa</button>
+    <button class="cs-pill" data-filter="Pakistan" data-group="country" aria-pressed="false">Pakistan</button>
+    <button class="cs-pill" data-filter="Bangladesh" data-group="country" aria-pressed="false">Bangladesh</button>
+    <button class="cs-pill" data-filter="Nepal" data-group="country" aria-pressed="false">Nepal</button>
+  </nav>
 
   <!-- THEME PILLS -->
-  <div class="cs-pills" id="csThemePills">
-    <button class="cs-pill active" data-filter="all" data-group="theme">All Themes</button>
-    <span class="cs-pill-divider"></span>
-    <button class="cs-pill" data-filter="flood" data-group="theme">Flood Protection</button>
-    <button class="cs-pill" data-filter="drought" data-group="theme">Drought &amp; Scarcity</button>
-    <button class="cs-pill" data-filter="supply" data-group="theme">Water Supply</button>
-    <button class="cs-pill" data-filter="reuse" data-group="theme">Reuse &amp; Recycling</button>
-    <button class="cs-pill" data-filter="irrigation" data-group="theme">Irrigation</button>
-    <button class="cs-pill" data-filter="transfer" data-group="theme">Water Transfer</button>
-    <button class="cs-pill" data-filter="governance" data-group="theme">Governance</button>
-  </div>
+  <nav class="cs-pills" id="csThemePills" role="group" aria-label="Filter by theme">
+    <button class="cs-pill active" data-filter="all" data-group="theme" aria-pressed="true">All Themes</button>
+    <span class="cs-pill-divider" aria-hidden="true"></span>
+    <button class="cs-pill" data-filter="flood" data-group="theme" aria-pressed="false">Flood Protection</button>
+    <button class="cs-pill" data-filter="drought" data-group="theme" aria-pressed="false">Drought &amp; Scarcity</button>
+    <button class="cs-pill" data-filter="supply" data-group="theme" aria-pressed="false">Water Supply</button>
+    <button class="cs-pill" data-filter="reuse" data-group="theme" aria-pressed="false">Reuse &amp; Recycling</button>
+    <button class="cs-pill" data-filter="irrigation" data-group="theme" aria-pressed="false">Irrigation</button>
+    <button class="cs-pill" data-filter="transfer" data-group="theme" aria-pressed="false">Water Transfer</button>
+    <button class="cs-pill" data-filter="governance" data-group="theme" aria-pressed="false">Governance</button>
+  </nav>
 
   <!-- ACTIVE FILTERS BAR -->
-  <div class="cs-filter-bar" id="csFilterBar">
+  <div class="cs-filter-bar" id="csFilterBar" role="status" aria-live="polite">
     <strong>Filters chosen:</strong>
     <span id="csFilterChips"></span>
     <span style="margin-left:0.5rem;color:var(--muted);">(<span id="csCount"></span> studies)</span>
@@ -122,16 +172,16 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
   </div>
 
   <!-- CARD VIEW -->
-  <div class="studies-grid" id="csCardView" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">
+  <div class="studies-grid" id="csCardView" role="list" aria-label="Case studies" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">
     {% assign studies = site.case_studies | sort: "title" %}
     {% for study in studies %}
-    <a href="{{ study.url | relative_url }}" class="study-card" data-country="{{ study.country }}" data-search="{{ study.card.short_title }} {{ study.country }} {{ study.card.short_desc }} {{ study.card.tags | join: ' ' }}" data-tags="{{ study.card.tags | join: '|' | downcase }}">
-      <div class="study-card-banner" style="background: {{ study.card.banner_gradient }};"></div>
+    <a href="{{ study.url | relative_url }}" class="study-card" role="listitem" data-country="{{ study.country }}" data-search="{{ study.card.short_title }} {{ study.country }} {{ study.card.short_desc }} {{ study.card.tags | join: ' ' }}" data-tags="{{ study.card.tags | join: '|' | downcase }}">
+      <div class="study-card-banner" style="background: {{ study.card.banner_gradient }};" aria-hidden="true"></div>
       <div class="study-card-body">
         <div class="study-card-category">{{ study.card.category }}</div>
         <div class="study-card-title">{{ study.card.short_title }}</div>
         <div class="study-card-desc">{{ study.card.short_desc }}</div>
-        <div class="study-card-tags">
+        <div class="study-card-tags" aria-label="Tags">
           {% for tag in study.card.tags %}
           <span class="study-card-tag">{{ tag }}</span>
           {% endfor %}
@@ -139,21 +189,22 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
       </div>
       <div class="study-card-footer">
         <span>{{ study.card.footer_text }}</span>
-        <span class="status"><span class="status-dot active"></span> Published</span>
+        <span class="status"><span class="status-dot active" aria-hidden="true"></span> Published</span>
       </div>
     </a>
     {% endfor %}
   </div>
 
   <!-- TABLE VIEW -->
-  <div id="csTableView">
+  <div id="csTableView" role="region" aria-label="Case studies table">
     <table>
+      <caption class="sr-only">Water infrastructure case studies with country, theme, and key statistics</caption>
       <thead>
         <tr>
-          <th>Case Study</th>
-          <th>Country</th>
-          <th>Key Theme</th>
-          <th>Key Stat</th>
+          <th scope="col">Case Study</th>
+          <th scope="col">Country</th>
+          <th scope="col">Key Theme</th>
+          <th scope="col">Key Stat</th>
         </tr>
       </thead>
       <tbody>
@@ -170,12 +221,12 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
   </div>
 
   <!-- NO RESULTS -->
-  <div class="cs-no-results" id="csNoResults">
+  <div class="cs-no-results" id="csNoResults" role="status">
     <h3>No matching case studies</h3>
     <p>Try adjusting your filter or search.</p>
   </div>
 
-</div>
+</main>
 
 <script>
 (function(){
@@ -234,14 +285,14 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
       bar.classList.add('visible');
       var html = '';
       if (filters.country !== 'all') {
-        html += '<span class="cs-filter-chip">' + filters.country + ' <button onclick="csClearFilter(\'country\')">&times;</button></span> ';
+        html += '<span class="cs-filter-chip">' + filters.country + ' <button onclick="csClearFilter(\'country\')" aria-label="Remove country filter">&times;</button></span> ';
       }
       if (filters.theme !== 'all') {
         var label = document.querySelector('#csThemePills .cs-pill[data-filter="' + filters.theme + '"]').textContent;
-        html += '<span class="cs-filter-chip">' + label + ' <button onclick="csClearFilter(\'theme\')">&times;</button></span> ';
+        html += '<span class="cs-filter-chip">' + label + ' <button onclick="csClearFilter(\'theme\')" aria-label="Remove theme filter">&times;</button></span> ';
       }
       if (query) {
-        html += '<span class="cs-filter-chip">&ldquo;' + query + '&rdquo; <button onclick="csClearFilter(\'search\')">&times;</button></span> ';
+        html += '<span class="cs-filter-chip">&ldquo;' + query + '&rdquo; <button onclick="csClearFilter(\'search\')" aria-label="Clear search">&times;</button></span> ';
       }
       chips.innerHTML = html;
       document.getElementById('csCount').textContent = count;
@@ -250,17 +301,25 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
     }
   }
 
+  function updateAria(container, activeFilter) {
+    container.querySelectorAll('.cs-pill').forEach(function(b) {
+      b.setAttribute('aria-pressed', b.dataset.filter === activeFilter ? 'true' : 'false');
+    });
+  }
+
   window.csClearFilter = function(type) {
     if (type === 'country') {
       filters.country = 'all';
       var cg = document.getElementById('csCountryPills');
       cg.querySelectorAll('.cs-pill').forEach(function(b) { b.classList.remove('active'); });
       cg.querySelector('.cs-pill[data-filter="all"]').classList.add('active');
+      updateAria(cg, 'all');
     } else if (type === 'theme') {
       filters.theme = 'all';
       var tg = document.getElementById('csThemePills');
       tg.querySelectorAll('.cs-pill').forEach(function(b) { b.classList.remove('active'); });
       tg.querySelector('.cs-pill[data-filter="all"]').classList.add('active');
+      updateAria(tg, 'all');
     } else if (type === 'search') {
       query = '';
       document.getElementById('csSearch').value = '';
@@ -268,23 +327,23 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
     apply();
   };
 
-  // Pill click — country
   document.getElementById('csCountryPills').addEventListener('click', function(e) {
     var btn = e.target.closest('.cs-pill');
     if (!btn) return;
     filters.country = btn.dataset.filter;
     this.querySelectorAll('.cs-pill').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
+    updateAria(this, filters.country);
     apply();
   });
 
-  // Pill click — theme
   document.getElementById('csThemePills').addEventListener('click', function(e) {
     var btn = e.target.closest('.cs-pill');
     if (!btn) return;
     filters.theme = btn.dataset.filter;
     this.querySelectorAll('.cs-pill').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
+    updateAria(this, filters.theme);
     apply();
   });
 
@@ -295,6 +354,7 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
     document.getElementById('csSearch').value = '';
     document.querySelectorAll('.cs-pill').forEach(function(b) { b.classList.remove('active'); });
     document.querySelectorAll('.cs-pill[data-filter="all"]').forEach(function(b) { b.classList.add('active'); });
+    document.querySelectorAll('.cs-pills').forEach(function(c) { updateAria(c, 'all'); });
     apply();
   };
 
@@ -303,6 +363,8 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
     document.getElementById('csTableView').style.display = view === 'table' ? '' : 'none';
     document.getElementById('btnCardView').classList.toggle('active', view === 'cards');
     document.getElementById('btnTableView').classList.toggle('active', view === 'table');
+    document.getElementById('btnCardView').setAttribute('aria-pressed', view === 'cards');
+    document.getElementById('btnTableView').setAttribute('aria-pressed', view === 'table');
   };
 
   var input = document.getElementById('csSearch');
