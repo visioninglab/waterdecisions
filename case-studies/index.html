@@ -34,70 +34,42 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
       <div class="overview-stat-label">Principles Tracked</div>
     </div>
     <div class="overview-stat">
-      <i data-lucide="layers" class="overview-stat-icon"></i>
+      <i data-lucide="target" class="overview-stat-icon"></i>
       <div class="overview-stat-num">7</div>
       <div class="overview-stat-label">Themes</div>
     </div>
   </div>
 
-  <!-- SEARCH -->
-  <div class="search-bar">
-    <input type="text" id="csSearch" placeholder="Search case studies&hellip;" aria-label="Search case studies">
-    <button class="reset-filters-btn" id="csReset" style="display:none;" onclick="csResetAll()">Reset all filters</button>
-  </div>
-
-  <!-- FILTERS -->
+  <!-- SEARCH & CONTROLS -->
   <style>
-    .cs-filters { display:flex; flex-wrap:wrap; gap:0.75rem 2rem; margin-bottom:1.5rem; }
-    .cs-filter-group { display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap; }
-    .cs-filter-group label { font-size:13px; font-weight:600; color:var(--muted); margin-right:0.25rem; white-space:nowrap; }
-    .cs-fbtn { font-size:12px; padding:4px 12px; border-radius:100px; border:1px solid var(--border); background:var(--card-bg); color:var(--muted); cursor:pointer; font-weight:500; transition:all 0.15s; }
-    .cs-fbtn:hover { border-color:var(--accent); color:var(--accent); }
-    .cs-fbtn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
-    .cs-view-toggle { display:flex; gap:0.35rem; margin-left:auto; }
+    .cs-toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:0.75rem; margin-bottom:1rem; }
+    .cs-toolbar .search-bar { flex:1; min-width:200px; margin-bottom:0; }
+    .cs-view-toggle { display:flex; gap:0.35rem; }
     .cs-view-btn { width:32px; height:32px; border-radius:6px; border:1px solid var(--border); background:var(--card-bg); cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--muted); transition:all 0.15s; }
     .cs-view-btn:hover { border-color:var(--accent); color:var(--accent); }
     .cs-view-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
     .cs-view-btn svg { width:16px; height:16px; }
+    .cs-pills { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem; }
+    .cs-pill { font-size:12.5px; padding:5px 14px; border-radius:100px; border:1px solid var(--border); background:var(--card-bg); color:var(--muted); cursor:pointer; font-weight:500; transition:all 0.15s; white-space:nowrap; }
+    .cs-pill:hover { border-color:var(--accent); color:var(--accent); }
+    .cs-pill.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .cs-pill-divider { width:1px; background:var(--border); margin:0 0.25rem; align-self:stretch; }
     #csTableView { display:none; }
     #csTableView table { width:100%; border-collapse:collapse; font-size:14px; }
     #csTableView th { padding:0.75rem 1rem; text-align:left; font-family:'Playfair Display',Georgia,serif; border-bottom:2px solid var(--border); font-size:13px; }
     #csTableView td { padding:0.65rem 1rem; border-bottom:1px solid var(--border); }
     #csTableView tr:hover { background:var(--sidebar-bg); }
     #csTableView a { color:var(--accent); text-decoration:none; font-weight:600; }
-    #csTableView .cs-country-badge { font-size:11.5px; color:var(--muted); }
     .cs-no-results { display:none; text-align:center; padding:3rem 1rem; color:var(--muted); }
     .cs-no-results h3 { font-family:'Playfair Display',Georgia,serif; margin-bottom:0.5rem; color:var(--ink); }
+    .cs-active-filter { display:none; margin-bottom:1rem; font-size:13px; color:var(--muted); }
+    .cs-active-filter span { font-weight:600; color:var(--ink); }
+    .cs-active-filter button { background:none; border:none; color:var(--accent); cursor:pointer; font-size:13px; text-decoration:underline; margin-left:0.5rem; }
   </style>
 
-  <div class="cs-filters">
-    <div class="cs-filter-group">
-      <label>Country:</label>
-      <button class="cs-fbtn active" onclick="csFilter('country','all',this)">All</button>
-      <button class="cs-fbtn" onclick="csFilter('country','uk',this)">UK</button>
-      <button class="cs-fbtn" onclick="csFilter('country','netherlands',this)">Netherlands</button>
-      <button class="cs-fbtn" onclick="csFilter('country','spain',this)">Spain</button>
-      <button class="cs-fbtn" onclick="csFilter('country','usa',this)">USA</button>
-      <button class="cs-fbtn" onclick="csFilter('country','singapore',this)">Singapore</button>
-      <button class="cs-fbtn" onclick="csFilter('country','china',this)">China</button>
-      <button class="cs-fbtn" onclick="csFilter('country','japan',this)">Japan</button>
-      <button class="cs-fbtn" onclick="csFilter('country','australia',this)">Australia</button>
-      <button class="cs-fbtn" onclick="csFilter('country','israel',this)">Israel</button>
-      <button class="cs-fbtn" onclick="csFilter('country','south africa',this)">South Africa</button>
-      <button class="cs-fbtn" onclick="csFilter('country','pakistan',this)">Pakistan</button>
-      <button class="cs-fbtn" onclick="csFilter('country','bangladesh',this)">Bangladesh</button>
-      <button class="cs-fbtn" onclick="csFilter('country','nepal',this)">Nepal</button>
-    </div>
-    <div class="cs-filter-group">
-      <label>Theme:</label>
-      <button class="cs-fbtn active" onclick="csFilter('theme','all',this)">All</button>
-      <button class="cs-fbtn" onclick="csFilter('theme','flood',this)">Flood Protection</button>
-      <button class="cs-fbtn" onclick="csFilter('theme','drought',this)">Drought</button>
-      <button class="cs-fbtn" onclick="csFilter('theme','supply',this)">Water Supply</button>
-      <button class="cs-fbtn" onclick="csFilter('theme','governance',this)">Governance</button>
-      <button class="cs-fbtn" onclick="csFilter('theme','reuse',this)">Reuse &amp; Recycling</button>
-      <button class="cs-fbtn" onclick="csFilter('theme','irrigation',this)">Irrigation</button>
-      <button class="cs-fbtn" onclick="csFilter('theme','transfer',this)">Water Transfer</button>
+  <div class="cs-toolbar">
+    <div class="search-bar">
+      <input type="text" id="csSearch" placeholder="Search case studies&hellip;" aria-label="Search case studies">
     </div>
     <div class="cs-view-toggle">
       <button class="cs-view-btn active" id="btnCardView" onclick="csSetView('cards')" title="Card view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
@@ -105,11 +77,29 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
     </div>
   </div>
 
+  <!-- SINGLE ROW OF FILTER PILLS -->
+  <div class="cs-pills" id="csPills">
+    <button class="cs-pill active" data-filter="all">All</button>
+    <span class="cs-pill-divider"></span>
+    <button class="cs-pill" data-filter="flood">Flood Protection</button>
+    <button class="cs-pill" data-filter="drought">Drought &amp; Scarcity</button>
+    <button class="cs-pill" data-filter="supply">Water Supply</button>
+    <button class="cs-pill" data-filter="reuse">Reuse &amp; Recycling</button>
+    <button class="cs-pill" data-filter="irrigation">Irrigation</button>
+    <button class="cs-pill" data-filter="transfer">Water Transfer</button>
+    <button class="cs-pill" data-filter="governance">Governance</button>
+  </div>
+
+  <div class="cs-active-filter" id="csActiveFilter">
+    Showing: <span id="csActiveLabel"></span> (<span id="csCount"></span> studies)
+    <button onclick="csReset()">Show all</button>
+  </div>
+
   <!-- CARD VIEW -->
   <div class="studies-grid" id="csCardView" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr));">
     {% assign studies = site.case_studies | sort: "title" %}
     {% for study in studies %}
-    <a href="{{ study.url | relative_url }}" class="study-card" data-country="{{ study.country | downcase }}" data-theme="{{ study.card.filters.hazard }} {{ study.card.tags | join: ' ' | downcase }}">
+    <a href="{{ study.url | relative_url }}" class="study-card" data-search="{{ study.card.short_title }} {{ study.country }} {{ study.card.short_desc }} {{ study.card.tags | join: ' ' }}" data-tags="{{ study.card.tags | join: '|' | downcase }}">
       <div class="study-card-banner" style="background: {{ study.card.banner_gradient }};"></div>
       <div class="study-card-body">
         <div class="study-card-category">{{ study.card.category }}</div>
@@ -142,10 +132,10 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
       </thead>
       <tbody>
         {% for study in studies %}
-        <tr data-country="{{ study.country | downcase }}" data-theme="{{ study.card.filters.hazard }} {{ study.card.tags | join: ' ' | downcase }}">
+        <tr data-search="{{ study.card.short_title }} {{ study.country }} {{ study.card.short_desc }} {{ study.card.tags | join: ' ' }}" data-tags="{{ study.card.tags | join: '|' | downcase }}">
           <td><a href="{{ study.url | relative_url }}">{{ study.card.short_title }}</a></td>
-          <td><span class="cs-country-badge">{{ study.country }}</span></td>
-          <td>{{ study.card.tags | first }}</td>
+          <td style="font-size:13px;color:var(--muted);">{{ study.country }}</td>
+          <td style="font-size:13px;">{{ study.card.tags | first }}</td>
           <td style="color:var(--muted);font-size:13px;">{{ study.stats[0].value }} {{ study.stats[0].label }}</td>
         </tr>
         {% endfor %}
@@ -156,56 +146,83 @@ footer_text: "Water Decisions &bull; Case Studies &bull; Last updated March 2026
   <!-- NO RESULTS -->
   <div class="cs-no-results" id="csNoResults">
     <h3>No matching case studies</h3>
-    <p>Try adjusting your filters or search to see more results.</p>
+    <p>Try adjusting your filter or search.</p>
   </div>
 
 </div>
 
 <script>
 (function(){
-  var filters = { country:'all', theme:'all' };
+  // Theme keyword map — each filter maps to keywords found in tags
+  var themeMap = {
+    flood: ['flood','storm surge','barrier','typhoon','early warning','disaster'],
+    drought: ['drought','scarcity','desalination','day zero','conservation','demand','water security','arid','rationing'],
+    supply: ['water supply','water security','desalination','reservoir','newater','recycling','national infrastructure','rural water'],
+    reuse: ['reuse','recycling','reclaim','circular','newater','reclamation','wastewater'],
+    irrigation: ['irrigation','agricultural','basin plan','allocation'],
+    transfer: ['transfer','inter-basin','redistribution','balancing'],
+    governance: ['governance','governance failure','sgma','groundwater governance','community governance','water allocation','basin plan','water markets']
+  };
+
+  var activeFilter = 'all';
   var query = '';
+
+  function matchesTheme(tags, filter) {
+    if(filter === 'all') return true;
+    var keywords = themeMap[filter] || [];
+    var t = tags.toLowerCase();
+    for(var i = 0; i < keywords.length; i++) {
+      if(t.indexOf(keywords[i]) !== -1) return true;
+    }
+    return false;
+  }
 
   function apply() {
     var cards = document.querySelectorAll('#csCardView .study-card');
     var rows = document.querySelectorAll('#csTableView tbody tr');
     var count = 0;
+    var q = query.toLowerCase();
 
-    function matches(el) {
-      var c = filters.country, t = filters.theme, q = query.toLowerCase();
-      var matchCountry = (c === 'all' || el.dataset.country === c);
-      var matchTheme = (t === 'all' || (el.dataset.theme && el.dataset.theme.indexOf(t) !== -1));
-      var matchSearch = !q || el.textContent.toLowerCase().indexOf(q) !== -1;
-      return matchCountry && matchTheme && matchSearch;
+    function check(el) {
+      var search = (el.dataset.search || '').toLowerCase();
+      var tags = el.dataset.tags || '';
+      var mTheme = matchesTheme(tags + ' ' + search, activeFilter);
+      var mSearch = !q || search.indexOf(q) !== -1;
+      return mTheme && mSearch;
     }
 
-    cards.forEach(function(el){ var v = matches(el); el.style.display = v ? '' : 'none'; if(v) count++; });
-    rows.forEach(function(el){ var v = matches(el); el.style.display = v ? '' : 'none'; });
+    cards.forEach(function(el){ var v = check(el); el.style.display = v ? '' : 'none'; if(v) count++; });
+    rows.forEach(function(el){ var v = check(el); el.style.display = v ? '' : 'none'; });
 
     document.getElementById('csNoResults').style.display = count === 0 ? 'block' : 'none';
-    document.getElementById('csReset').style.display =
-      (filters.country !== 'all' || filters.theme !== 'all' || query) ? '' : 'none';
+
+    var af = document.getElementById('csActiveFilter');
+    if(activeFilter !== 'all' || query) {
+      af.style.display = 'block';
+      var label = activeFilter !== 'all' ? document.querySelector('.cs-pill[data-filter="'+activeFilter+'"]').textContent : 'Search results';
+      document.getElementById('csActiveLabel').textContent = label;
+      document.getElementById('csCount').textContent = count;
+    } else {
+      af.style.display = 'none';
+    }
   }
 
-  window.csFilter = function(type, val, btn) {
-    filters[type] = (filters[type] === val && val !== 'all') ? 'all' : val;
-    var group = btn.parentElement;
-    group.querySelectorAll('.cs-fbtn').forEach(function(b){ b.classList.remove('active'); });
-    if(filters[type] === 'all') {
-      group.querySelector('.cs-fbtn').classList.add('active');
-    } else {
-      btn.classList.add('active');
-    }
+  // Pill click handling
+  document.getElementById('csPills').addEventListener('click', function(e) {
+    var btn = e.target.closest('.cs-pill');
+    if(!btn) return;
+    var f = btn.dataset.filter;
+    activeFilter = f;
+    document.querySelectorAll('.cs-pill').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
     apply();
-  };
+  });
 
-  window.csResetAll = function() {
-    filters.country = 'all'; filters.theme = 'all'; query = '';
+  window.csReset = function() {
+    activeFilter = 'all'; query = '';
     document.getElementById('csSearch').value = '';
-    document.querySelectorAll('.cs-fbtn').forEach(function(b){ b.classList.remove('active'); });
-    document.querySelectorAll('.cs-filter-group').forEach(function(g){
-      g.querySelector('.cs-fbtn').classList.add('active');
-    });
+    document.querySelectorAll('.cs-pill').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelector('.cs-pill[data-filter="all"]').classList.add('active');
     apply();
   };
 
