@@ -1,113 +1,55 @@
 ---
-layout: page
+layout: default
 title: "Decision Patterns"
 description: "Proven infrastructure strategies for water resilience, with typical monitoring methods and linked case studies."
 nav_active: decision-patterns
+footer_text: "Water Decisions &bull; Decision Patterns &bull; Last updated March 2026"
 ---
 
-<div class="page-content">
-  <p style="margin-bottom:2rem;color:var(--muted);">Decision patterns are proven infrastructure strategies used to address water resilience challenges. Each pattern links to the <a href="../use-cases/index.html" style="color:var(--accent);">use cases</a> it serves and the <a href="../case-studies/index.html" style="color:var(--accent);">case studies</a> that demonstrate it.</p>
+<div class="hero">
+  <div class="hero-inner">
+    <h1>Decision Patterns</h1>
+    <p class="hero-subtitle">Proven infrastructure strategies for water resilience &mdash; each linked to <a href="../use-cases/index.html" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">use cases</a> and <a href="../case-studies/index.html" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">case studies</a>.</p>
+  </div>
+</div>
 
-  <div class="overview-stats" style="margin-bottom:2rem;">
+<main class="page-content">
+  <div class="overview-stats" role="region" aria-label="Decision pattern statistics">
     <div class="overview-stat">
       <i data-lucide="git-branch" class="overview-stat-icon"></i>
-      <div class="overview-stat-num">9</div>
+      <div class="overview-stat-num">{{ site.data.decision-patterns | size }}</div>
       <div class="overview-stat-label">Decision Patterns</div>
     </div>
     <div class="overview-stat">
       <i data-lucide="target" class="overview-stat-icon"></i>
-      <div class="overview-stat-num">10</div>
-      <div class="overview-stat-label">Use Cases Served</div>
+      <div class="overview-stat-num">{{ site.data.use-cases | size }}</div>
+      <div class="overview-stat-label">Use Cases</div>
     </div>
     <div class="overview-stat">
       <i data-lucide="book-open" class="overview-stat-icon"></i>
-      <div class="overview-stat-num">2</div>
+      <div class="overview-stat-num">{{ site.case_studies | size }}</div>
       <div class="overview-stat-label">Case Studies</div>
     </div>
   </div>
 
-  <div class="studies-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
-
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='deep-storage-tunnels.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#0284c7,#0e4d6e);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Decision Pattern</div>
-        <div class="study-card-title">Deep Storage Tunnels</div>
-        <div class="study-card-desc">Underground tunnels storing excess stormwater to prevent overflow.</div>
-        <div class="study-card-tags"><span class="study-card-tag">Tunnels</span><span class="study-card-tag">Storage</span><span class="study-card-tag">Treatment</span></div>
-      </div>
-    </div>
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='flood-barriers.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#059669,#065f46);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Decision Pattern</div>
-        <div class="study-card-title">Flood Barriers</div>
-        <div class="study-card-desc">Fixed or movable barriers preventing floodwater inundation.</div>
-        <div class="study-card-tags"><span class="study-card-tag">Barriers</span><span class="study-card-tag">Levees</span><span class="study-card-tag">Gates</span></div>
-      </div>
-    </div>
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='floodplain-restoration.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#10b981,#047857);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Decision Pattern</div>
-        <div class="study-card-title">Floodplain Restoration</div>
-        <div class="study-card-desc">Restoring natural floodplain function to attenuate peak flows.</div>
-        <div class="study-card-tags"><span class="study-card-tag">Nature-based</span><span class="study-card-tag">Wetlands</span><span class="study-card-tag">Washlands</span></div>
-      </div>
-    </div>
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='smart-water-networks.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#7c3aed,#4c1d95);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Decision Pattern</div>
-        <div class="study-card-title">Smart Water Networks</div>
-        <div class="study-card-desc">Connected sensors and analytics optimising network performance.</div>
-        <div class="study-card-tags"><span class="study-card-tag">IoT</span><span class="study-card-tag">Digital twin</span><span class="study-card-tag">AI</span></div>
-      </div>
-    </div>
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='water-reuse-systems.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#06b6d4,#0e7490);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Decision Pattern</div>
-        <div class="study-card-title">Water Reuse Systems</div>
-        <div class="study-card-desc">Treating wastewater for reuse from irrigation to potable supply.</div>
-        <div class="study-card-tags"><span class="study-card-tag">NEWater</span><span class="study-card-tag">Membranes</span><span class="study-card-tag">UV</span></div>
-      </div>
-    </div>
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='desalination-supply.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#f59e0b,#d97706);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Decision Pattern</div>
-        <div class="study-card-title">Desalination Supply</div>
-        <div class="study-card-desc">Converting seawater to potable water via reverse osmosis.</div>
-        <div class="study-card-tags"><span class="study-card-tag">RO membranes</span><span class="study-card-tag">Energy</span><span class="study-card-tag">Brine</span></div>
-      </div>
-    </div>
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='demand-reduction-programmes.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#dc2626,#991b1b);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Decision Pattern</div>
-        <div class="study-card-title">Demand Reduction Programmes</div>
-        <div class="study-card-desc">Reducing consumption through metering, tariffs, and efficiency.</div>
-        <div class="study-card-tags"><span class="study-card-tag">Smart meters</span><span class="study-card-tag">Tariffs</span><span class="study-card-tag">Efficiency</span></div>
-      </div>
-    </div>
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='bathing-water-monitoring.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#6366f1,#4338ca);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Decision Pattern</div>
-        <div class="study-card-title">Bathing Water Monitoring</div>
-        <div class="study-card-desc">Systematic monitoring and prediction of bathing water quality.</div>
-        <div class="study-card-tags"><span class="study-card-tag">Sampling</span><span class="study-card-tag">Prediction</span><span class="study-card-tag">Public notice</span></div>
-      </div>
-    </div>
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='river-monitoring-networks.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#c8962d,#8a6520);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Decision Pattern</div>
-        <div class="study-card-title">River Monitoring Networks</div>
-        <div class="study-card-desc">Station networks assessing river ecological status and pollution.</div>
-        <div class="study-card-tags"><span class="study-card-tag">Stations</span><span class="study-card-tag">Chemistry</span><span class="study-card-tag">Biology</span></div>
-      </div>
-    </div>
-  </div>
-</div>
+  <table style="width:100%;border-collapse:collapse;font-size:14.5px;">
+    <thead>
+      <tr style="border-bottom:2px solid var(--border);text-align:left;">
+        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Decision Pattern</th>
+        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Description</th>
+        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Infrastructure</th>
+        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Monitoring</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dp in site.data.decision-patterns %}
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:0.75rem 1rem;"><a href="{{ dp.slug }}.html" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ dp.decision_pattern }}</a></td>
+        <td style="padding:0.75rem 1rem;color:var(--muted);font-size:13.5px;">{{ dp.description }}</td>
+        <td style="padding:0.75rem 1rem;color:var(--muted);font-size:13.5px;">{{ dp.infrastructure }}</td>
+        <td style="padding:0.75rem 1rem;color:var(--muted);font-size:13.5px;">{{ dp.monitoring }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</main>

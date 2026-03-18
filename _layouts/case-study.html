@@ -29,6 +29,48 @@ layout: default
     </div>
     {% endif %}
 
+    <!-- LINKED USE CASES & DECISION PATTERNS (from CSV mapping) -->
+    {% assign my_ucs = "" %}
+    {% assign my_dps = "" %}
+    {% for m in site.data.use-case-mapping %}
+      {% if m.case_study_slug == page.slug %}
+        {% unless my_ucs contains m.use_case_slug %}
+          {% if my_ucs == "" %}{% assign my_ucs = m.use_case_slug %}{% else %}{% assign my_ucs = my_ucs | append: "," | append: m.use_case_slug %}{% endif %}
+        {% endunless %}
+        {% unless my_dps contains m.decision_pattern_slug %}
+          {% if my_dps == "" %}{% assign my_dps = m.decision_pattern_slug %}{% else %}{% assign my_dps = my_dps | append: "," | append: m.decision_pattern_slug %}{% endif %}
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+    {% assign uc_list = my_ucs | split: "," %}
+    {% assign dp_list = my_dps | split: "," %}
+    {% if uc_list.size > 0 or dp_list.size > 0 %}
+    <div class="section" id="framework-links">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-icon" style="background:#fef3c7;color:#d97706;"><i data-lucide="compass"></i></div>
+        <h2>Knowledge Framework</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+      </div>
+      <div class="section-body">
+        {% if uc_list.size > 0 %}
+        <p style="font-weight:600;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.5rem;">Use Cases</p>
+        <ul style="margin-bottom:1rem;">
+        {% for us in uc_list %}{% for uc in site.data.use-cases %}{% if uc.slug == us %}
+          <li><a href="{{ '/use-cases/' | append: uc.slug | append: '.html' | relative_url }}" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ uc.use_case }}</a> &mdash; {{ uc.goal }}</li>
+        {% endif %}{% endfor %}{% endfor %}
+        </ul>
+        {% endif %}
+        {% if dp_list.size > 0 %}
+        <p style="font-weight:600;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.5rem;">Decision Patterns</p>
+        <ul>
+        {% for ds in dp_list %}{% for dp in site.data.decision-patterns %}{% if dp.slug == ds %}
+          <li><a href="{{ '/decision-patterns/' | append: dp.slug | append: '.html' | relative_url }}" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ dp.decision_pattern }}</a> &mdash; {{ dp.description }}</li>
+        {% endif %}{% endfor %}{% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
     {% for section in page.sections %}
       {% include section.html section=section %}
     {% endfor %}

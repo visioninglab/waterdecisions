@@ -1,0 +1,101 @@
+---
+layout: default
+---
+{% assign uc_slug = page.uc_slug %}
+{% assign uc = nil %}
+{% for row in site.data.use-cases %}
+  {% if row.slug == uc_slug %}{% assign uc = row %}{% endif %}
+{% endfor %}
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1>{{ uc.use_case }}</h1>
+    <p class="hero-subtitle">{{ uc.goal }}</p>
+  </div>
+</div>
+
+<main class="page-content narrow">
+  <p><a href="index.html" style="color:var(--accent);text-decoration:none;">&larr; Use Cases</a></p>
+
+  <!-- DECISION FLOW -->
+  <div class="section" id="decision-flow">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#e0f2fe;color:#0284c7;"><i data-lucide="git-branch"></i></div>
+      <h2>Decision Flow</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <table style="width:100%;font-size:14px;border-collapse:collapse;">
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 1rem;font-weight:600;color:var(--muted);width:120px;">Trigger</td><td style="padding:0.5rem 1rem;">{{ uc.trigger }}</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 1rem;font-weight:600;color:var(--muted);">Inputs</td><td style="padding:0.5rem 1rem;">{{ uc.inputs }}</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 1rem;font-weight:600;color:var(--muted);">Decision</td><td style="padding:0.5rem 1rem;">{{ uc.decision }}</td></tr>
+        <tr><td style="padding:0.5rem 1rem;font-weight:600;color:var(--muted);">Action</td><td style="padding:0.5rem 1rem;">{{ uc.action }}</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- RELATED DECISION PATTERNS (from mapping) -->
+  {% assign patterns = "" %}
+  {% for m in site.data.use-case-mapping %}
+    {% if m.use_case_slug == uc_slug %}
+      {% unless patterns contains m.decision_pattern_slug %}
+        {% if patterns == "" %}{% assign patterns = m.decision_pattern_slug %}{% else %}{% assign patterns = patterns | append: "," | append: m.decision_pattern_slug %}{% endif %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+  {% assign pattern_slugs = patterns | split: "," %}
+
+  <div class="section" id="decision-patterns">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#ede9fe;color:#7c3aed;"><i data-lucide="layers"></i></div>
+      <h2>Related Decision Patterns</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <ul>
+      {% for ps in pattern_slugs %}
+        {% for dp in site.data.decision-patterns %}
+          {% if dp.slug == ps %}
+        <li><a href="../decision-patterns/{{ dp.slug }}.html" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ dp.decision_pattern }}</a> &mdash; {{ dp.description }}</li>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <!-- RELATED CASE STUDIES (from mapping, rendered as cards) -->
+  <div class="section" id="case-studies">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#f0fdf4;color:#16a34a;"><i data-lucide="book-open"></i></div>
+      <h2>Related Case Studies</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      {% assign cs_slugs = "" %}
+      {% for m in site.data.use-case-mapping %}
+        {% if m.use_case_slug == uc_slug %}
+          {% unless cs_slugs contains m.case_study_slug %}
+            {% if cs_slugs == "" %}{% assign cs_slugs = m.case_study_slug %}{% else %}{% assign cs_slugs = cs_slugs | append: "," | append: m.case_study_slug %}{% endif %}
+          {% endunless %}
+        {% endif %}
+      {% endfor %}
+      {% assign slug_list = cs_slugs | split: "," %}
+      <div class="studies-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin-top:0.75rem;">
+      {% for cs_slug in slug_list %}
+        {% for study in site.case_studies %}
+          {% if study.slug == cs_slug %}
+        <a href="{{ study.url | relative_url }}" class="study-card">
+          <div class="study-card-banner" style="background:{{ study.card.banner_gradient }};" aria-hidden="true"></div>
+          <div class="study-card-body">
+            <div class="study-card-category">{{ study.card.category }}</div>
+            <div class="study-card-title">{{ study.card.short_title }}</div>
+            <div class="study-card-desc">{{ study.card.short_desc }}</div>
+          </div>
+          <div class="study-card-footer"><span>{{ study.card.footer_text }}</span></div>
+        </a>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</main>
