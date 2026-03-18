@@ -1,0 +1,186 @@
+- slug: deep-storage-tunnels
+  decision_pattern: Deep storage tunnels
+  category: Flooding & Sewage
+  problem: "Cities with old combined sewer systems overflow raw sewage into rivers during heavy rain. This pollutes waterways and harms public health."
+  how_it_works: "Large underground tunnels capture overflow during storms and hold it until treatment plants have capacity. The stored water is then pumped out and treated normally."
+  infrastructure: "Deep bored tunnels, connection shafts to existing sewers, pumping stations, treatment works"
+  monitoring: "Flow sensors in sewers and tunnels, rainfall gauges, SCADA control systems"
+  strengths: "Captures the vast majority of overflows; long design life (100+ years); works with existing sewer network"
+  tradeoffs: "Very expensive (billions); takes years to build; does not reduce the volume of stormwater entering the system"
+  description: Store excess wastewater underground
+
+- slug: continuous-monitoring
+  decision_pattern: Continuous monitoring networks
+  category: Monitoring & Data
+  problem: "Without continuous data, operators only discover problems after damage has occurred. Intermittent sampling misses short-lived events like pollution spills or pressure drops."
+  how_it_works: "Networks of sensors installed across the water system transmit readings in real time to a central control room, enabling immediate detection and response."
+  infrastructure: "Sensors (flow, pressure, quality), telemetry units, communications networks, SCADA systems"
+  monitoring: "Real-time dashboards, automated alerts, trend analysis"
+  strengths: "Immediate detection of problems; builds long-term datasets for planning; enables automation"
+  tradeoffs: "Ongoing maintenance and calibration costs; sensor networks can be expensive to retrofit; data overload without good analytics"
+  description: Track system events continuously
+
+- slug: hydrological-monitoring
+  decision_pattern: Hydrological monitoring networks
+  category: Monitoring & Data
+  problem: "River levels and flows change rapidly during storms. Without continuous measurement, flood warnings come too late and water allocation decisions are based on guesswork."
+  how_it_works: "Gauging stations along rivers measure water levels and flow rates continuously, feeding data to forecasting models and warning systems."
+  infrastructure: "River gauging stations, rain gauges, weather radar, data transmission networks"
+  monitoring: "Water level readings, flow rate calculations, rainfall intensity data"
+  strengths: "Essential foundation for flood forecasting; enables evidence-based water allocation; long historical records support climate analysis"
+  tradeoffs: "Stations require regular maintenance; remote locations can be hard to service; equipment vulnerable to the floods it measures"
+  description: Measure water levels and flows
+
+- slug: predictive-modelling
+  decision_pattern: Predictive modelling systems
+  category: Monitoring & Data
+  problem: "Reacting to events after they happen costs lives and money. Decision-makers need advance warning of floods, droughts, and system failures."
+  how_it_works: "Computer models combine real-time sensor data with weather forecasts and historical patterns to predict what will happen hours or days ahead, giving time to prepare."
+  infrastructure: "Hydrological models, weather prediction systems, computing infrastructure"
+  monitoring: "Forecast accuracy tracking, model calibration against observed events"
+  strengths: "Extends warning lead times; supports proactive rather than reactive decisions; improves with more data over time"
+  tradeoffs: "Models are only as good as their input data; extreme events may exceed model assumptions; requires specialist expertise to build and maintain"
+  description: Forecast future system states
+
+- slug: movable-flood-barriers
+  decision_pattern: Movable flood barriers
+  category: Flooding & Sewage
+  problem: "Low-lying coastal and riverside areas face periodic flooding from storm surges and high tides. Permanent walls would block navigation and access."
+  how_it_works: "Large mechanical gates or barriers are normally open to allow river flow and shipping, but close when storm surges or high tides threaten. Closure decisions are based on forecast data."
+  infrastructure: "Steel or concrete gates, hydraulic operating machinery, control rooms, backup power systems"
+  monitoring: "Tide level sensors, surge forecasting models, structural condition monitoring"
+  strengths: "Protects large areas when needed; allows normal river use when open; can be designed for extreme events"
+  tradeoffs: "Very expensive to build and maintain; mechanical systems can fail; increasing closure frequency from sea level rise reduces maintenance windows"
+  description: Physically block floodwater
+
+- slug: integrated-flood
+  decision_pattern: Integrated flood systems
+  category: Flooding & Sewage
+  problem: "No single flood defence can handle every type of flooding. Rivers, rainfall, tides, and groundwater can all cause floods, sometimes simultaneously."
+  how_it_works: "Multiple types of flood infrastructure work together as a coordinated system: barriers, channels, storage areas, pumps, and natural floodplains, all connected by monitoring and control systems."
+  infrastructure: "Flood barriers, underground channels, retention basins, pump stations, natural floodplains"
+  monitoring: "Integrated sensor networks, central control rooms, automated gate and pump systems"
+  strengths: "Handles multiple flood sources; redundancy if one component fails; can combine engineered and natural solutions"
+  tradeoffs: "Complex to design and coordinate; expensive across the full system; requires ongoing inter-agency cooperation"
+  description: Combine infrastructure and monitoring
+
+- slug: integrated-water
+  decision_pattern: Integrated water systems
+  category: Water Supply
+  problem: "Relying on a single water source is risky. Droughts, contamination, or infrastructure failure can cut off supply with no backup."
+  how_it_works: "Multiple water sources &mdash; reservoirs, rivers, groundwater, desalination, and recycled water &mdash; are connected through a single distribution network and managed as a portfolio."
+  infrastructure: "Reservoirs, desalination plants, water recycling facilities, treatment works, trunk mains"
+  monitoring: "System-wide SCADA, demand forecasting, source availability tracking"
+  strengths: "Resilient against any single source failing; can optimise for cost and energy; adapts to seasonal variation"
+  tradeoffs: "Expensive to build multiple sources; complex to operate and balance; public acceptance of some sources (e.g. recycled water) can be challenging"
+  description: Coordinate multiple supply sources
+
+- slug: reservoir-optimisation
+  decision_pattern: Reservoir optimisation
+  category: Water Supply
+  problem: "Reservoir operators must balance competing needs: storing water for dry periods, maintaining flood capacity, and releasing enough to keep rivers healthy."
+  how_it_works: "Operating rules and models guide how much water to store, release, or transfer based on current levels, weather forecasts, and downstream needs."
+  infrastructure: "Dams, spillways, outlet works, inter-reservoir transfer systems"
+  monitoring: "Reservoir level sensors, inflow gauges, weather forecasts, downstream demand data"
+  strengths: "Maximises the value of existing storage; balances multiple objectives; can adapt to changing conditions"
+  tradeoffs: "Optimisation depends on accurate forecasts; sedimentation reduces capacity over time; climate change may invalidate historical operating rules"
+  description: Manage stored water effectively
+
+- slug: demand-reduction
+  decision_pattern: Demand reduction programmes
+  category: Demand & Conservation
+  problem: "Building new supply infrastructure is expensive and slow. In many cases, reducing how much water people use is faster, cheaper, and more sustainable."
+  how_it_works: "A combination of water restrictions, pricing incentives, public campaigns, efficient appliance standards, and leak reduction to permanently lower per-capita water consumption."
+  infrastructure: "Smart meters, efficient appliances, leak detection systems, public communication channels"
+  monitoring: "Per-capita consumption tracking, leak rates, compliance monitoring"
+  strengths: "Lower cost than new supply infrastructure; permanent behaviour change possible; reduces energy use and carbon emissions"
+  tradeoffs: "Requires sustained public engagement; can disproportionately affect vulnerable groups; savings may be eroded by population growth"
+  description: Reduce water usage behaviourally
+
+- slug: national-strategies
+  decision_pattern: National water strategies
+  category: Governance & Planning
+  problem: "Water challenges cross boundaries between cities, regions, and agencies. Without a national plan, investments are uncoordinated and gaps emerge."
+  how_it_works: "A government-led strategy sets long-term targets for water supply, flood protection, and environmental quality, coordinating investment across agencies and regions."
+  infrastructure: "Multi-system infrastructure spanning supply, treatment, flood defence, and environmental management"
+  monitoring: "National-level performance indicators, progress reporting, periodic strategy reviews"
+  strengths: "Coordinates investment across sectors; addresses long-term challenges like climate change; provides certainty for infrastructure planning"
+  tradeoffs: "Can be slow to adapt; political priorities may override technical needs; implementation depends on local agencies"
+  description: Plan supply long-term
+
+- slug: water-reuse
+  decision_pattern: Water reuse systems
+  category: Water Supply
+  problem: "Treated wastewater is typically discharged to rivers or the sea. In water-scarce regions, this is a wasted resource that could supplement supply."
+  how_it_works: "Treated wastewater undergoes additional advanced treatment (microfiltration, reverse osmosis, UV disinfection) to produce water safe for irrigation, industrial use, or indirect drinking supply."
+  infrastructure: "Tertiary treatment plants, membrane filtration systems, UV disinfection, distribution networks"
+  monitoring: "Multi-parameter water quality monitoring, membrane integrity testing, pathogen detection"
+  strengths: "Creates a drought-proof local supply; reduces discharge to environment; lower energy than desalination"
+  tradeoffs: "Public acceptance of drinking recycled water can be low; requires rigorous quality assurance; does not increase total water in the system"
+  description: Treat wastewater for reuse
+
+- slug: desalination
+  decision_pattern: Desalination systems
+  category: Water Supply
+  problem: "Some regions have abundant seawater but insufficient freshwater. Conventional sources (rainfall, rivers, groundwater) cannot meet growing demand."
+  how_it_works: "Seawater is forced through reverse osmosis membranes that remove salt and contaminants, producing fresh drinking water independent of rainfall."
+  infrastructure: "Intake systems, pre-treatment, reverse osmosis membrane arrays, energy recovery devices, brine outfall"
+  monitoring: "Membrane performance, energy consumption, product water quality, marine environmental impact"
+  strengths: "Completely independent of rainfall and climate; can be scaled to meet large demand; technology costs have fallen dramatically"
+  tradeoffs: "Energy-intensive; brine disposal can harm marine ecology; expensive compared to conventional treatment where freshwater is available"
+  description: Produce water from seawater
+
+- slug: basin-governance
+  decision_pattern: Basin governance systems
+  category: Governance & Planning
+  problem: "When multiple users (farmers, cities, industry, environment) draw from the same river or aquifer, over-extraction and conflict are inevitable without rules."
+  how_it_works: "A governance framework sets extraction limits, allocates water between users, establishes monitoring and compliance systems, and creates mechanisms for resolving disputes."
+  infrastructure: "Metering systems, regulatory frameworks, water trading platforms, environmental flow requirements"
+  monitoring: "Extraction metering, compliance auditing, ecological health indicators, water accounting"
+  strengths: "Prevents over-extraction; enables fair allocation; protects environmental flows; can incorporate water markets"
+  tradeoffs: "Politically contentious; enforcement is challenging; existing users resist losing allocations; requires strong institutions"
+  description: Allocate water at basin scale
+
+- slug: smart-monitoring
+  decision_pattern: Smart monitoring networks
+  category: Monitoring & Data
+  problem: "Traditional manual inspections and periodic sampling miss problems between visits. Large networks with thousands of assets cannot be physically checked frequently enough."
+  how_it_works: "Internet-connected sensors across the water network continuously measure pressure, flow, quality, and other parameters. Data is analysed centrally to detect anomalies and predict failures."
+  infrastructure: "IoT sensors, communication gateways, cloud platforms, analytics software"
+  monitoring: "Real-time telemetry dashboards, automated anomaly detection, predictive maintenance alerts"
+  strengths: "Detects problems early; reduces manual inspection costs; enables predictive maintenance; builds operational intelligence"
+  tradeoffs: "Sensor networks require ongoing maintenance; cybersecurity risks; initial investment can be high; rural areas may lack connectivity"
+  description: Use sensors across systems
+
+- slug: water-quality-monitoring
+  decision_pattern: Water quality monitoring networks
+  category: Monitoring & Data
+  problem: "Pollution from agriculture, industry, and sewage can make water unsafe for drinking, bathing, or ecosystems. Without monitoring, contamination goes undetected."
+  how_it_works: "Networks of sampling points and automated sensors track parameters like dissolved oxygen, nutrients, heavy metals, and bacteria across rivers, lakes, and coastal waters."
+  infrastructure: "Sampling stations, automated analysers, laboratory networks, data management systems"
+  monitoring: "Chemical and biological water quality indicators, trend analysis, regulatory compliance reporting"
+  strengths: "Detects contamination early; provides evidence for regulatory enforcement; tracks long-term environmental trends"
+  tradeoffs: "Comprehensive monitoring is expensive; some pollutants require lab analysis (not real-time); emerging contaminants may not be covered"
+  description: Monitor environmental conditions
+
+- slug: community-water
+  decision_pattern: Community water systems
+  category: Demand & Conservation
+  problem: "Remote and rural communities often lack access to piped water. Centralised systems are too expensive to extend to dispersed populations in difficult terrain."
+  how_it_works: "Local water sources (springs, boreholes) are captured and distributed through simple gravity-fed or hand-pump systems, owned and maintained by the community itself."
+  infrastructure: "Spring protection, gravity-fed pipe networks, storage tanks, community tapstands"
+  monitoring: "Community-based monitoring, periodic water quality testing, functionality surveys"
+  strengths: "Very low cost ($15&ndash;40 per person); no energy required for gravity systems; community ownership improves sustainability"
+  tradeoffs: "Depends on reliable local sources (threatened by climate change); maintenance capacity varies; water quality may not meet urban standards"
+  description: Local water management
+
+- slug: inter-basin-transfer
+  decision_pattern: Inter-basin transfer systems
+  category: Governance & Planning
+  problem: "Water is unevenly distributed geographically. Some regions have surplus water while nearby regions face chronic scarcity, limiting economic development."
+  how_it_works: "Large-scale infrastructure (canals, tunnels, pipelines) moves water from water-rich regions to water-scarce ones, often across hundreds of kilometres."
+  infrastructure: "Transfer canals, tunnels, pumping stations, dams in donor catchments, distribution networks"
+  monitoring: "Flow measurement along transfer routes, water quality monitoring, donor basin impact assessment"
+  strengths: "Can transform water-scarce regions; enables economic development; politically visible investment"
+  tradeoffs: "Extremely expensive (often billions); environmental damage in donor basins; social displacement from dam construction; creates long-term dependency"
+  description: Move water between regions

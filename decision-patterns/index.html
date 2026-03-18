@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Decision Patterns"
-description: "Proven infrastructure strategies for water resilience, with typical monitoring methods and linked case studies."
+description: "Proven strategies for solving water infrastructure challenges — from flood barriers to desalination, explained in plain English with real-world examples."
 nav_active: decision-patterns
 footer_text: "Water Decisions &bull; Decision Patterns &bull; Last updated March 2026"
 ---
@@ -9,16 +9,34 @@ footer_text: "Water Decisions &bull; Decision Patterns &bull; Last updated March
 <div class="hero">
   <div class="hero-inner">
     <h1>Decision Patterns</h1>
-    <p class="hero-subtitle">Proven infrastructure strategies for water resilience &mdash; each linked to <a href="../use-cases/index.html" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">use cases</a> and <a href="../case-studies/index.html" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">case studies</a>.</p>
+    <p class="hero-subtitle">Proven strategies for solving water infrastructure challenges &mdash; what works, what it costs, and where it has been tried.</p>
   </div>
 </div>
 
 <main class="page-content">
+
+  <!-- INTRO -->
+  <div class="intro-text">
+    <p><strong>What is a decision pattern?</strong> A decision pattern is a proven approach to a common water infrastructure challenge. Think of it as a playbook entry: &ldquo;when you face this problem, here is a strategy that has worked elsewhere, along with the infrastructure it requires, how you monitor it, and the trade-offs to consider.&rdquo;</p>
+    <p>Each pattern is linked to <a href="../use-cases/index.html" style="color:var(--accent);">use cases</a> (the operational scenarios where it applies) and <a href="../case-studies/index.html" style="color:var(--accent);">case studies</a> (real-world examples of it in action). Together, these three layers form the Water Decisions knowledge framework.</p>
+  </div>
+
+  <!-- HOW TO READ -->
+  <div style="background:var(--sidebar-bg);border-radius:8px;padding:1rem 1.25rem;margin-bottom:2rem;font-size:14px;color:var(--muted);line-height:1.6;">
+    <strong style="color:var(--ink);">How to read this page:</strong> Patterns are grouped into categories. Each card shows the problem it solves and a brief description of how it works. Click any card to see the full detail page with infrastructure, monitoring, strengths, trade-offs, and linked case studies.
+  </div>
+
+  <!-- STATS -->
   <div class="overview-stats" role="region" aria-label="Decision pattern statistics">
     <div class="overview-stat">
       <i data-lucide="git-branch" class="overview-stat-icon"></i>
       <div class="overview-stat-num">{{ site.data.decision-patterns | size }}</div>
-      <div class="overview-stat-label">Decision Patterns</div>
+      <div class="overview-stat-label">Patterns</div>
+    </div>
+    <div class="overview-stat">
+      <i data-lucide="layers" class="overview-stat-icon"></i>
+      <div class="overview-stat-num">4</div>
+      <div class="overview-stat-label">Categories</div>
     </div>
     <div class="overview-stat">
       <i data-lucide="target" class="overview-stat-icon"></i>
@@ -32,24 +50,68 @@ footer_text: "Water Decisions &bull; Decision Patterns &bull; Last updated March
     </div>
   </div>
 
-  <table style="width:100%;border-collapse:collapse;font-size:14.5px;">
-    <thead>
-      <tr style="border-bottom:2px solid var(--border);text-align:left;">
-        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Decision Pattern</th>
-        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Description</th>
-        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Infrastructure</th>
-        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Monitoring</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for dp in site.data.decision-patterns %}
-      <tr style="border-bottom:1px solid var(--border);">
-        <td style="padding:0.75rem 1rem;"><a href="{{ dp.slug }}.html" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ dp.decision_pattern }}</a></td>
-        <td style="padding:0.75rem 1rem;color:var(--muted);font-size:13.5px;">{{ dp.description }}</td>
-        <td style="padding:0.75rem 1rem;color:var(--muted);font-size:13.5px;">{{ dp.infrastructure }}</td>
-        <td style="padding:0.75rem 1rem;color:var(--muted);font-size:13.5px;">{{ dp.monitoring }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <style>
+    .dp-category { margin-bottom:2.5rem; }
+    .dp-category-title { font-family:'Playfair Display',Georgia,serif; font-size:1.3rem; margin-bottom:0.25rem; }
+    .dp-category-desc { color:var(--muted); font-size:14px; margin-bottom:1rem; }
+    .dp-card { border:1px solid var(--border); border-radius:8px; background:var(--card-bg); overflow:hidden; display:flex; flex-direction:column; transition:box-shadow 0.2s,transform 0.15s; text-decoration:none; color:inherit; }
+    .dp-card:hover { box-shadow:var(--card-hover-shadow); transform:translateY(-2px); }
+    .dp-card-accent { height:4px; }
+    .dp-card-body { padding:1.25rem 1.5rem; flex:1; }
+    .dp-card-name { font-family:'Playfair Display',Georgia,serif; font-size:17px; font-weight:700; margin-bottom:0.5rem; color:var(--ink); }
+    .dp-card:hover .dp-card-name { color:var(--accent); }
+    .dp-card-problem { font-size:13.5px; color:var(--muted); line-height:1.55; margin-bottom:0.75rem; }
+    .dp-card-how { font-size:13.5px; color:var(--ink); line-height:1.55; }
+    .dp-card-footer { border-top:1px solid var(--border); padding:0.6rem 1.5rem; font-size:12px; color:var(--muted); display:flex; gap:1rem; flex-wrap:wrap; }
+    .dp-card-footer span { display:flex; align-items:center; gap:4px; }
+    .dp-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.25rem; }
+  </style>
+
+  {% assign categories = "Flooding & Sewage,Water Supply,Demand & Conservation,Monitoring & Data,Governance & Planning" | split: "," %}
+  {% assign cat_descs = "Strategies for managing floods and sewage overflows — from barriers and tunnels to natural floodplains.|Approaches to securing reliable water supply through diversification, storage, and alternative sources.|Ways to reduce water demand and extend supply through behaviour change and community management.|Sensor networks, data systems, and forecasting tools that underpin informed decision-making.|Frameworks for coordinating water management across regions, agencies, and competing interests." | split: "|" %}
+  {% assign cat_colors = "#0284c7,#059669,#7c3aed,#d97706,#dc2626" | split: "," %}
+
+  {% for cat in categories %}
+    {% assign cat_idx = forloop.index0 %}
+    {% assign cat_color = cat_colors[cat_idx] %}
+    {% assign cat_desc = cat_descs[cat_idx] %}
+
+    {% assign patterns_in_cat = site.data.decision-patterns | where: "category", cat %}
+    {% if patterns_in_cat.size > 0 %}
+    <div class="dp-category">
+      <h2 class="dp-category-title" style="color:{{ cat_color }};">{{ cat }}</h2>
+      <p class="dp-category-desc">{{ cat_desc }}</p>
+
+      <div class="dp-grid">
+        {% for dp in patterns_in_cat %}
+          <!-- Count related use cases and case studies -->
+          {% assign uc_count = 0 %}
+          {% assign cs_count = 0 %}
+          {% assign seen_ucs = "" %}
+          {% assign seen_css = "" %}
+          {% for m in site.data.use-case-mapping %}
+            {% if m.decision_pattern_slug == dp.slug %}
+              {% unless seen_ucs contains m.use_case_slug %}{% assign uc_count = uc_count | plus: 1 %}{% assign seen_ucs = seen_ucs | append: m.use_case_slug | append: "," %}{% endunless %}
+              {% unless seen_css contains m.case_study_slug %}{% assign cs_count = cs_count | plus: 1 %}{% assign seen_css = seen_css | append: m.case_study_slug | append: "," %}{% endunless %}
+            {% endif %}
+          {% endfor %}
+
+        <a href="{{ dp.slug }}.html" class="dp-card">
+          <div class="dp-card-accent" style="background:{{ cat_color }};"></div>
+          <div class="dp-card-body">
+            <div class="dp-card-name">{{ dp.decision_pattern }}</div>
+            <div class="dp-card-problem"><strong>Problem:</strong> {{ dp.problem }}</div>
+            <div class="dp-card-how"><strong>How it works:</strong> {{ dp.how_it_works | truncate: 160 }}</div>
+          </div>
+          <div class="dp-card-footer">
+            <span><i data-lucide="target" style="width:13px;height:13px;"></i> {{ uc_count }} use case{% if uc_count != 1 %}s{% endif %}</span>
+            <span><i data-lucide="book-open" style="width:13px;height:13px;"></i> {{ cs_count }} case stud{% if cs_count != 1 %}ies{% else %}y{% endif %}</span>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+
 </main>

@@ -15,19 +15,72 @@ layout: default
 </div>
 
 <main class="page-content narrow">
-  <p><a href="index.html" style="color:var(--accent);text-decoration:none;">&larr; Decision Patterns</a></p>
+  <p><a href="index.html" style="color:var(--accent);text-decoration:none;">&larr; Decision Patterns</a>
+  {% if dp.category %}<span style="margin-left:1rem;font-size:12px;padding:3px 10px;border-radius:100px;background:var(--sidebar-bg);color:var(--muted);font-weight:600;">{{ dp.category }}</span>{% endif %}</p>
 
-  <!-- INFRASTRUCTURE & MONITORING -->
+  <!-- WHAT PROBLEM DOES THIS SOLVE? -->
+  <div class="section" id="problem">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#fee2e2;color:#dc2626;"><i data-lucide="alert-triangle"></i></div>
+      <h2>What problem does this solve?</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <p>{{ dp.problem }}</p>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section" id="how-it-works">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#e0f2fe;color:#0284c7;"><i data-lucide="info"></i></div>
+      <h2>How it works</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <p>{{ dp.how_it_works }}</p>
+    </div>
+  </div>
+
+  <!-- TYPICAL INFRASTRUCTURE -->
   <div class="section" id="infrastructure">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-icon" style="background:#d1fae5;color:#059669;"><i data-lucide="building-2"></i></div>
-      <h2>Infrastructure &amp; Monitoring</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+      <h2>Typical infrastructure</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
     </div>
     <div class="section-body">
-      <table style="width:100%;font-size:14px;border-collapse:collapse;">
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 1rem;font-weight:600;color:var(--muted);width:140px;">Infrastructure</td><td style="padding:0.5rem 1rem;">{{ dp.infrastructure }}</td></tr>
-        <tr><td style="padding:0.5rem 1rem;font-weight:600;color:var(--muted);">Monitoring</td><td style="padding:0.5rem 1rem;">{{ dp.monitoring }}</td></tr>
-      </table>
+      <p>{{ dp.infrastructure }}</p>
+    </div>
+  </div>
+
+  <!-- TYPICAL MONITORING -->
+  <div class="section" id="monitoring">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#fef3c7;color:#d97706;"><i data-lucide="activity"></i></div>
+      <h2>Typical monitoring</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <p>{{ dp.monitoring }}</p>
+    </div>
+  </div>
+
+  <!-- STRENGTHS -->
+  <div class="section" id="strengths">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#d1fae5;color:#059669;"><i data-lucide="check-circle"></i></div>
+      <h2>Strengths</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <p>{{ dp.strengths }}</p>
+    </div>
+  </div>
+
+  <!-- TRADE-OFFS -->
+  <div class="section" id="tradeoffs">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#fef3c7;color:#d97706;"><i data-lucide="scale"></i></div>
+      <h2>Trade-offs</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <p>{{ dp.tradeoffs }}</p>
     </div>
   </div>
 
@@ -42,12 +95,14 @@ layout: default
   {% endfor %}
   {% assign uc_slugs = ucs | split: "," %}
 
+  {% if uc_slugs.size > 0 %}
   <div class="section" id="use-cases">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-icon" style="background:#fce7f3;color:#db2777;"><i data-lucide="target"></i></div>
-      <h2>Related Use Cases</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+      <h2>Related use cases</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
     </div>
     <div class="section-body">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:0.75rem;">Operational scenarios where this pattern is applied:</p>
       <ul>
       {% for us in uc_slugs %}
         {% for uc in site.data.use-cases %}
@@ -59,24 +114,28 @@ layout: default
       </ul>
     </div>
   </div>
+  {% endif %}
 
   <!-- RELATED CASE STUDIES (from mapping, rendered as cards) -->
+  {% assign cs_slugs = "" %}
+  {% for m in site.data.use-case-mapping %}
+    {% if m.decision_pattern_slug == dp_slug %}
+      {% unless cs_slugs contains m.case_study_slug %}
+        {% if cs_slugs == "" %}{% assign cs_slugs = m.case_study_slug %}{% else %}{% assign cs_slugs = cs_slugs | append: "," | append: m.case_study_slug %}{% endif %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+  {% assign slug_list = cs_slugs | split: "," %}
+
+  {% if slug_list.size > 0 %}
   <div class="section" id="case-studies">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-icon" style="background:#f0fdf4;color:#16a34a;"><i data-lucide="book-open"></i></div>
-      <h2>Related Case Studies</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+      <h2>Case studies</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
     </div>
     <div class="section-body">
-      {% assign cs_slugs = "" %}
-      {% for m in site.data.use-case-mapping %}
-        {% if m.decision_pattern_slug == dp_slug %}
-          {% unless cs_slugs contains m.case_study_slug %}
-            {% if cs_slugs == "" %}{% assign cs_slugs = m.case_study_slug %}{% else %}{% assign cs_slugs = cs_slugs | append: "," | append: m.case_study_slug %}{% endif %}
-          {% endunless %}
-        {% endif %}
-      {% endfor %}
-      {% assign slug_list = cs_slugs | split: "," %}
-      <div class="studies-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin-top:0.75rem;">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:0.75rem;">Real-world examples of this pattern in action:</p>
+      <div class="studies-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin-top:0.5rem;">
       {% for cs_slug in slug_list %}
         {% for study in site.case_studies %}
           {% if study.slug == cs_slug %}
@@ -95,5 +154,6 @@ layout: default
       </div>
     </div>
   </div>
+  {% endif %}
 
 </main>
