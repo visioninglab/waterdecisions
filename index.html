@@ -17,7 +17,7 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
 <!-- CONTENT -->
 <div class="page-content">
 
-  <!-- FRAMEWORK FLOW -->
+  <!-- FRAMEWORK FLOW (stepper) -->
   <style>
     .fw-flow { display:grid; grid-template-columns:1fr; gap:0; margin:0 auto 2.5rem; max-width:680px; }
     .fw-step { display:grid; grid-template-columns:56px 1fr; gap:0 1.25rem; align-items:start; }
@@ -61,7 +61,7 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
         <h3><a href="use-cases/index.html">Use Cases</a></h3>
         <p>Operational scenarios where water infrastructure decisions must be made.</p>
         <div class="fw-tags">
-          <span class="fw-tag">15 scenarios</span>
+          <span class="fw-tag">{{ site.data.use-cases | size }} scenarios</span>
           <span class="fw-tag">Cross-linked</span>
         </div>
       </div>
@@ -75,7 +75,7 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
         <h3><a href="decision-patterns/index.html">Decision Patterns</a></h3>
         <p>Proven infrastructure strategies with typical monitoring methods and evidence.</p>
         <div class="fw-tags">
-          <span class="fw-tag">17 patterns</span>
+          <span class="fw-tag">{{ site.data.decision-patterns | size }} patterns</span>
           <span class="fw-tag">Evidence-based</span>
         </div>
       </div>
@@ -88,7 +88,7 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
         <h3><a href="case-studies/index.html">Case Studies</a></h3>
         <p>Real-world water infrastructure assessed against resilience principles.</p>
         <div class="fw-tags">
-          <span class="fw-tag">22 published</span>
+          <span class="fw-tag">{{ site.case_studies | size }} published</span>
           <span class="fw-tag">6 principles</span>
           <span class="fw-tag">SDG mapped</span>
         </div>
@@ -96,47 +96,143 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
     </div>
   </div>
 
-  <!-- CASE STUDIES -->
-  <h2 style="font-family:'Playfair Display',Georgia,serif;margin-bottom:0.5rem;">Case Studies</h2>
-  <p style="margin-bottom:1.25rem;color:var(--muted);font-size:14.5px;">Each case study is assessed against <a href="principles.html" style="color:var(--accent);text-decoration:none;">UNDRR/ISO 22372 resilience principles</a> and mapped to the knowledge framework above.</p>
+  <!-- NETWORK DIAGRAM -->
+  <h2 style="font-family:'Playfair Display',Georgia,serif;margin-bottom:0.5rem;">Knowledge Network</h2>
+  <p style="margin-bottom:1.25rem;color:var(--muted);font-size:14.5px;">How use cases, decision patterns, and case studies connect. Click any node to explore.</p>
 
-  <div class="studies-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='china-hydraulic.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#0284c7,#0e4d6e);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Water &bull; China</div>
-        <div class="study-card-title">Dujiangyan Irrigation System</div>
-        <div class="study-card-desc">A 2,300-year-old hydraulic engineering masterpiece that controls flooding and provides irrigation without a dam.</div>
-        <div class="study-card-tags">
-          <span class="study-card-tag">Ancient Infrastructure</span>
-          <span class="study-card-tag">World Heritage</span>
-        </div>
-      </div>
-      <div class="study-card-footer">
-        <span>2,300 years old &bull; Built 256 BC &bull; Still operational</span>
-        <span class="status"><span class="status-dot active"></span> Published</span>
-      </div>
-    </div>
-    <div class="study-card" style="cursor:pointer;" onclick="window.location.href='singapore-dtss.html'">
-      <div class="study-card-banner" style="background:linear-gradient(90deg,#0284c7,#0e4d6e);"></div>
-      <div class="study-card-body">
-        <div class="study-card-category">Water &bull; Singapore</div>
-        <div class="study-card-title">Deep Tunnel Sewerage System</div>
-        <div class="study-card-desc">National water security through used water reclamation via 206 km of deep tunnels and three reclamation plants.</div>
-        <div class="study-card-tags">
-          <span class="study-card-tag">Water Security</span>
-          <span class="study-card-tag">Digital Twin</span>
-        </div>
-      </div>
-      <div class="study-card-footer">
-        <span>$10B &bull; 206 km &bull; 100-year design life</span>
-        <span class="status"><span class="status-dot active"></span> Published</span>
-      </div>
-    </div>
+  <style>
+    .net-wrap { overflow-x:auto; margin-bottom:2.5rem; }
+    .net-svg { width:100%; max-width:960px; margin:0 auto; display:block; }
+    .net-svg text { font-family:'Source Sans 3',system-ui,sans-serif; pointer-events:none; }
+    .net-svg .net-link { stroke:var(--border); stroke-width:1.2; opacity:0.5; transition:opacity 0.2s,stroke 0.2s; }
+    .net-svg .net-node { cursor:pointer; transition:transform 0.15s,filter 0.15s; }
+    .net-svg .net-node:hover { filter:brightness(1.15); }
+    .net-svg .net-node:hover ~ .net-link { opacity:0.1; }
+    .net-svg .net-label-col { font-size:13px; font-weight:700; fill:var(--muted); letter-spacing:0.04em; text-transform:uppercase; }
+    .net-svg .net-label-node { font-size:10px; fill:#fff; font-weight:600; }
+    .net-svg .net-label-sub { font-size:9px; fill:rgba(255,255,255,0.75); }
+    @media(max-width:640px) { .net-svg { min-width:700px; } }
+  </style>
+
+  <div class="net-wrap">
+    <!-- Build node positions from CSV data -->
+    {% assign baseurl = site.baseurl %}
+
+    <!-- Collect unique use cases, decision patterns, case studies from mapping -->
+    {% assign uc_seen = "" %}
+    {% assign dp_seen = "" %}
+    {% assign cs_seen = "" %}
+    {% for m in site.data.use-case-mapping %}
+      {% unless uc_seen contains m.use_case_slug %}{% if uc_seen == "" %}{% assign uc_seen = m.use_case_slug %}{% else %}{% assign uc_seen = uc_seen | append: "|" | append: m.use_case_slug %}{% endif %}{% endunless %}
+      {% unless dp_seen contains m.decision_pattern_slug %}{% if dp_seen == "" %}{% assign dp_seen = m.decision_pattern_slug %}{% else %}{% assign dp_seen = dp_seen | append: "|" | append: m.decision_pattern_slug %}{% endif %}{% endunless %}
+      {% unless cs_seen contains m.case_study_slug %}{% if cs_seen == "" %}{% assign cs_seen = m.case_study_slug %}{% else %}{% assign cs_seen = cs_seen | append: "|" | append: m.case_study_slug %}{% endif %}{% endunless %}
+    {% endfor %}
+    {% assign uc_nodes = uc_seen | split: "|" %}
+    {% assign dp_nodes = dp_seen | split: "|" %}
+    {% assign cs_nodes = cs_seen | split: "|" %}
+
+    {% assign uc_count = uc_nodes | size %}
+    {% assign dp_count = dp_nodes | size %}
+    {% assign cs_count = cs_nodes | size %}
+
+    <!-- Calculate SVG height -->
+    {% assign max_count = uc_count %}
+    {% if dp_count > max_count %}{% assign max_count = dp_count %}{% endif %}
+    {% if cs_count > max_count %}{% assign max_count = cs_count %}{% endif %}
+    {% assign svg_h = max_count | times: 48 | plus: 80 %}
+
+    <svg class="net-svg" viewBox="0 0 960 {{ svg_h }}" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Column labels -->
+      <text x="120" y="24" text-anchor="middle" class="net-label-col"><a href="{{ baseurl }}/use-cases/index.html" style="fill:var(--muted);">Use Cases</a></text>
+      <text x="480" y="24" text-anchor="middle" class="net-label-col"><a href="{{ baseurl }}/decision-patterns/index.html" style="fill:var(--muted);">Decision Patterns</a></text>
+      <text x="840" y="24" text-anchor="middle" class="net-label-col"><a href="{{ baseurl }}/case-studies/index.html" style="fill:var(--muted);">Case Studies</a></text>
+
+      <!-- CONNECTIONS (drawn first, behind nodes) -->
+      {% assign uc_i = 0 %}
+      {% for uc_slug in uc_nodes %}
+        {% assign uc_y = uc_i | times: 48 | plus: 68 %}
+        {% for m in site.data.use-case-mapping %}
+          {% if m.use_case_slug == uc_slug %}
+            <!-- Find DP y position -->
+            {% assign dp_i = 0 %}
+            {% for dp_s in dp_nodes %}
+              {% if dp_s == m.decision_pattern_slug %}{% assign dp_y = dp_i | times: 48 | plus: 68 %}{% endif %}
+              {% assign dp_i = dp_i | plus: 1 %}
+            {% endfor %}
+            <line class="net-link" x1="195" y1="{{ uc_y }}" x2="405" y2="{{ dp_y }}"/>
+          {% endif %}
+        {% endfor %}
+        {% assign uc_i = uc_i | plus: 1 %}
+      {% endfor %}
+
+      {% assign dp_i = 0 %}
+      {% for dp_slug in dp_nodes %}
+        {% assign dp_y = dp_i | times: 48 | plus: 68 %}
+        {% for m in site.data.use-case-mapping %}
+          {% if m.decision_pattern_slug == dp_slug %}
+            <!-- Find CS y position -->
+            {% assign cs_i = 0 %}
+            {% for cs_s in cs_nodes %}
+              {% if cs_s == m.case_study_slug %}{% assign cs_y = cs_i | times: 48 | plus: 68 %}{% endif %}
+              {% assign cs_i = cs_i | plus: 1 %}
+            {% endfor %}
+            <line class="net-link" x1="555" y1="{{ dp_y }}" x2="765" y2="{{ cs_y }}"/>
+          {% endif %}
+        {% endfor %}
+        {% assign dp_i = dp_i | plus: 1 %}
+      {% endfor %}
+
+      <!-- USE CASE NODES -->
+      {% assign uc_i = 0 %}
+      {% for uc_slug in uc_nodes %}
+        {% assign uc_y = uc_i | times: 48 | plus: 68 %}
+        {% for uc in site.data.use-cases %}
+          {% if uc.slug == uc_slug %}
+        <a href="{{ baseurl }}/use-cases/{{ uc.slug }}.html" class="net-node">
+          <rect x="20" y="{{ uc_y | minus: 16 }}" width="200" height="32" rx="16" fill="#059669"/>
+          <text x="120" y="{{ uc_y | plus: 4 }}" text-anchor="middle" class="net-label-node">{{ uc.use_case | truncate: 28 }}</text>
+        </a>
+          {% endif %}
+        {% endfor %}
+        {% assign uc_i = uc_i | plus: 1 %}
+      {% endfor %}
+
+      <!-- DECISION PATTERN NODES -->
+      {% assign dp_i = 0 %}
+      {% for dp_slug in dp_nodes %}
+        {% assign dp_y = dp_i | times: 48 | plus: 68 %}
+        {% for dp in site.data.decision-patterns %}
+          {% if dp.slug == dp_slug %}
+        <a href="{{ baseurl }}/decision-patterns/{{ dp.slug }}.html" class="net-node">
+          <rect x="380" y="{{ dp_y | minus: 16 }}" width="200" height="32" rx="16" fill="#7c3aed"/>
+          <text x="480" y="{{ dp_y | plus: 4 }}" text-anchor="middle" class="net-label-node">{{ dp.decision_pattern | truncate: 28 }}</text>
+        </a>
+          {% endif %}
+        {% endfor %}
+        {% assign dp_i = dp_i | plus: 1 %}
+      {% endfor %}
+
+      <!-- CASE STUDY NODES -->
+      {% assign cs_i = 0 %}
+      {% for cs_slug in cs_nodes %}
+        {% assign cs_y = cs_i | times: 48 | plus: 68 %}
+        {% for study in site.case_studies %}
+          {% if study.slug == cs_slug %}
+        <a href="{{ study.url | relative_url }}" class="net-node">
+          <rect x="740" y="{{ cs_y | minus: 16 }}" width="200" height="32" rx="16" fill="#c8962d"/>
+          <text x="840" y="{{ cs_y | plus: 4 }}" text-anchor="middle" class="net-label-node">{{ study.card.short_title | truncate: 26 }}</text>
+        </a>
+          {% endif %}
+        {% endfor %}
+        {% assign cs_i = cs_i | plus: 1 %}
+      {% endfor %}
+
+    </svg>
   </div>
 
   <!-- TOOLS -->
-  <h2 style="font-family:'Playfair Display',Georgia,serif;margin:2.5rem 0 0.5rem;">Tools &amp; Resources</h2>
+  <h2 style="font-family:'Playfair Display',Georgia,serif;margin:0 0 0.5rem;">Tools &amp; Resources</h2>
   <p style="margin-bottom:1.25rem;color:var(--muted);font-size:14.5px;">Interactive tools and reference material supporting the framework.</p>
 
   <div class="studies-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
@@ -175,3 +271,40 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
   </div>
 
 </div>
+
+<!-- Hover highlighting script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var nodes = document.querySelectorAll('.net-node');
+  var links = document.querySelectorAll('.net-link');
+
+  nodes.forEach(function(node) {
+    node.addEventListener('mouseenter', function() {
+      var rect = node.querySelector('rect');
+      if (!rect) return;
+      var x = +rect.getAttribute('x'), y = +rect.getAttribute('y');
+      var w = +rect.getAttribute('width'), h = +rect.getAttribute('height');
+      var cx = x + w/2, cy = y + h/2;
+
+      links.forEach(function(link) {
+        var x1 = +link.getAttribute('x1'), y1 = +link.getAttribute('y1');
+        var x2 = +link.getAttribute('x2'), y2 = +link.getAttribute('y2');
+        var connected = (Math.abs(y1 - (cy)) < 20 && Math.abs(x1 - (x + w)) < 10) ||
+                        (Math.abs(y2 - (cy)) < 20 && Math.abs(x2 - x) < 10) ||
+                        (Math.abs(y1 - (cy)) < 20 && Math.abs(x1 - x) < 10) ||
+                        (Math.abs(y2 - (cy)) < 20 && Math.abs(x2 - (x + w)) < 10);
+        link.style.opacity = connected ? '0.9' : '0.08';
+        link.style.stroke = connected ? rect.getAttribute('fill') : '';
+        link.style.strokeWidth = connected ? '2' : '';
+      });
+    });
+    node.addEventListener('mouseleave', function() {
+      links.forEach(function(link) {
+        link.style.opacity = '';
+        link.style.stroke = '';
+        link.style.strokeWidth = '';
+      });
+    });
+  });
+});
+</script>
