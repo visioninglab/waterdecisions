@@ -44,7 +44,17 @@ layout: default
     {% endfor %}
     {% assign uc_list = my_ucs | split: "," %}
     {% assign dp_list = my_dps | split: "," %}
-    {% if uc_list.size > 0 or dp_list.size > 0 %}
+    <!-- Collect linked models from model-mapping -->
+    {% assign my_models = "" %}
+    {% for mm in site.data.model-mapping %}
+      {% if mm.case_study_slug == page.slug %}
+        {% unless my_models contains mm.model_slug %}
+          {% if my_models == "" %}{% assign my_models = mm.model_slug %}{% else %}{% assign my_models = my_models | append: "," | append: mm.model_slug %}{% endif %}
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+    {% assign model_list = my_models | split: "," %}
+    {% if uc_list.size > 0 or dp_list.size > 0 or model_list.size > 0 %}
     <div class="section" id="framework-links">
       <div class="section-header" onclick="toggleSection(this)">
         <div class="section-icon" style="background:#fef3c7;color:#d97706;"><i data-lucide="compass"></i></div>
@@ -55,17 +65,32 @@ layout: default
         <p style="font-weight:600;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.5rem;">Use Cases</p>
         <ul style="margin-bottom:1rem;">
         {% for us in uc_list %}{% for uc in site.data.use-cases %}{% if uc.slug == us %}
-          <li><a href="{{ '/use-cases/' | append: uc.slug | append: '.html' | relative_url }}" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ uc.use_case }}</a> &mdash; {{ uc.goal }}</li>
+          <li><a href="{{ '/use-cases/' | append: uc.slug | append: '.html' | relative_url }}" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ uc.use_case }}</a> &mdash; {{ uc.what | truncate: 100 }}</li>
         {% endif %}{% endfor %}{% endfor %}
         </ul>
         {% endif %}
         {% if dp_list.size > 0 %}
         <p style="font-weight:600;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.5rem;">Decision Patterns</p>
-        <ul>
+        <ul style="margin-bottom:1rem;">
         {% for ds in dp_list %}{% for dp in site.data.decision-patterns %}{% if dp.slug == ds %}
           <li><a href="{{ '/decision-patterns/' | append: dp.slug | append: '.html' | relative_url }}" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ dp.decision_pattern }}</a> &mdash; {{ dp.description }}</li>
         {% endif %}{% endfor %}{% endfor %}
         </ul>
+        {% endif %}
+        {% if model_list.size > 0 %}
+        <p style="font-weight:600;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.5rem;">System Models</p>
+        {% for mm in site.data.model-mapping %}
+          {% if mm.case_study_slug == page.slug %}
+            {% for mod in site.data.models %}
+              {% if mod.slug == mm.model_slug %}
+        <div class="principle-card" style="margin-bottom:0.75rem;">
+          <h4><a href="{{ '/models/' | append: mod.slug | append: '.html' | relative_url }}" style="color:var(--accent);text-decoration:none;">{{ mod.model }}</a></h4>
+          <p><strong>Tool:</strong> {{ mm.tool }} &mdash; {{ mm.what_it_does }}</p>
+        </div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
         {% endif %}
       </div>
     </div>

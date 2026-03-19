@@ -69,15 +69,29 @@ layout: default
   {% endif %}
 
   <!-- TOOLS & SOURCES -->
-  {% if m.tools or m.sources %}
+  {% if m.tools.size > 0 or m.sources.size > 0 %}
   <div class="section" id="tools">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-icon" style="background:#e0e7ff;color:#4f46e5;"><i data-lucide="wrench"></i></div>
       <h2>Tools &amp; sources</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
     </div>
     <div class="section-body">
-      {% if m.tools %}<p><strong>Common tools:</strong> {{ m.tools }}</p>{% endif %}
-      {% if m.sources %}<p><strong>Key sources:</strong> {{ m.sources }}</p>{% endif %}
+      {% if m.tools.size > 0 %}
+      <p style="font-weight:600;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.5rem;">Common tools</p>
+      <ul style="margin-bottom:1.25rem;">
+        {% for t in m.tools %}
+        <li>{% if t.url %}<a href="{{ t.url }}" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ t.name }}</a>{% else %}{{ t.name }}{% endif %}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% if m.sources.size > 0 %}
+      <p style="font-weight:600;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.5rem;">Key sources</p>
+      <ul>
+        {% for s in m.sources %}
+        <li>{% if s.url %}<a href="{{ s.url }}" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ s.name }}</a>{% else %}{{ s.name }}{% endif %}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
     </div>
   </div>
   {% endif %}

@@ -19,8 +19,19 @@
     - Leakage trajectory over time
     - Target compliance forecasts
     - Cost-benefit of intervention options
-  tools: "IWA water balance methodology, Ofwat performance frameworks, SCADA leak detection analytics"
-  sources: "International Water Association (IWA), Ofwat, Environment Agency"
+  tools:
+    - name: "IWA Water Balance Methodology"
+      url: "https://www.iwapublishing.com/books/9781789060881/water-losses-and-water-auditing"
+    - name: "Ofwat Leakage Performance"
+      url: "https://www.ofwat.gov.uk/regulated-companies/company-obligations/leakage/"
+    - name: "SCADA leak detection analytics"
+  sources:
+    - name: "International Water Association (IWA)"
+      url: "https://iwa-network.org/"
+    - name: "Ofwat"
+      url: "https://www.ofwat.gov.uk/"
+    - name: "Environment Agency"
+      url: "https://www.gov.uk/government/organisations/environment-agency"
 
 - slug: supply-demand
   model: "Supply&ndash;demand balance models"
@@ -40,8 +51,20 @@
     - Supply deficit or surplus over time
     - Infrastructure requirements and timing
     - Scenario comparisons (dry year, climate change, growth)
-  tools: "WRMP modelling frameworks, REALM (Australia), system simulation models"
-  sources: "Environment Agency National Framework, OECD, national water resource plans"
+  tools:
+    - name: "WRMP modelling frameworks"
+      url: "https://www.gov.uk/government/publications/water-resources-planning-guideline"
+    - name: "REALM (Resource Allocation Model)"
+      url: "https://www.water.vic.gov.au/"
+    - name: "eWater Source"
+      url: "https://ewater.org.au/products/ewater-source/"
+  sources:
+    - name: "Environment Agency National Framework"
+      url: "https://www.gov.uk/government/publications/meeting-our-future-water-needs-a-national-framework-for-water-resources"
+    - name: "OECD Water Governance"
+      url: "https://www.oecd.org/water/"
+    - name: "UK Water Resources Management Plans"
+      url: "https://www.gov.uk/government/collections/water-resources-planning"
 
 - slug: flood-hydrological
   model: "Flood &amp; hydrological models"
@@ -62,8 +85,26 @@
     - Inundation maps showing affected areas
     - Risk levels and return periods
     - Barrier closure triggers
-  tools: "Delft-FEWS, SOBEK, MIKE, InfoWorks ICM, HEC-RAS"
-  sources: "Deltares, Environment Agency, Met Office, WMO"
+  tools:
+    - name: "Delft-FEWS"
+      url: "https://www.deltares.nl/en/software-and-data/products/delft-fews"
+    - name: "SOBEK"
+      url: "https://www.deltares.nl/en/software-and-data/products/sobek"
+    - name: "MIKE by DHI"
+      url: "https://www.mikepoweredbydhi.com/"
+    - name: "InfoWorks ICM"
+      url: "https://www.autodesk.com/products/innovyze"
+    - name: "HEC-RAS"
+      url: "https://www.hec.usace.army.mil/software/hec-ras/"
+  sources:
+    - name: "Deltares"
+      url: "https://www.deltares.nl/en"
+    - name: "Environment Agency Flood Risk"
+      url: "https://www.gov.uk/government/collections/flood-risk-management-current-schemes-and-strategies"
+    - name: "Met Office"
+      url: "https://www.metoffice.gov.uk/"
+    - name: "World Meteorological Organization (WMO)"
+      url: "https://www.wmo.int/"
 
 - slug: water-quality
   model: "Water quality models"
@@ -84,8 +125,22 @@
     - Compliance with regulatory standards
     - Pollution risk forecasts
     - Treatment optimisation recommendations
-  tools: "QUAL2K, WASP, InfoWorks WQ, process simulation models"
-  sources: "Environment Agency, EPA, European Environment Agency, WHO"
+  tools:
+    - name: "QUAL2K"
+      url: "https://www.epa.gov/ceam/qual2k"
+    - name: "WASP (Water Quality Analysis Simulation)"
+      url: "https://www.epa.gov/ceam/water-quality-analysis-simulation-program-wasp"
+    - name: "InfoWorks WQ"
+      url: "https://www.autodesk.com/products/innovyze"
+  sources:
+    - name: "Environment Agency"
+      url: "https://www.gov.uk/government/organisations/environment-agency"
+    - name: "US Environmental Protection Agency (EPA)"
+      url: "https://www.epa.gov/"
+    - name: "European Environment Agency"
+      url: "https://www.eea.europa.eu/"
+    - name: "World Health Organization (WHO)"
+      url: "https://www.who.int/health-topics/water-quality"
 
 - slug: allocation-governance
   model: "Allocation &amp; governance models"
@@ -105,8 +160,19 @@
     - Allocation decisions by user and region
     - System-wide trade-offs and impacts
     - Scenario analysis for drought or growth
-  tools: "Basin allocation models, eWater Source, C2VSim, water accounting frameworks"
-  sources: "Murray-Darling Basin Authority, World Bank, FAO"
+  tools:
+    - name: "eWater Source"
+      url: "https://ewater.org.au/products/ewater-source/"
+    - name: "C2VSim (California)"
+      url: "https://water.ca.gov/Library/Modeling-and-Analysis/Central-Valley-models-and-tools/C2VSim"
+    - name: "Basin allocation models"
+  sources:
+    - name: "Murray-Darling Basin Authority"
+      url: "https://www.mdba.gov.au/"
+    - name: "World Bank Water"
+      url: "https://www.worldbank.org/en/topic/water"
+    - name: "FAO AQUASTAT"
+      url: "https://www.fao.org/aquastat/"
 
 - slug: infrastructure-asset
   model: "Infrastructure &amp; asset models"
@@ -127,8 +193,18 @@
     - Optimal maintenance schedules
     - Investment priority rankings
     - Network capacity assessments
-  tools: "Asset management systems, GIS-based deterioration models, KANEW pipe cohort models"
-  sources: "UK Water Industry Research, AWWA, ISO 55000"
+  tools:
+    - name: "KANEW pipe cohort models"
+    - name: "GIS-based deterioration models"
+    - name: "ISO 55000 asset management framework"
+      url: "https://www.iso.org/iso-55001-asset-management.html"
+  sources:
+    - name: "UK Water Industry Research (UKWIR)"
+      url: "https://ukwir.org/"
+    - name: "American Water Works Association (AWWA)"
+      url: "https://www.awwa.org/"
+    - name: "ISO 55000 series"
+      url: "https://www.iso.org/iso-55001-asset-management.html"
 
 - slug: integrated-digital-twin
   model: "Integrated system &amp; digital twin models"
@@ -149,5 +225,21 @@
     - Optimisation recommendations
     - Early warning of emerging risks
     - Investment planning insights
-  tools: "Digital twin platforms, Deltares integrated models, PUB Smart Water Grid"
-  sources: "Deltares, PUB Singapore, National Infrastructure Commission"
+  tools:
+    - name: "Deltares integrated models"
+      url: "https://www.deltares.nl/en"
+    - name: "PUB Smart Water Grid"
+      url: "https://www.pub.gov.sg/watersupply/waterdistribution"
+    - name: "Bentley OpenFlows"
+      url: "https://www.bentley.com/software/openflows-watergems/"
+    - name: "Siemens Water Digital Twin"
+      url: "https://www.siemens.com/global/en/products/automation/topic-areas/digital-enterprise/digital-twin.html"
+  sources:
+    - name: "Deltares"
+      url: "https://www.deltares.nl/en"
+    - name: "PUB Singapore"
+      url: "https://www.pub.gov.sg/"
+    - name: "National Infrastructure Commission"
+      url: "https://nic.org.uk/"
+    - name: "IWA Digital Water Programme"
+      url: "https://iwa-network.org/projects/digital-water-programme/"
