@@ -1,0 +1,28 @@
+name: Validate Data Links
+
+on:
+  push:
+    paths:
+      - '_data/**'
+      - '_case_studies/**'
+      - 'use-cases/**'
+      - 'decision-patterns/**'
+      - 'models/**'
+      - 'scripts/validate-links.js'
+  pull_request:
+    paths:
+      - '_data/**'
+      - '_case_studies/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate referential integrity
+        run: node scripts/validate-links.js
