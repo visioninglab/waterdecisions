@@ -1,0 +1,175 @@
+---
+layout: default
+---
+{% assign m_slug = page.model_slug %}
+{% assign m = nil %}
+{% for row in site.data.models %}
+  {% if row.slug == m_slug %}{% assign m = row %}{% endif %}
+{% endfor %}
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1>{{ m.model }}</h1>
+    <p class="hero-subtitle">{{ m.what | truncate: 200 }}</p>
+  </div>
+</div>
+
+<main class="page-content narrow">
+  <p><a href="index.html" style="color:var(--accent);text-decoration:none;">&larr; System Models</a>
+  {% if m.category %}<span style="margin-left:1rem;font-size:12px;padding:3px 10px;border-radius:100px;background:var(--sidebar-bg);color:var(--muted);font-weight:600;">{{ m.category }}</span>{% endif %}</p>
+
+  <!-- WHAT ARE THESE MODELS? -->
+  <div class="section" id="what">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#e0f2fe;color:#0284c7;"><i data-lucide="info"></i></div>
+      <h2>What are these models?</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <p>{{ m.what }}</p>
+    </div>
+  </div>
+
+  <!-- WHAT ARE THEY USED FOR? -->
+  {% if m.used_for.size > 0 %}
+  <div class="section" id="used-for">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#d1fae5;color:#059669;"><i data-lucide="target"></i></div>
+      <h2>What are they used for?</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <ul>{% for item in m.used_for %}<li>{{ item }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- TYPICAL INPUTS -->
+  {% if m.inputs.size > 0 %}
+  <div class="section" id="inputs">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#fef3c7;color:#d97706;"><i data-lucide="log-in"></i></div>
+      <h2>Typical inputs</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <ul>{% for item in m.inputs %}<li>{{ item }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- TYPICAL OUTPUTS -->
+  {% if m.outputs.size > 0 %}
+  <div class="section" id="outputs">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#ede9fe;color:#7c3aed;"><i data-lucide="log-out"></i></div>
+      <h2>Typical outputs</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <ul>{% for item in m.outputs %}<li>{{ item }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- TOOLS & SOURCES -->
+  {% if m.tools or m.sources %}
+  <div class="section" id="tools">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#e0e7ff;color:#4f46e5;"><i data-lucide="wrench"></i></div>
+      <h2>Tools &amp; sources</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      {% if m.tools %}<p><strong>Common tools:</strong> {{ m.tools }}</p>{% endif %}
+      {% if m.sources %}<p><strong>Key sources:</strong> {{ m.sources }}</p>{% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- CASE STUDIES & TOOLS TABLE (from mapping) -->
+  {% assign mappings = site.data.model-mapping | where: "model_slug", m_slug %}
+  {% if mappings.size > 0 %}
+  <div class="section" id="case-studies">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#f0fdf4;color:#16a34a;"><i data-lucide="book-open"></i></div>
+      <h2>Where these models are used</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:1.5rem;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border);text-align:left;">
+            <th style="padding:0.6rem 0.75rem;">Case Study</th>
+            <th style="padding:0.6rem 0.75rem;">Tool / Model</th>
+            <th style="padding:0.6rem 0.75rem;">What it does</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mm in mappings %}
+            {% for study in site.case_studies %}
+              {% if study.slug == mm.case_study_slug %}
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:0.6rem 0.75rem;"><a href="{{ study.url | relative_url }}" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ study.card.short_title }}</a></td>
+            <td style="padding:0.6rem 0.75rem;color:var(--muted);">{{ mm.tool }}</td>
+            <td style="padding:0.6rem 0.75rem;color:var(--muted);">{{ mm.what_it_does }}</td>
+          </tr>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Case study cards -->
+      <div class="studies-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));">
+      {% assign seen_cs = "" %}
+      {% for mm in mappings %}
+        {% unless seen_cs contains mm.case_study_slug %}
+          {% for study in site.case_studies %}
+            {% if study.slug == mm.case_study_slug %}
+        <a href="{{ study.url | relative_url }}" class="study-card">
+          <div class="study-card-banner" style="background:{{ study.card.banner_gradient }};" aria-hidden="true"></div>
+          <div class="study-card-body">
+            <div class="study-card-category">{{ study.card.category }}</div>
+            <div class="study-card-title">{{ study.card.short_title }}</div>
+            <div class="study-card-desc">{{ study.card.short_desc }}</div>
+          </div>
+          <div class="study-card-footer"><span>{{ study.card.footer_text }}</span></div>
+        </a>
+            {% endif %}
+          {% endfor %}
+          {% assign seen_cs = seen_cs | append: mm.case_study_slug | append: "," %}
+        {% endunless %}
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- RELATED USE CASES -->
+  {% assign all_ucs = "" %}
+  {% for mm in mappings %}
+    {% for uc_slug in mm.use_case_slugs %}
+      {% unless all_ucs contains uc_slug %}
+        {% if all_ucs == "" %}{% assign all_ucs = uc_slug %}{% else %}{% assign all_ucs = all_ucs | append: "," | append: uc_slug %}{% endif %}
+      {% endunless %}
+    {% endfor %}
+  {% endfor %}
+  {% assign uc_list = all_ucs | split: "," %}
+
+  {% if uc_list.size > 0 %}
+  <div class="section" id="use-cases">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#fce7f3;color:#db2777;"><i data-lucide="compass"></i></div>
+      <h2>Related use cases</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:0.75rem;">Decisions these models support:</p>
+      <ul>
+      {% for us in uc_list %}
+        {% for uc in site.data.use-cases %}
+          {% if uc.slug == us %}
+        <li><a href="{{ '/use-cases/' | append: uc.slug | append: '.html' | relative_url }}" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ uc.use_case }}</a> &mdash; {{ uc.what | truncate: 100 }}</li>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
+</main>

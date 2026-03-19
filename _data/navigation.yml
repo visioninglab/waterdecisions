@@ -23,6 +23,11 @@
   icon: "book-open"
   id: "case-studies"
 
+- label: "Models"
+  url: "/models/index.html"
+  icon: "cpu"
+  id: "models"
+
 - label: "Assessment"
   url: "/assessment.html"
   icon: "clipboard-check"

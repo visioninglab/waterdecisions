@@ -1,0 +1,154 @@
+# ============================================================
+#  Model ↔ Case Study ↔ Use Case mapping
+# ============================================================
+
+# Leakage & Loss Models
+- model_slug: leakage-loss
+  case_study_slug: uk-thames-tideway
+  tool: "InfoWorks ICM"
+  what_it_does: "Simulates sewer flows, CSO events, and storage capacity"
+  use_case_slugs: [collect-data, sewage-overflow]
+
+- model_slug: leakage-loss
+  case_study_slug: singapore-dtss
+  tool: "Integrated sewer network models"
+  what_it_does: "Optimises conveyance and treatment capacity"
+  use_case_slugs: [collect-data, sewage-overflow]
+
+# Supply-Demand Balance Models
+- model_slug: supply-demand
+  case_study_slug: singapore-newater
+  tool: "Whole-of-system water resource model"
+  what_it_does: "Balances supply, demand, reuse, and desalination"
+  use_case_slugs: [balance-supply, plan-supply]
+
+- model_slug: supply-demand
+  case_study_slug: australia-melbourne-conservation
+  tool: "REALM (Resource Allocation Model)"
+  what_it_does: "Simulates supply-demand under drought scenarios"
+  use_case_slugs: [balance-supply, reduce-demand]
+
+- model_slug: supply-demand
+  case_study_slug: southafrica-capetown-dayzero
+  tool: "WCWSS system model"
+  what_it_does: "Models drought scenarios and supply constraints"
+  use_case_slugs: [manage-reservoir, reduce-demand]
+
+- model_slug: supply-demand
+  case_study_slug: israel-desalination
+  tool: "National water balance model"
+  what_it_does: "Plans desalination capacity against national demand"
+  use_case_slugs: [plan-supply, produce-alternative]
+
+- model_slug: supply-demand
+  case_study_slug: uk-beckton-desal
+  tool: "Reverse osmosis system models"
+  what_it_does: "Simulates energy use and output for drought activation"
+  use_case_slugs: [produce-alternative, plan-supply]
+
+# Flood & Hydrological Models
+- model_slug: flood-hydrological
+  case_study_slug: uk-thames-barrier
+  tool: "Thames Estuary flood forecasting system"
+  what_it_does: "Predicts surge and tide conditions to trigger barrier closure"
+  use_case_slugs: [forecast-flood, operate-flood-defences]
+
+- model_slug: flood-hydrological
+  case_study_slug: netherlands-delta
+  tool: "Delft-FEWS / SOBEK"
+  what_it_does: "Forecasting and scenario modelling for national flood risk"
+  use_case_slugs: [forecast-flood, monitor-water-levels]
+
+- model_slug: flood-hydrological
+  case_study_slug: bangladesh-flood-warning
+  tool: "Delft-FEWS / regional flood models"
+  what_it_does: "Predicts river flooding and issues 5&ndash;10 day warnings"
+  use_case_slugs: [forecast-flood, monitor-water-levels]
+
+- model_slug: flood-hydrological
+  case_study_slug: japan-tokyo-flood
+  tool: "Urban flood routing models"
+  what_it_does: "Simulates extreme rainfall and underground storage performance"
+  use_case_slugs: [operate-flood-defences, forecast-flood]
+
+- model_slug: flood-hydrological
+  case_study_slug: netherlands-room-river
+  tool: "WAQUA / SOBEK hydraulic models"
+  what_it_does: "Simulates river discharge and floodplain capacity"
+  use_case_slugs: [operate-flood-defences, forecast-flood]
+
+# Water Quality Models
+- model_slug: water-quality
+  case_study_slug: usa-flint-water
+  tool: "Lead and Copper Rule compliance models"
+  what_it_does: "Assesses lead contamination risk in distribution systems"
+  use_case_slugs: [detect-pollution]
+
+- model_slug: water-quality
+  case_study_slug: uk-thames-tideway
+  tool: "Thames water quality models"
+  what_it_does: "Tracks dissolved oxygen recovery from reduced CSO discharges"
+  use_case_slugs: [detect-pollution, sewage-overflow]
+
+- model_slug: water-quality
+  case_study_slug: spain-barcelona-reuse
+  tool: "Integrated urban water cycle models"
+  what_it_does: "Models reuse flows and water quality compliance"
+  use_case_slugs: [treat-reuse, detect-pollution]
+
+- model_slug: water-quality
+  case_study_slug: australia-murray-darling
+  tool: "River system water quality models"
+  what_it_does: "Tracks salinity, nutrients, and ecological health"
+  use_case_slugs: [detect-pollution, allocate-resources]
+
+# Allocation & Governance Models
+- model_slug: allocation-governance
+  case_study_slug: australia-murray-darling
+  tool: "eWater Source / basin allocation models"
+  what_it_does: "Allocates water across regions, users, and environment"
+  use_case_slugs: [allocate-resources]
+
+- model_slug: allocation-governance
+  case_study_slug: pakistan-indus-irrigation
+  tool: "Canal system simulation models"
+  what_it_does: "Distributes water across agricultural users and provinces"
+  use_case_slugs: [allocate-resources, transfer-water]
+
+- model_slug: allocation-governance
+  case_study_slug: usa-california-sgma
+  tool: "MODFLOW / C2VSim groundwater models"
+  what_it_does: "Models groundwater sustainability under extraction limits"
+  use_case_slugs: [allocate-resources, monitor-water-levels]
+
+# Infrastructure & Asset Models
+- model_slug: infrastructure-asset
+  case_study_slug: singapore-dtss
+  tool: "Asset management and tunnel monitoring systems"
+  what_it_does: "Monitors 206 km tunnel integrity and treatment plant performance"
+  use_case_slugs: [collect-data]
+
+- model_slug: infrastructure-asset
+  case_study_slug: singapore-marina-barrage
+  tool: "Gate and pump control systems"
+  what_it_does: "Manages 9 crest gates and 7 drainage pumps"
+  use_case_slugs: [operate-flood-defences, manage-reservoir]
+
+# Integrated / Digital Twin Models
+- model_slug: integrated-digital-twin
+  case_study_slug: singapore-dtss
+  tool: "Changi WRP digital twin"
+  what_it_does: "Real-time simulation of whole plant process with 1,200+ data streams"
+  use_case_slugs: [collect-data, balance-supply]
+
+- model_slug: integrated-digital-twin
+  case_study_slug: netherlands-delta
+  tool: "Deltares integrated flood-freshwater models"
+  what_it_does: "Combines flood, freshwater, and climate scenarios nationally"
+  use_case_slugs: [forecast-flood, plan-supply]
+
+- model_slug: integrated-digital-twin
+  case_study_slug: china-south-north-transfer
+  tool: "SCADA and automated canal control"
+  what_it_does: "Manages 1,432 km gravity canal with automated gate systems"
+  use_case_slugs: [transfer-water, balance-supply]

@@ -1,0 +1,153 @@
+# ============================================================
+#  System Models — how water systems behave over time
+# ============================================================
+
+- slug: leakage-loss
+  model: "Leakage &amp; loss models"
+  category: Infrastructure
+  what: "Models that estimate how much water is lost through leaks in the distribution network and how this changes over time under different repair and renewal strategies."
+  used_for:
+    - Setting leakage reduction targets
+    - Testing the impact of monitoring and repair strategies
+    - Comparing baseline vs accelerated improvement scenarios
+  inputs:
+    - Baseline leakage (megalitres per day)
+    - Pipe repair rates
+    - Asset renewal rates
+    - Leak detection speed
+  outputs:
+    - Leakage trajectory over time
+    - Target compliance forecasts
+    - Cost-benefit of intervention options
+  tools: "IWA water balance methodology, Ofwat performance frameworks, SCADA leak detection analytics"
+  sources: "International Water Association (IWA), Ofwat, Environment Agency"
+
+- slug: supply-demand
+  model: "Supply&ndash;demand balance models"
+  category: Planning
+  what: "Models that compare total water supply capacity against projected demand under different scenarios including population growth, climate change, and new infrastructure."
+  used_for:
+    - Identifying future supply shortages
+    - Planning new infrastructure investment
+    - Testing demand reduction strategies
+    - Comparing supply diversification options
+  inputs:
+    - Population growth projections
+    - Per capita consumption trends
+    - Climate impact on rainfall and runoff
+    - New supply source capacity
+  outputs:
+    - Supply deficit or surplus over time
+    - Infrastructure requirements and timing
+    - Scenario comparisons (dry year, climate change, growth)
+  tools: "WRMP modelling frameworks, REALM (Australia), system simulation models"
+  sources: "Environment Agency National Framework, OECD, national water resource plans"
+
+- slug: flood-hydrological
+  model: "Flood &amp; hydrological models"
+  category: Flooding
+  what: "Models that simulate how water moves through rivers, catchments, and coastal systems &mdash; predicting where and when flooding will occur and how severe it will be."
+  used_for:
+    - Forecasting flood events hours to days ahead
+    - Issuing early warnings to communities
+    - Designing flood protection infrastructure
+    - Assessing climate change impacts on flood risk
+  inputs:
+    - Rainfall (observed and forecast)
+    - River flow and level data
+    - Sea level and tidal predictions
+    - Catchment characteristics (soil, slope, land use)
+  outputs:
+    - Flood forecasts with lead times
+    - Inundation maps showing affected areas
+    - Risk levels and return periods
+    - Barrier closure triggers
+  tools: "Delft-FEWS, SOBEK, MIKE, InfoWorks ICM, HEC-RAS"
+  sources: "Deltares, Environment Agency, Met Office, WMO"
+
+- slug: water-quality
+  model: "Water quality models"
+  category: Environment
+  what: "Models that simulate how pollutants move through water systems and affect quality &mdash; predicting whether water meets safety standards for drinking, bathing, or ecosystem health."
+  used_for:
+    - Assessing compliance with drinking water and bathing water standards
+    - Predicting pollution events from sewage overflows or spills
+    - Evaluating treatment plant performance
+    - Tracking long-term environmental trends
+  inputs:
+    - Pollutant concentrations (nutrients, metals, bacteria)
+    - Flow rates and dilution
+    - Temperature and dissolved oxygen
+    - Treatment process parameters
+  outputs:
+    - Water quality status and classification
+    - Compliance with regulatory standards
+    - Pollution risk forecasts
+    - Treatment optimisation recommendations
+  tools: "QUAL2K, WASP, InfoWorks WQ, process simulation models"
+  sources: "Environment Agency, EPA, European Environment Agency, WHO"
+
+- slug: allocation-governance
+  model: "Allocation &amp; governance models"
+  category: Planning
+  what: "Models that distribute available water across regions, sectors, or users &mdash; balancing the competing needs of agriculture, cities, industry, and the environment."
+  used_for:
+    - Balancing competing demands during scarcity
+    - Supporting policy decisions on water rights
+    - Managing basin-scale water systems
+    - Evaluating water trading and market mechanisms
+  inputs:
+    - Total water availability
+    - Demand by sector (agriculture, urban, industrial, environmental)
+    - Policy rules and entitlements
+    - Environmental flow requirements
+  outputs:
+    - Allocation decisions by user and region
+    - System-wide trade-offs and impacts
+    - Scenario analysis for drought or growth
+  tools: "Basin allocation models, eWater Source, C2VSim, water accounting frameworks"
+  sources: "Murray-Darling Basin Authority, World Bank, FAO"
+
+- slug: infrastructure-asset
+  model: "Infrastructure &amp; asset models"
+  category: Infrastructure
+  what: "Models that simulate the performance and deterioration of physical water infrastructure over time &mdash; predicting when pipes, pumps, and treatment works will fail and when to replace them."
+  used_for:
+    - Predicting pipe failures and bursts
+    - Planning maintenance schedules
+    - Optimising asset replacement investment
+    - Assessing network capacity under growth
+  inputs:
+    - Asset age, material, and condition
+    - Historical failure rates
+    - Operating conditions (pressure, flow, soil)
+    - Replacement costs
+  outputs:
+    - Failure risk and probability
+    - Optimal maintenance schedules
+    - Investment priority rankings
+    - Network capacity assessments
+  tools: "Asset management systems, GIS-based deterioration models, KANEW pipe cohort models"
+  sources: "UK Water Industry Research, AWWA, ISO 55000"
+
+- slug: integrated-digital-twin
+  model: "Integrated system &amp; digital twin models"
+  category: Integrated
+  what: "Models that combine multiple parts of the water system &mdash; supply, demand, infrastructure, and environment &mdash; into a single simulation, often fed by real-time sensor data."
+  used_for:
+    - System-wide optimisation across supply sources
+    - Real-time decision support during events
+    - Testing complex &ldquo;what if&rdquo; scenarios
+    - Long-term strategic planning
+  inputs:
+    - Supply, demand, infrastructure, and environmental data
+    - Real-time sensor feeds (SCADA, IoT)
+    - Weather forecasts and climate projections
+    - Policy and operational constraints
+  outputs:
+    - System performance under multiple scenarios
+    - Optimisation recommendations
+    - Early warning of emerging risks
+    - Investment planning insights
+  tools: "Digital twin platforms, Deltares integrated models, PUB Smart Water Grid"
+  sources: "Deltares, PUB Singapore, National Infrastructure Commission"

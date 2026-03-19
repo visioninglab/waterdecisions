@@ -1,0 +1,142 @@
+---
+layout: default
+title: "System Models"
+description: "System models describe how water systems behave over time under different conditions — from leakage trajectories to flood forecasts and supply-demand scenarios."
+nav_active: models
+footer_text: "Water Decisions &bull; System Models &bull; Last updated March 2026"
+---
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1>System Models</h1>
+    <p class="hero-subtitle">How water systems behave over time under different conditions &mdash; the analytical layer that turns options into outcomes.</p>
+  </div>
+</div>
+
+<main class="page-content">
+
+  <!-- INTRO -->
+  <div class="intro-text">
+    <p>System models describe how water infrastructure performs under different scenarios. They help answer questions such as:</p>
+    <ul>
+      <li>What happens if demand increases by 20%?</li>
+      <li>How fast must leakage reduce to meet targets?</li>
+      <li>What happens to supply under a 1-in-200-year drought?</li>
+      <li>Which combination of interventions actually meets the goal?</li>
+    </ul>
+    <p>Models sit alongside the other parts of this site:</p>
+    <div style="background:var(--sidebar-bg);border-radius:8px;padding:1rem 1.25rem;margin:1rem 0;font-size:14.5px;line-height:1.8;">
+      <a href="../use-cases/index.html" style="color:var(--accent);font-weight:600;">Use cases</a> &rarr; what needs to be done<br>
+      <a href="../decision-patterns/index.html" style="color:var(--accent);font-weight:600;">Decision patterns</a> &rarr; how it is done<br>
+      <a href="../case-studies/index.html" style="color:var(--accent);font-weight:600;">Case studies</a> &rarr; where it has been done<br>
+      <strong>Models</strong> &rarr; how the system behaves over time
+    </div>
+  </div>
+
+  <!-- HOW TO USE -->
+  <div style="background:var(--sidebar-bg);border-radius:8px;padding:1rem 1.25rem;margin-bottom:2rem;font-size:14px;color:var(--muted);line-height:1.6;">
+    <strong style="color:var(--ink);">How to use this page:</strong> Start here if you want to understand system performance and outcomes. Each model category explains what the models do, what data goes in, and what comes out. Follow links to see related use cases (what decisions they support) and case studies (where they have been applied).
+  </div>
+
+  <!-- STATS -->
+  <div class="overview-stats" role="region" aria-label="Model statistics">
+    <div class="overview-stat">
+      <i data-lucide="cpu" class="overview-stat-icon"></i>
+      <div class="overview-stat-num">{{ site.data.models | size }}</div>
+      <div class="overview-stat-label">Model Types</div>
+    </div>
+    <div class="overview-stat">
+      <i data-lucide="book-open" class="overview-stat-icon"></i>
+      <div class="overview-stat-num">{{ site.data.model-mapping | size }}</div>
+      <div class="overview-stat-label">Model&ndash;Case Links</div>
+    </div>
+    <div class="overview-stat">
+      <i data-lucide="target" class="overview-stat-icon"></i>
+      <div class="overview-stat-num">{{ site.data.use-cases | size }}</div>
+      <div class="overview-stat-label">Use Cases</div>
+    </div>
+    <div class="overview-stat">
+      <i data-lucide="git-branch" class="overview-stat-icon"></i>
+      <div class="overview-stat-num">{{ site.data.decision-patterns | size }}</div>
+      <div class="overview-stat-label">Decision Patterns</div>
+    </div>
+  </div>
+
+  <!-- MODEL CARDS -->
+  <style>
+    .mod-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1.25rem; margin-bottom:2.5rem; }
+    .mod-card { border:1px solid var(--border); border-radius:8px; background:var(--card-bg); overflow:hidden; display:flex; flex-direction:column; transition:box-shadow 0.2s,transform 0.15s; text-decoration:none; color:inherit; }
+    .mod-card:hover { box-shadow:var(--card-hover-shadow); transform:translateY(-2px); }
+    .mod-card-accent { height:4px; }
+    .mod-card-body { padding:1.25rem 1.5rem; flex:1; }
+    .mod-card-name { font-family:'Playfair Display',Georgia,serif; font-size:17px; font-weight:700; margin-bottom:0.5rem; color:var(--ink); }
+    .mod-card:hover .mod-card-name { color:var(--accent); }
+    .mod-card-what { font-size:13.5px; color:var(--muted); line-height:1.55; margin-bottom:0.75rem; }
+    .mod-card-list { font-size:13px; color:var(--ink); line-height:1.55; padding-left:1.25rem; margin:0; }
+    .mod-card-list li { margin-bottom:0.2rem; }
+    .mod-card-footer { border-top:1px solid var(--border); padding:0.6rem 1.5rem; font-size:12px; color:var(--muted); display:flex; gap:1rem; flex-wrap:wrap; }
+    .mod-card-footer span { display:flex; align-items:center; gap:4px; }
+    .mod-cat-badge { display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; padding:3px 10px; border-radius:100px; margin-bottom:0.5rem; }
+  </style>
+
+  <h2 style="font-family:'Playfair Display',Georgia,serif;margin-bottom:1rem;">Model Categories</h2>
+
+  <div class="mod-grid">
+    {% for m in site.data.models %}
+      {% assign mappings = site.data.model-mapping | where: "model_slug", m.slug %}
+      {% assign cs_count = 0 %}
+      {% assign seen = "" %}
+      {% for mm in mappings %}
+        {% unless seen contains mm.case_study_slug %}{% assign cs_count = cs_count | plus: 1 %}{% assign seen = seen | append: mm.case_study_slug | append: "," %}{% endunless %}
+      {% endfor %}
+
+      {% case m.category %}
+        {% when "Flooding" %}{% assign cat_color = "#0284c7" %}
+        {% when "Planning" %}{% assign cat_color = "#7c3aed" %}
+        {% when "Infrastructure" %}{% assign cat_color = "#059669" %}
+        {% when "Environment" %}{% assign cat_color = "#d97706" %}
+        {% when "Integrated" %}{% assign cat_color = "#dc2626" %}
+        {% else %}{% assign cat_color = "#6e7178" %}
+      {% endcase %}
+
+    <a href="{{ m.slug }}.html" class="mod-card">
+      <div class="mod-card-accent" style="background:{{ cat_color }};"></div>
+      <div class="mod-card-body">
+        <div class="mod-cat-badge" style="color:{{ cat_color }};background:{{ cat_color }}15;">{{ m.category }}</div>
+        <div class="mod-card-name">{{ m.model }}</div>
+        <div class="mod-card-what">{{ m.what | truncate: 160 }}</div>
+        <ul class="mod-card-list">
+          {% for item in m.used_for limit:3 %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="mod-card-footer">
+        <span><i data-lucide="book-open" style="width:13px;height:13px;"></i> {{ cs_count }} case stud{% if cs_count != 1 %}ies{% else %}y{% endif %}</span>
+        <span><i data-lucide="log-in" style="width:13px;height:13px;"></i> {{ m.inputs | size }} inputs</span>
+        <span><i data-lucide="log-out" style="width:13px;height:13px;"></i> {{ m.outputs | size }} outputs</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+  <!-- KEY TAKEAWAY -->
+  <div style="background:linear-gradient(135deg,#f0fdf4,#e0f2fe);border:1px solid var(--border);border-radius:8px;padding:1.5rem 2rem;margin-bottom:2.5rem;">
+    <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;margin-bottom:0.75rem;">Models turn options into outcomes</h3>
+    <p style="font-size:14.5px;color:var(--muted);line-height:1.6;margin:0;">
+      <strong style="color:var(--ink);">Use cases</strong> describe what needs to be done.
+      <strong style="color:var(--ink);">Decision patterns</strong> describe possible solutions.
+      <strong style="color:var(--ink);">Case studies</strong> show real examples.
+      <strong style="color:var(--ink);">Models</strong> show what will happen over time.
+    </p>
+  </div>
+
+  <!-- EXPLORE BY TYPE -->
+  <h2 style="font-family:'Playfair Display',Georgia,serif;margin-bottom:0.75rem;">Explore by model type</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;">
+    {% for m in site.data.models %}
+    <a href="{{ m.slug }}.html" style="font-size:13px;padding:6px 16px;border-radius:100px;border:1px solid var(--border);color:var(--accent);text-decoration:none;font-weight:500;background:var(--card-bg);transition:all 0.15s;">{{ m.model }}</a>
+    {% endfor %}
+  </div>
+
+</main>
