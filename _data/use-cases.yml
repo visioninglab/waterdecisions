@@ -1,0 +1,155 @@
+# ============================================================
+#  Use Cases — actions and decisions in water infrastructure
+# ============================================================
+# Categories map to the resilience lifecycle:
+#   Monitor  → continuous situational awareness (BEFORE)
+#   Forecast → predicting what will happen next (BEFORE)
+#   Operate  → running infrastructure day-to-day (DURING)
+#   Respond  → reacting to events and emergencies (DURING/AFTER)
+#   Allocate → distributing and planning resources (LONG-TERM)
+# ============================================================
+
+# ── MONITOR ──────────────────────────────────────────────────
+
+- slug: monitor-water-levels
+  use_case: "Monitor river and reservoir levels"
+  category: Monitor
+  what: "Continuously measure water levels in rivers, reservoirs, and aquifers so that operators have an up-to-date picture of the system."
+  when: "Runs 24/7 as a background process. Data becomes critical during storms, droughts, and when making abstraction or release decisions."
+  data: "Automated level sensors, rain gauges, satellite altimetry, and historical baseline data."
+  decision: "Are levels rising dangerously or falling below safe thresholds?"
+  action: "Feed data into flood or drought models; trigger alerts when thresholds are breached; inform reservoir release decisions."
+
+- slug: collect-data
+  use_case: "Collect real-time system data"
+  category: Monitor
+  what: "Gather continuous readings from sensors across the water network — pressure, flow, quality, and equipment status — into a central platform."
+  when: "Continuous. Essential for detecting leaks, bursts, contamination, and equipment failures as they happen rather than days later."
+  data: "IoT sensors, SCADA telemetry, pressure loggers, flow meters, water quality probes."
+  decision: "Is the data within normal ranges? Are there anomalies?"
+  action: "Store for analysis; raise automated alarms for anomalies; feed into dashboards and predictive models."
+
+- slug: detect-pollution
+  use_case: "Detect pollution events in waterways"
+  category: Monitor
+  what: "Identify contamination of rivers, lakes, or coastal waters from sewage, industrial discharge, agricultural runoff, or accidental spills."
+  when: "Triggered by sensor anomalies (dissolved oxygen drops, turbidity spikes) or public reports. Urgent during rainfall events when runoff is highest."
+  data: "Water quality sensors (dissolved oxygen, ammonia, turbidity, pH), sampling results, upstream discharge data."
+  decision: "Is pollution present? What is the source? Is it getting worse?"
+  action: "Trigger incident response; notify the environment regulator; issue public health warnings if bathing or drinking water is affected."
+
+# ── FORECAST ─────────────────────────────────────────────────
+
+- slug: forecast-flood
+  use_case: "Forecast flood risk ahead of events"
+  category: Forecast
+  what: "Use weather forecasts, river data, and hydrological models to predict where and when flooding will occur, giving communities time to prepare."
+  when: "Activated when weather forecasts indicate heavy rainfall, storm surges, or rapid snowmelt. Lead times range from hours to 10 days."
+  data: "Weather radar, numerical weather predictions, upstream river levels, soil moisture, tidal forecasts, historical flood data."
+  decision: "Is flooding likely? Where? When? How severe?"
+  action: "Issue flood warnings; pre-position emergency resources; close flood barriers; advise evacuation where necessary."
+
+- slug: plan-supply
+  use_case: "Plan long-term water supply"
+  category: Forecast
+  what: "Assess whether current water sources will meet future demand given population growth, climate change, and infrastructure ageing — and identify what new investment is needed."
+  when: "Strategic planning cycle, typically every 5–25 years. Triggered by drought events, population projections, or policy changes."
+  data: "Population and demand forecasts, climate projections, infrastructure condition assessments, cost models."
+  decision: "Is supply sufficient for the next 25–50 years? If not, what combination of new sources, efficiency, and demand management is optimal?"
+  action: "Develop a water resources management plan; secure funding; commission new infrastructure or programmes."
+
+# ── OPERATE ──────────────────────────────────────────────────
+
+- slug: operate-flood-defences
+  use_case: "Operate flood defences during events"
+  category: Operate
+  what: "Decide when to close barriers, activate pumps, open sluices, or divert floodwater through emergency channels during a flood event."
+  when: "When river levels, tides, or storm surges exceed trigger thresholds. Decisions often needed within hours, sometimes minutes."
+  data: "Real-time water levels, surge forecasts, barrier status, downstream capacity, shipping schedules."
+  decision: "Close the barrier now or wait? Activate pumps? Divert flow?"
+  action: "Close barriers; start pumps; open overflow channels; coordinate with shipping and upstream operators."
+
+- slug: balance-supply
+  use_case: "Balance supply across multiple sources"
+  category: Operate
+  what: "Coordinate between reservoirs, groundwater, desalination, and recycled water to meet daily demand reliably while minimising cost and energy."
+  when: "Continuous operational decision. Becomes critical during droughts when some sources are restricted or during peak summer demand."
+  data: "Reservoir levels, treatment plant capacity, demand forecasts, energy prices, source water quality."
+  decision: "Which sources to draw from today? How much from each?"
+  action: "Adjust abstraction rates, treatment plant throughput, and distribution routing to balance supply with demand."
+
+- slug: manage-reservoir
+  use_case: "Manage reservoir storage and releases"
+  category: Operate
+  what: "Decide how much water to store and how much to release from reservoirs, balancing supply security, flood capacity, hydropower, and downstream environmental needs."
+  when: "Ongoing. Critical during transitions between wet and dry seasons, before expected storms, and during prolonged droughts."
+  data: "Reservoir levels and inflow rates, weather forecasts, downstream demand, environmental flow requirements, flood storage rules."
+  decision: "Store water for later or release it now? How much flood capacity to maintain?"
+  action: "Adjust outlet valves and spillway gates; coordinate with downstream users and environmental agencies."
+
+- slug: treat-reuse
+  use_case: "Treat wastewater for safe reuse"
+  category: Operate
+  what: "Take treated sewage effluent through additional advanced treatment to produce water safe for irrigation, industry, aquifer recharge, or indirect drinking supply."
+  when: "Continuous at treatment plants. Demand is highest during droughts when conventional sources are stressed."
+  data: "Influent quality, membrane performance, pathogen monitoring, product water quality tests, demand from reuse customers."
+  decision: "Does the treated water meet the required quality standard for its intended use?"
+  action: "Release to reuse distribution network; divert to further treatment if quality is below standard; adjust membrane or UV dosing."
+
+- slug: produce-alternative
+  use_case: "Produce water from alternative sources"
+  category: Operate
+  what: "Activate desalination plants or other non-conventional supply sources to supplement supply during shortages."
+  when: "When conventional sources fall below critical levels. Some plants run continuously; others operate on standby and activate during droughts."
+  data: "Reservoir levels, demand forecasts, intake water quality (salinity, temperature), energy availability and cost."
+  decision: "Activate the plant? At what capacity?"
+  action: "Start or ramp up desalination production; blend output into the distribution network; monitor energy consumption and brine discharge."
+
+# ── RESPOND ──────────────────────────────────────────────────
+
+- slug: sewage-overflow
+  use_case: "Detect and report sewage overflows"
+  category: Respond
+  what: "Identify when combined sewer overflows (CSOs) discharge untreated sewage into rivers or coastal waters, log the event, and notify regulators."
+  when: "During and after heavy rainfall that overwhelms sewer capacity. In the UK, water companies must now monitor and report all storm overflow events."
+  data: "Flow sensors at CSO outfalls, rainfall data, sewer level monitors, event duration and volume logs."
+  decision: "Is an overflow occurring? How long has it lasted? Does it breach permit conditions?"
+  action: "Log the event; notify the environment regulator; publish data for public transparency; trigger post-event investigation."
+
+- slug: reduce-demand
+  use_case: "Reduce water demand during shortages"
+  category: Respond
+  what: "Implement restrictions, campaigns, and pricing measures to cut water consumption when supply is running low."
+  when: "When reservoir levels or aquifer levels fall below trigger thresholds, typically during drought. Escalating stages of restriction may apply."
+  data: "Reservoir levels, per-capita consumption data, weather forecasts, leak rates, compliance monitoring."
+  decision: "What level of restriction is needed? Voluntary or mandatory? For how long?"
+  action: "Impose hosepipe bans or usage limits; launch public awareness campaigns; increase tariffs; deploy enforcement; accelerate leak repairs."
+
+# ── ALLOCATE ─────────────────────────────────────────────────
+
+- slug: allocate-resources
+  use_case: "Allocate water between competing users"
+  category: Allocate
+  what: "Distribute available water fairly between agriculture, cities, industry, and the environment when there is not enough for everyone."
+  when: "Ongoing governance challenge. Becomes acute during droughts or when a new major user (city, farm, mine) enters the system."
+  data: "Total available water, licensed entitlements, actual usage metering, environmental flow requirements, economic value of water uses."
+  decision: "Who gets how much water? Should allocations be reduced? Should water trading be used to reallocate?"
+  action: "Set seasonal allocations; enforce extraction limits; enable water trading; protect minimum environmental flows."
+
+- slug: rural-supply
+  use_case: "Provide water to remote communities"
+  category: Allocate
+  what: "Ensure that rural and remote communities have access to safe drinking water, typically using low-cost, locally maintainable technology."
+  when: "When communities lack piped supply. Ongoing need for maintenance and source protection as climate and demand change."
+  data: "Local spring or borehole yields, water quality tests, community population and demand, maintenance fund status."
+  decision: "Is the source adequate and safe? Can the community maintain the system? Is a new or upgraded source needed?"
+  action: "Protect spring sources; build or repair gravity-fed pipe networks; train community water committees; fund maintenance."
+
+- slug: transfer-water
+  use_case: "Transfer water between regions"
+  category: Allocate
+  what: "Move large volumes of water from a water-rich region to a water-scarce one through canals, tunnels, or pipelines."
+  when: "When regional water imbalance is chronic and local sources cannot meet demand. Typically a strategic national decision with decades-long implementation."
+  data: "Donor and recipient basin hydrology, population and demand projections, environmental impact assessments, construction feasibility."
+  decision: "Is transfer justified? What route? How much? What compensation for the donor region?"
+  action: "Build transfer infrastructure (canals, tunnels, dams); negotiate transboundary or inter-regional agreements; monitor donor basin impacts."

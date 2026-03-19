@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Use Cases"
-description: "Operational scenarios where water infrastructure decisions must be made, linked to decision patterns and real-world case studies."
+description: "15 operational scenarios where water infrastructure decisions must be made — what triggers them, what data is used, and what action follows."
 nav_active: use-cases
 footer_text: "Water Decisions &bull; Use Cases &bull; Last updated March 2026"
 ---
@@ -9,16 +9,34 @@ footer_text: "Water Decisions &bull; Use Cases &bull; Last updated March 2026"
 <div class="hero">
   <div class="hero-inner">
     <h1>Use Cases</h1>
-    <p class="hero-subtitle">Operational scenarios where water infrastructure decisions must be made &mdash; each linked to <a href="../decision-patterns/index.html" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">decision patterns</a> and <a href="../case-studies/index.html" style="color:#fff;text-decoration:underline;text-underline-offset:2px;">case studies</a>.</p>
+    <p class="hero-subtitle">Actions and decisions in water infrastructure &mdash; the operational scenarios where someone must decide what to do, and act on it.</p>
   </div>
 </div>
 
 <main class="page-content">
+
+  <!-- INTRO -->
+  <div class="intro-text">
+    <p><strong>What is a use case?</strong> A use case describes a specific situation where a water professional needs to make a decision and take action. It answers five questions: <em>what is happening?</em>, <em>what triggers it?</em>, <em>what data is available?</em>, <em>what decision needs to be made?</em>, and <em>what action follows?</em></p>
+    <p>Each use case is linked to <a href="../decision-patterns/index.html" style="color:var(--accent);">decision patterns</a> (the proven strategies for handling it) and <a href="../case-studies/index.html" style="color:var(--accent);">case studies</a> (real places where these decisions have been made). Together they form a practical knowledge framework for water infrastructure resilience.</p>
+  </div>
+
+  <!-- HOW TO READ -->
+  <div style="background:var(--sidebar-bg);border-radius:8px;padding:1rem 1.25rem;margin-bottom:2rem;font-size:14px;color:var(--muted);line-height:1.6;">
+    <strong style="color:var(--ink);">How to read this page:</strong> Use cases are grouped by when they happen in the resilience lifecycle &mdash; from continuous monitoring, through forecasting and operations, to emergency response and long-term allocation. Click any card to see the full detail page with decision flow, related patterns, and case studies.
+  </div>
+
+  <!-- STATS -->
   <div class="overview-stats" role="region" aria-label="Use case statistics">
     <div class="overview-stat">
       <i data-lucide="target" class="overview-stat-icon"></i>
       <div class="overview-stat-num">{{ site.data.use-cases | size }}</div>
       <div class="overview-stat-label">Use Cases</div>
+    </div>
+    <div class="overview-stat">
+      <i data-lucide="layers" class="overview-stat-icon"></i>
+      <div class="overview-stat-num">5</div>
+      <div class="overview-stat-label">Categories</div>
     </div>
     <div class="overview-stat">
       <i data-lucide="git-branch" class="overview-stat-icon"></i>
@@ -32,24 +50,73 @@ footer_text: "Water Decisions &bull; Use Cases &bull; Last updated March 2026"
     </div>
   </div>
 
-  <table style="width:100%;border-collapse:collapse;font-size:14.5px;">
-    <thead>
-      <tr style="border-bottom:2px solid var(--border);text-align:left;">
-        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Use Case</th>
-        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Goal</th>
-        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Trigger</th>
-        <th style="padding:0.75rem 1rem;font-family:'Playfair Display',Georgia,serif;">Decision</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for uc in site.data.use-cases %}
-      <tr style="border-bottom:1px solid var(--border);">
-        <td style="padding:0.75rem 1rem;"><a href="{{ uc.slug }}.html" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ uc.use_case }}</a></td>
-        <td style="padding:0.75rem 1rem;color:var(--muted);font-size:13.5px;">{{ uc.goal }}</td>
-        <td style="padding:0.75rem 1rem;color:var(--muted);font-size:13.5px;">{{ uc.trigger }}</td>
-        <td style="padding:0.75rem 1rem;color:var(--muted);font-size:13.5px;">{{ uc.decision }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <style>
+    .uc-category { margin-bottom:2.5rem; }
+    .uc-category-title { font-family:'Playfair Display',Georgia,serif; font-size:1.3rem; margin-bottom:0.25rem; }
+    .uc-category-desc { color:var(--muted); font-size:14px; margin-bottom:1rem; }
+    .uc-card { border:1px solid var(--border); border-radius:8px; background:var(--card-bg); overflow:hidden; display:flex; flex-direction:column; transition:box-shadow 0.2s,transform 0.15s; text-decoration:none; color:inherit; }
+    .uc-card:hover { box-shadow:var(--card-hover-shadow); transform:translateY(-2px); }
+    .uc-card-accent { height:4px; }
+    .uc-card-body { padding:1.25rem 1.5rem; flex:1; }
+    .uc-card-name { font-family:'Playfair Display',Georgia,serif; font-size:17px; font-weight:700; margin-bottom:0.5rem; color:var(--ink); }
+    .uc-card:hover .uc-card-name { color:var(--accent); }
+    .uc-card-what { font-size:13.5px; color:var(--muted); line-height:1.55; margin-bottom:0.75rem; }
+    .uc-card-decision { font-size:13.5px; color:var(--ink); line-height:1.55; font-style:italic; }
+    .uc-card-footer { border-top:1px solid var(--border); padding:0.6rem 1.5rem; font-size:12px; color:var(--muted); display:flex; gap:1rem; flex-wrap:wrap; }
+    .uc-card-footer span { display:flex; align-items:center; gap:4px; }
+    .uc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.25rem; }
+    .uc-lifecycle { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; padding:3px 10px; border-radius:100px; margin-bottom:0.25rem; }
+  </style>
+
+  {% assign categories = "Monitor,Forecast,Operate,Respond,Allocate" | split: "," %}
+  {% assign cat_labels = "Monitor — continuous situational awareness,Forecast — predicting what happens next,Operate — running infrastructure day-to-day,Respond — reacting to events and emergencies,Allocate — distributing and planning resources" | split: "," %}
+  {% assign cat_descs = "Keeping a constant watch on the water system — levels, flows, quality, and equipment status — so problems are detected as they happen.|Using models and data to predict future conditions — floods, droughts, and long-term supply gaps — giving time to prepare.|The daily and hourly decisions involved in running water infrastructure: opening valves, balancing sources, treating water, and keeping the system flowing.|When something goes wrong — a sewage overflow, a drought, a contamination event — these are the decisions that limit damage and protect people.|Strategic decisions about who gets how much water, how to serve remote communities, and whether to move water between regions." | split: "," %}
+  {% assign cat_colors = "#0284c7,#7c3aed,#059669,#dc2626,#d97706" | split: "," %}
+  {% assign cat_timescales = "Continuous — before events,Before — hours to decades ahead,During — real-time operations,During and after events,Long-term planning" | split: "," %}
+
+  {% for cat in categories %}
+    {% assign cat_idx = forloop.index0 %}
+    {% assign cat_color = cat_colors[cat_idx] %}
+    {% assign cat_label = cat_labels[cat_idx] %}
+    {% assign cat_desc = cat_descs[cat_idx] %}
+    {% assign cat_time = cat_timescales[cat_idx] %}
+
+    {% assign ucs_in_cat = site.data.use-cases | where: "category", cat %}
+    {% if ucs_in_cat.size > 0 %}
+    <div class="uc-category">
+      <div class="uc-lifecycle" style="color:{{ cat_color }};background:{{ cat_color }}15;">{{ cat_time }}</div>
+      <h2 class="uc-category-title" style="color:{{ cat_color }};">{{ cat_label }}</h2>
+      <p class="uc-category-desc">{{ cat_desc }}</p>
+
+      <div class="uc-grid">
+        {% for uc in ucs_in_cat %}
+          {% assign dp_count = 0 %}
+          {% assign cs_count = 0 %}
+          {% assign seen_dps = "" %}
+          {% assign seen_css = "" %}
+          {% for m in site.data.use-case-mapping %}
+            {% if m.use_case_slug == uc.slug %}
+              {% unless seen_dps contains m.decision_pattern_slug %}{% assign dp_count = dp_count | plus: 1 %}{% assign seen_dps = seen_dps | append: m.decision_pattern_slug | append: "," %}{% endunless %}
+              {% unless seen_css contains m.case_study_slug %}{% assign cs_count = cs_count | plus: 1 %}{% assign seen_css = seen_css | append: m.case_study_slug | append: "," %}{% endunless %}
+            {% endif %}
+          {% endfor %}
+
+        <a href="{{ uc.slug }}.html" class="uc-card">
+          <div class="uc-card-accent" style="background:{{ cat_color }};"></div>
+          <div class="uc-card-body">
+            <div class="uc-card-name">{{ uc.use_case }}</div>
+            <div class="uc-card-what">{{ uc.what | truncate: 180 }}</div>
+            <div class="uc-card-decision">&ldquo;{{ uc.decision }}&rdquo;</div>
+          </div>
+          <div class="uc-card-footer">
+            <span><i data-lucide="git-branch" style="width:13px;height:13px;"></i> {{ dp_count }} pattern{% if dp_count != 1 %}s{% endif %}</span>
+            <span><i data-lucide="book-open" style="width:13px;height:13px;"></i> {{ cs_count }} case stud{% if cs_count != 1 %}ies{% else %}y{% endif %}</span>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+
 </main>

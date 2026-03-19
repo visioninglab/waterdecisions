@@ -10,30 +10,70 @@ layout: default
 <div class="hero">
   <div class="hero-inner">
     <h1>{{ uc.use_case }}</h1>
-    <p class="hero-subtitle">{{ uc.goal }}</p>
+    <p class="hero-subtitle">{{ uc.what | truncate: 200 }}</p>
   </div>
 </div>
 
 <main class="page-content narrow">
-  <p><a href="index.html" style="color:var(--accent);text-decoration:none;">&larr; Use Cases</a></p>
+  <p><a href="index.html" style="color:var(--accent);text-decoration:none;">&larr; Use Cases</a>
+  {% if uc.category %}<span style="margin-left:1rem;font-size:12px;padding:3px 10px;border-radius:100px;background:var(--sidebar-bg);color:var(--muted);font-weight:600;">{{ uc.category }}</span>{% endif %}</p>
 
-  <!-- DECISION FLOW -->
-  <div class="section" id="decision-flow">
+  <!-- WHAT IS THIS? -->
+  <div class="section" id="what">
     <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-icon" style="background:#e0f2fe;color:#0284c7;"><i data-lucide="git-branch"></i></div>
-      <h2>Decision Flow</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+      <div class="section-icon" style="background:#e0f2fe;color:#0284c7;"><i data-lucide="info"></i></div>
+      <h2>What is this?</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
     </div>
     <div class="section-body">
-      <table style="width:100%;font-size:14px;border-collapse:collapse;">
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 1rem;font-weight:600;color:var(--muted);width:120px;">Trigger</td><td style="padding:0.5rem 1rem;">{{ uc.trigger }}</td></tr>
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 1rem;font-weight:600;color:var(--muted);">Inputs</td><td style="padding:0.5rem 1rem;">{{ uc.inputs }}</td></tr>
-        <tr style="border-bottom:1px solid var(--border);"><td style="padding:0.5rem 1rem;font-weight:600;color:var(--muted);">Decision</td><td style="padding:0.5rem 1rem;">{{ uc.decision }}</td></tr>
-        <tr><td style="padding:0.5rem 1rem;font-weight:600;color:var(--muted);">Action</td><td style="padding:0.5rem 1rem;">{{ uc.action }}</td></tr>
-      </table>
+      <p>{{ uc.what }}</p>
     </div>
   </div>
 
-  <!-- RELATED DECISION PATTERNS (from mapping) -->
+  <!-- WHEN DOES IT HAPPEN? -->
+  <div class="section" id="when">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#fef3c7;color:#d97706;"><i data-lucide="clock"></i></div>
+      <h2>When does it happen?</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <p>{{ uc.when }}</p>
+    </div>
+  </div>
+
+  <!-- WHAT DATA IS USED? -->
+  <div class="section" id="data">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#d1fae5;color:#059669;"><i data-lucide="database"></i></div>
+      <h2>What data is used?</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <p>{{ uc.data }}</p>
+    </div>
+  </div>
+
+  <!-- WHAT DECISION IS MADE? -->
+  <div class="section" id="decision">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#ede9fe;color:#7c3aed;"><i data-lucide="help-circle"></i></div>
+      <h2>What decision is made?</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:1.1rem;font-style:italic;color:var(--ink);">&ldquo;{{ uc.decision }}&rdquo;</p>
+    </div>
+  </div>
+
+  <!-- WHAT ACTION FOLLOWS? -->
+  <div class="section" id="action">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-icon" style="background:#fee2e2;color:#dc2626;"><i data-lucide="zap"></i></div>
+      <h2>What action follows?</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+    </div>
+    <div class="section-body">
+      <p>{{ uc.action }}</p>
+    </div>
+  </div>
+
+  <!-- RELATED DECISION PATTERNS -->
   {% assign patterns = "" %}
   {% for m in site.data.use-case-mapping %}
     {% if m.use_case_slug == uc_slug %}
@@ -44,41 +84,48 @@ layout: default
   {% endfor %}
   {% assign pattern_slugs = patterns | split: "," %}
 
+  {% if pattern_slugs.size > 0 %}
   <div class="section" id="decision-patterns">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-icon" style="background:#ede9fe;color:#7c3aed;"><i data-lucide="layers"></i></div>
-      <h2>Related Decision Patterns</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+      <h2>Related decision patterns</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
     </div>
     <div class="section-body">
-      <ul>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:0.75rem;">Proven strategies for handling this scenario:</p>
       {% for ps in pattern_slugs %}
         {% for dp in site.data.decision-patterns %}
           {% if dp.slug == ps %}
-        <li><a href="../decision-patterns/{{ dp.slug }}.html" style="color:var(--accent);text-decoration:none;font-weight:600;">{{ dp.decision_pattern }}</a> &mdash; {{ dp.description }}</li>
+      <div class="principle-card" style="margin-bottom:0.75rem;">
+        <h4><a href="../decision-patterns/{{ dp.slug }}.html" style="color:var(--accent);text-decoration:none;">{{ dp.decision_pattern }}</a></h4>
+        <p>{{ dp.problem | truncate: 160 }}</p>
+      </div>
           {% endif %}
         {% endfor %}
       {% endfor %}
-      </ul>
     </div>
   </div>
+  {% endif %}
 
-  <!-- RELATED CASE STUDIES (from mapping, rendered as cards) -->
+  <!-- RELATED CASE STUDIES -->
+  {% assign cs_slugs = "" %}
+  {% for m in site.data.use-case-mapping %}
+    {% if m.use_case_slug == uc_slug %}
+      {% unless cs_slugs contains m.case_study_slug %}
+        {% if cs_slugs == "" %}{% assign cs_slugs = m.case_study_slug %}{% else %}{% assign cs_slugs = cs_slugs | append: "," | append: m.case_study_slug %}{% endif %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+  {% assign slug_list = cs_slugs | split: "," %}
+
+  {% if slug_list.size > 0 %}
   <div class="section" id="case-studies">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-icon" style="background:#f0fdf4;color:#16a34a;"><i data-lucide="book-open"></i></div>
-      <h2>Related Case Studies</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
+      <h2>Case studies</h2><span class="section-toggle"><i data-lucide="chevron-down" style="width:18px;height:18px;"></i></span>
     </div>
     <div class="section-body">
-      {% assign cs_slugs = "" %}
-      {% for m in site.data.use-case-mapping %}
-        {% if m.use_case_slug == uc_slug %}
-          {% unless cs_slugs contains m.case_study_slug %}
-            {% if cs_slugs == "" %}{% assign cs_slugs = m.case_study_slug %}{% else %}{% assign cs_slugs = cs_slugs | append: "," | append: m.case_study_slug %}{% endif %}
-          {% endunless %}
-        {% endif %}
-      {% endfor %}
-      {% assign slug_list = cs_slugs | split: "," %}
-      <div class="studies-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin-top:0.75rem;">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:0.75rem;">Real-world examples of this use case in practice:</p>
+      <div class="studies-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));margin-top:0.5rem;">
       {% for cs_slug in slug_list %}
         {% for study in site.case_studies %}
           {% if study.slug == cs_slug %}
@@ -97,5 +144,6 @@ layout: default
       </div>
     </div>
   </div>
+  {% endif %}
 
 </main>
