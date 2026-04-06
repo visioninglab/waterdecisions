@@ -3,6 +3,11 @@
   icon: "home"
   id: "home"
 
+- label: "Case Studies"
+  url: "/case-studies/index.html"
+  icon: "book-open"
+  id: "case-studies"
+
 - label: "Ontology"
   url: "/ontology/index.html"
   icon: "network"
@@ -18,15 +23,15 @@
   icon: "git-branch"
   id: "decision-patterns"
 
-- label: "Case Studies"
-  url: "/case-studies/index.html"
-  icon: "book-open"
-  id: "case-studies"
-
 - label: "Models"
   url: "/models/index.html"
   icon: "cpu"
   id: "models"
+
+- label: "Water Quality"
+  url: "/water-dashboard.html"
+  icon: "droplets"
+  id: "water-quality"
 
 - label: "Assessment"
   url: "/assessment.html"
