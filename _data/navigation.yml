@@ -28,11 +28,6 @@
   icon: "cpu"
   id: "models"
 
-- label: "Water Quality"
-  url: "/water-dashboard.html"
-  icon: "droplets"
-  id: "water-quality"
-
 - label: "Assessment"
   url: "/assessment.html"
   icon: "clipboard-check"
