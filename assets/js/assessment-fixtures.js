@@ -25,14 +25,15 @@ var CASE_STUDY_FIXTURES = {
         'AECOM / Black & Veatch (Phase 2 JV)'
       ]
     },
-    principleScores: { p1: 5, p2: 5, p3: 4, p4: 3, p5: 4, p6: 4 },
-    principleConfidence: { p1: 'high', p2: 'high', p3: 'high', p4: 'medium', p5: 'high', p6: 'medium' },
+    principleScores: { p1: 4, p2: 5, p3: 4, p4: 3, p5: 5, p6: 4 },
+    principleConfidence: { p1: 'medium', p2: 'high', p3: 'high', p4: 'medium', p5: 'high', p6: 'high' },
     principleReflections: {
       p2: 'Deep tunnels at 30\u201360m provide flood resilience; 206km gravity-flow network.',
       p3: 'Tuas WRP integrates water and waste; NEWater supplies 55% of needs.',
       p5: 'Centralised PUB governance with Four National Taps strategy.'
     },
-    decisionClarity: { strategy: 5, operations: 5, investment: 5, coordination: 4, monitoring: 4 }
+    decisionClarity: { strategy: 5, operations: 5, investment: 5, coordination: 4, monitoring: 4 },
+    sdgs: ['SDG 6', 'SDG 9', 'SDG 11', 'SDG 13', 'SDG 17']
   },
 
   'china-hydraulic': {
@@ -57,45 +58,47 @@ var CASE_STUDY_FIXTURES = {
         'UNESCO World Heritage Committee'
       ]
     },
-    principleScores: { p1: 3, p2: 5, p3: 5, p4: 4, p5: 5, p6: 5 },
-    principleConfidence: { p1: 'medium', p2: 'high', p3: 'high', p4: 'medium', p5: 'high', p6: 'high' },
+    principleScores: { p1: 5, p2: 5, p3: 5, p4: 4, p5: 3, p6: 5 },
+    principleConfidence: { p1: 'high', p2: 'high', p3: 'high', p4: 'medium', p5: 'medium', p6: 'high' },
     principleReflections: {
       p1: '2,300 years of empirical learning through annual dredging and maintenance.',
       p3: 'Zero environmental impact \u2014 works with natural river dynamics, no dam.',
       p4: '2003: public campaign halted the destructive Yangliuhu dam project.'
     },
-    decisionClarity: { strategy: 4, operations: 5, investment: 3, coordination: 3, monitoring: 4 }
+    decisionClarity: { strategy: 4, operations: 5, investment: 3, coordination: 3, monitoring: 4 },
+    sdgs: ['SDG 6', 'SDG 9', 'SDG 11', 'SDG 13']
   },
 
-  'usa-broward-county': {
-    title: 'Broward County Resilience Plan',
-    link: 'usa-broward-county.html',
+  'uk-thames-barrier': {
+    title: 'UK Thames Flood Barrier',
+    link: 'uk-thames-barrier.html',
     system: {
-      name: 'Broward County Resilience Plan',
+      name: 'Thames Flood Barrier & TE2100 Programme',
       sector: 'water',
       scale: 'regional',
-      role: 'Chief Resilience Officer'
+      role: 'Environment Agency \u2014 Thames Estuary Flood Risk'
     },
     priorities: {
       outcomes: [
-        'Flood risk mitigation after 1-in-1,000 year event',
-        'Climate adaptation infrastructure portfolio',
-        'Economic resilience with 9%+ projected ROI'
+        'Protect London from tidal surge flooding',
+        'Adaptive long-term strategy through TE2100 plan',
+        'Coordinate multi-agency flood risk management'
       ],
-      concerns: ['flood', 'climate', 'social'],
+      concerns: ['flood', 'climate', 'ageing', 'interdep'],
       stakeholders: [
-        'Broward County Government / CRO',
-        'Fort Lauderdale residents and businesses',
-        'Hazen & Sawyer / McKinsey (advisors)'
+        'Environment Agency',
+        'London boroughs',
+        'Thames Water'
       ]
     },
-    principleScores: { p1: 4, p2: 3, p3: 3, p4: 4, p5: 4, p6: 3 },
-    principleConfidence: { p1: 'high', p2: 'medium', p3: 'medium', p4: 'high', p5: 'high', p6: 'medium' },
+    principleScores: { p1: 4, p2: 5, p3: 2, p4: 2, p5: 4, p6: 5 },
+    principleConfidence: { p1: 'high', p2: 'high', p3: 'low', p4: 'low', p5: 'high', p6: 'high' },
     principleReflections: {
-      p1: 'Multi-stakeholder coordination: county acted with autonomy from state/federal.',
-      p4: 'Exemplary CRO-led Steering Committee with community, finance and engineering.',
-      p5: 'McKinsey cost-benefit shows 9%+ ROI; multiple adaptation tiers assessed.'
+      p1: 'Every barrier closure generates operational data that informs forecasting and asset management.',
+      p2: 'Built proactively after 1953 flood; active deployable defence tested monthly.',
+      p6: 'TE2100 provides adaptive pathways with decision points based on actual sea level rise.'
     },
-    decisionClarity: { strategy: 5, operations: 3, investment: 4, coordination: 4, monitoring: 3 }
+    decisionClarity: { strategy: 5, operations: 4, investment: 4, coordination: 3, monitoring: 4 },
+    sdgs: ['SDG 6', 'SDG 11', 'SDG 13']
   }
 };

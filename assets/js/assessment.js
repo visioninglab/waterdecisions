@@ -14,19 +14,28 @@
   ];
 
   var PRINCIPLES = [
-    { id: 'p1', num: 'P1', name: 'Clearly Defined Accountabilities and Shared Responsibilities',
-      desc: 'Share information and expertise for coordinated benefits with clear accountability.' },
+    { id: 'p1', num: 'P1', name: 'Continuously Learning',
+      desc: 'Develop and update understanding and insight into infrastructure resilience through monitoring, analysis and stress testing.' },
     { id: 'p2', num: 'P2', name: 'Proactively Protected',
       desc: 'Proactively plan, design, build and operate infrastructure prepared for current and future hazards.' },
     { id: 'p3', num: 'P3', name: 'Environmentally Integrated',
       desc: 'Work in a positively integrated way with the natural environment using nature-based solutions.' },
     { id: 'p4', num: 'P4', name: 'Socially Engaged',
       desc: 'Develop active engagement, involvement and participation across all levels of society.' },
-    { id: 'p5', num: 'P5', name: 'Adaptively Transforming',
-      desc: 'Adapt and transform infrastructure systems to meet changing needs and conditions.' },
-    { id: 'p6', num: 'P6', name: 'Continually Learning and Improving',
-      desc: 'Develop and update understanding and insight into infrastructure resilience through monitoring, analysis and stress testing.' }
+    { id: 'p5', num: 'P5', name: 'Shared Responsibility',
+      desc: 'Share information and expertise for coordinated benefits with clear accountability.' },
+    { id: 'p6', num: 'P6', name: 'Adaptively Transforming',
+      desc: 'Adapt and transform infrastructure systems to meet changing needs and conditions.' }
   ];
+
+  // SDG inference from principle scores
+  var SDG_INFERENCE = {
+    'SDG 6':  { name: 'Clean Water and Sanitation', color: '#26BDE2', principles: ['p1', 'p3', 'p4', 'p5'] },
+    'SDG 9':  { name: 'Industry, Innovation and Infrastructure', color: '#FD6925', principles: ['p2', 'p6'] },
+    'SDG 11': { name: 'Sustainable Cities and Communities', color: '#FD9D24', principles: ['p2', 'p4', 'p6'] },
+    'SDG 13': { name: 'Climate Action', color: '#3F7E44', principles: ['p1', 'p2', 'p6'] },
+    'SDG 17': { name: 'Partnerships for the Goals', color: '#19486A', principles: ['p4', 'p5'] }
+  };
 
   var DECISION_AREAS = [
     { id: 'strategy', label: 'Strategy', prompt: 'How clear is the strategic direction for resilience?' },
@@ -602,6 +611,26 @@
 
     // Suggestions
     renderSuggestions(scores);
+
+    // SDG Contribution Inference
+    var sdgEl = document.getElementById('sdgInference');
+    if (sdgEl) {
+      var inferred = inferSDGs();
+      if (inferred.length > 0) {
+        var badges = inferred.map(function (s) {
+          return '<span class="sdg-badge" style="background:' + s.color + ';">' + s.sdg + '</span>';
+        }).join(' ');
+        var top3 = inferred.slice(0, 3).map(function (s) { return s.sdg; }).join(', ');
+        sdgEl.innerHTML =
+          '<h4><i data-lucide="globe" style="width:16px;height:16px;display:inline;vertical-align:-2px;margin-right:6px;"></i>Likely SDG Contribution</h4>' +
+          '<p>Based on the principle profile, this assessment most strongly contributes to <strong>' + top3 + '</strong>.</p>' +
+          '<p style="font-size:0.8rem;color:#6b6560;">The six principles remain the core assessment method. SDG mappings indicate areas of contribution rather than formal certification.</p>' +
+          '<div class="sdg-badges">' + badges + '</div>';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      } else {
+        sdgEl.innerHTML = '';
+      }
+    }
   }
 
   function getPrincipleScoresArray() {
@@ -689,12 +718,12 @@
     if (!container) return;
     container.innerHTML = '';
 
-    // Derived PDCA: Plan = avg(P6,P1), Do = avg(P2,P3), Check = avg(P6,P4), Act = avg(P1,P5)
+    // Derived PDCA: Plan = avg(P1,P5), Do = avg(P2,P3), Check = avg(P1,P4), Act = avg(P5,P6)
     var pdca = [
-      { label: 'Plan', score: avg(scores[5], scores[0]), desc: 'avg(P6, P1)' },
+      { label: 'Plan', score: avg(scores[0], scores[4]), desc: 'avg(P1, P5)' },
       { label: 'Do', score: avg(scores[1], scores[2]), desc: 'avg(P2, P3)' },
-      { label: 'Check', score: avg(scores[5], scores[3]), desc: 'avg(P6, P4)' },
-      { label: 'Act', score: avg(scores[0], scores[4]), desc: 'avg(P1, P5)' }
+      { label: 'Check', score: avg(scores[0], scores[3]), desc: 'avg(P1, P4)' },
+      { label: 'Act', score: avg(scores[4], scores[5]), desc: 'avg(P5, P6)' }
     ];
 
     var grid = el('div', { className: 'diag-pdca-grid' });
@@ -779,6 +808,21 @@
   }
 
   function avg(a, b) { return (a + b) / 2; }
+
+  function inferSDGs() {
+    var result = [];
+    Object.keys(SDG_INFERENCE).forEach(function (sdg) {
+      var info = SDG_INFERENCE[sdg];
+      var scores = info.principles.map(function (p) { return state.principleScores[p] || 0; }).filter(function (s) { return s > 0; });
+      if (scores.length === 0) return;
+      var avg = scores.reduce(function (a, b) { return a + b; }, 0) / scores.length;
+      if (avg >= 2) {
+        result.push({ sdg: sdg, name: info.name, color: info.color, strength: avg });
+      }
+    });
+    result.sort(function (a, b) { return b.strength - a.strength; });
+    return result;
+  }
 
   /* ============ EXPORT ============ */
 

@@ -1,47 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>7-Minute Resilience Diagnostic &mdash; DIR Case Study Wiki</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<meta name="description" content="7-minute resilience diagnostic for infrastructure systems. Assess against six UNDRR principles or explore water case studies.">
-<meta property="og:title" content="7-Minute Resilience Diagnostic &mdash; DIR Case Study Wiki">
-<meta property="og:description" content="Quick resilience diagnostic for infrastructure systems aligned with ISO 22372.">
-<meta property="og:type" content="website">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="styles.css?v=4">
-<style>
-.sdg-inference { margin-top: 1.5rem; padding: 1rem 1.2rem; background: #faf9f7; border-radius: 8px; border: 1px solid #e5e3df; }
-.sdg-inference h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
-.sdg-inference p { font-size: 0.88rem; color: #6b6560; line-height: 1.6; margin-bottom: 0.75rem; }
-.sdg-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.sdg-badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; color: #fff; white-space: nowrap; }
-</style>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-</head>
-<body>
-
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="topbar-logo">
-    <a href="index.html">
-      <span class="dot"></span>
-      DIR Case Study Wiki
-    </a>
-  </div>
-  <div class="topbar-nav">
-    <a href="index.html"><i data-lucide="book-open" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Case Studies</a>
-    <a href="principles.html"><i data-lucide="scale" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Principles</a>
-    <a href="glossary.html"><i data-lucide="bookmark" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Glossary</a>
-    <a href="assessment.html" class="active"><i data-lucide="clipboard-check" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>Assessment</a>
-    <a href="about.html"><i data-lucide="info" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;"></i>About</a>
-  </div>
-</div>
+---
+layout: default
+title: 7-Minute Resilience Diagnostic
+description: Quick infrastructure resilience assessment aligned with ISO 22372 and the six UNDRR Principles for Resilient Infrastructure.
+nav_active: assessment
+extra_head: '<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>'
+---
 
 <!-- HERO -->
 <div class="hero">
@@ -74,10 +37,6 @@
       </div>
       <!-- CASE STUDY OVERVIEW -->
       <div class="diag-case-overview" id="caseOverview"></div>
-
-      <div class="diag-landing-footer">
-        <a href="assessment-old.html">Use the full detailed assessment tool &rarr;</a>
-      </div>
     </div>
   </div>
 
@@ -310,26 +269,5 @@
 
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-  7-Minute Resilience Diagnostic &mdash; A <strong>Visioning Lab</strong> &amp; <strong>UKCRIC</strong> prototype &bull; DEMO &bull; Not for production use
-</div>
-
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-<script src="script.js?v=3"></script>
-<script src="assessment-fixtures.js"></script>
-<script src="assessment.js?v=4"></script>
-<div id="google_translate_element" class="translate-widget"></div>
-<script>
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en',
-    includedLanguages: 'en,zh-CN,fr,de,es,ar,ja,ko,pt',
-    layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
-    autoDisplay: false
-  }, 'google_translate_element');
-}
-</script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-</body>
-</html>
+<script src="{{ '/assets/js/assessment-fixtures.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+<script src="{{ '/assets/js/assessment.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
