@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Water Quality Dashboard
-description: Real-time water quality monitoring across all UK Environment Agency stations with flood warnings, trend analysis, and determinand thresholds.
+description: Water quality monitoring for North England catchments — Tyne, Wear, Tees, Aire, Don and more — with flood warnings, trend analysis, and determinand thresholds.
 nav_active: water-quality
 extra_head: '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>'
 ---
@@ -15,6 +15,9 @@ extra_head: '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/l
       <span id="wqStationCount">—</span> stations &bull;
       <span id="wqReadingCount">—</span> readings &bull;
       <span id="wqWarningCount">—</span> warnings
+      <button class="wq-btn wq-btn-refresh" id="wqRefreshBtn" onclick="refreshLiveData()" title="Refresh from EA API">
+        <i data-lucide="refresh-cw" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:3px;"></i>Live refresh
+      </button>
     </span>
   </div>
 </div>
@@ -22,8 +25,8 @@ extra_head: '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/l
 <!-- HERO -->
 <div class="wq-hero">
   <div class="wq-hero-inner">
-    <h1>Water Quality Dashboard</h1>
-    <p class="wq-hero-sub">Comprehensive monitoring data from the Environment Agency across all UK stations. Pre-fetched via GitHub Actions — always available, never dependent on live API.</p>
+    <h1>Water Quality Dashboard <span class="wq-hero-region">North England</span></h1>
+    <p class="wq-hero-sub">Monitoring data from the Environment Agency across North England catchments — Tyne, Wear, Tees, Aire, Don and more. Pre-fetched data with live refresh available.</p>
   </div>
 </div>
 

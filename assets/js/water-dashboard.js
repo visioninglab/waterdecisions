@@ -66,49 +66,77 @@
     renderAll();
   }
 
+  // North England catchments for scoped fetching
+  const NORTH_CATCHMENTS = ['Tyne', 'Wear', 'Tees', 'Swale', 'Wharfe and Lower Ouse', 'Aire and Calder', 'Don and Rother', 'Derwent', 'Rother'];
+
+  function mapStation(s) {
+    return {
+      id: s.notation || s.stationReference || '',
+      label: s.label || '',
+      river: s.riverName || '',
+      catchment: s.catchmentName || '',
+      town: s.town || '',
+      lat: s.lat || null,
+      lng: s.long || null,
+      type: (s.type || '').toString().split('/').pop() || 'Unknown',
+      dateOpened: s.dateOpened || '',
+      measures: (Array.isArray(s.measures) ? s.measures : (s.measures ? [s.measures] : [])).map(m => ({
+        id: (m.notation || m['@id'] || '').toString().split('/').pop(),
+        parameter: m.parameter || '',
+        parameterName: m.parameterName || '',
+        qualifier: m.qualifier || '',
+        unit: m.unitName || '',
+        period: m.period || null
+      }))
+    };
+  }
+
   async function loadLiveData() {
     const API = 'https://environment.data.gov.uk/flood-monitoring';
     try {
-      const [stRes, rdRes, flRes] = await Promise.allSettled([
-        fetch(API + '/id/stations?status=Active&_limit=10000'),
-        fetch(API + '/data/readings?latest&_limit=10000'),
-        fetch(API + '/id/floods')
-      ]);
-
-      if (stRes.status === 'fulfilled' && stRes.value.ok) {
-        const d = await stRes.value.json();
-        stations = (d.items || []).map(s => ({
-          id: s.notation || s.stationReference || '',
-          label: s.label || '',
-          river: s.riverName || '',
-          catchment: s.catchmentName || '',
-          town: s.town || '',
-          lat: s.lat || null,
-          lng: s.long || null,
-          type: (s.type || '').toString().split('/').pop() || 'Unknown',
-          dateOpened: s.dateOpened || '',
-          measures: (Array.isArray(s.measures) ? s.measures : (s.measures ? [s.measures] : [])).map(m => ({
-            id: (m.notation || m['@id'] || '').toString().split('/').pop(),
-            parameter: m.parameter || '',
-            parameterName: m.parameterName || '',
-            qualifier: m.qualifier || '',
-            unit: m.unitName || '',
-            period: m.period || null
-          }))
-        })).filter(s => s.lat && s.lng);
+      // Fetch stations for each North England catchment
+      const stationPromises = NORTH_CATCHMENTS.map(c =>
+        fetch(API + '/id/stations?catchmentName=' + encodeURIComponent(c) + '&status=Active&_limit=500')
+      );
+      const stationResults = await Promise.allSettled(stationPromises);
+      const seen = new Set();
+      stations = [];
+      for (const res of stationResults) {
+        if (res.status !== 'fulfilled' || !res.value.ok) continue;
+        const d = await res.value.json();
+        for (const s of (d.items || [])) {
+          const mapped = mapStation(s);
+          if (mapped.lat && mapped.lng && !seen.has(mapped.id)) {
+            seen.add(mapped.id);
+            stations.push(mapped);
+          }
+        }
       }
 
-      if (rdRes.status === 'fulfilled' && rdRes.value.ok) {
-        const d = await rdRes.value.json();
-        const rds = (d.items || []).map(r => {
+      // Fetch readings — batch by station to avoid 10k+ request
+      const readingBatches = [];
+      for (const s of stations) {
+        readingBatches.push(
+          fetch(API + '/id/stations/' + s.id + '/readings?latest').catch(() => null)
+        );
+      }
+      const rdResults = await Promise.allSettled(readingBatches);
+      const allReadings = [];
+      for (let i = 0; i < rdResults.length; i++) {
+        const res = rdResults[i];
+        if (res.status !== 'fulfilled' || !res.value || !res.value.ok) continue;
+        const d = await res.value.json();
+        for (const r of (d.items || [])) {
           const mid = (r.measure || '').toString().split('/').pop();
-          return { stationId: mid.split('-')[0], measure: mid, value: r.value, dateTime: r.dateTime || '' };
-        });
-        indexReadings(rds);
+          allReadings.push({ stationId: stations[i].id, measure: mid, value: r.value, dateTime: r.dateTime || '' });
+        }
       }
+      indexReadings(allReadings);
 
-      if (flRes.status === 'fulfilled' && flRes.value.ok) {
-        const d = await flRes.value.json();
+      // Fetch flood warnings
+      const flRes = await fetch(API + '/id/floods').catch(() => null);
+      if (flRes && flRes.ok) {
+        const d = await flRes.json();
         floodWarnings = (d.items || []).map(w => ({
           severity: w.severityLevel || null,
           severityLabel: w.severity || '',
@@ -118,11 +146,27 @@
         })).filter(w => w.severity && w.severity <= 3);
       }
 
-      dataMeta = { lastFetch: new Date().toISOString(), stationCount: stations.length, note: 'Live API fallback' };
+      dataMeta = { lastFetch: new Date().toISOString(), stationCount: stations.length, note: 'Live API — North England' };
     } catch (e) {
       console.warn('Live API fallback failed:', e);
     }
   }
+
+  // --- Live Refresh Button ---
+  window.refreshLiveData = async function () {
+    const btn = document.getElementById('wqRefreshBtn');
+    const origHtml = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i data-lucide="loader" style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:3px;"></i>Refreshing...';
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    await loadLiveData();
+    renderAll();
+
+    btn.disabled = false;
+    btn.innerHTML = origHtml;
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  };
 
   function indexReadings(rds) {
     readings = {};
@@ -188,7 +232,7 @@
   // --- Map ---
   function initMap() {
     if (map) { map.remove(); map = null; }
-    map = L.map('wqMap').setView([53.5, -1.5], 6);
+    map = L.map('wqMap').setView([54.2, -1.5], 7);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
       maxZoom: 18

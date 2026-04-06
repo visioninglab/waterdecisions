@@ -1,1 +1,2301 @@
-{"readings":[],"meta":{"fetched":"2026-03-09T12:00:00Z","count":0,"source":"EA Flood Monitoring API v0.9"}}
+{
+  "readings": [
+    {
+      "stationId": "023008",
+      "measure": "023008-level-stage-i-15_min-m",
+      "value": 0.415,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023036",
+      "measure": "023036-level-stage-i-15_min-m",
+      "value": 0.254,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023027",
+      "measure": "023027-level-stage-i-15_min-m",
+      "value": 0.541,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023018",
+      "measure": "023018-level-stage-i-15_min-m",
+      "value": 0.054,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023009",
+      "measure": "023009-level-stage-i-15_min-m",
+      "value": 0.328,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023037",
+      "measure": "023037-level-stage-i-15_min-m",
+      "value": 0.326,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023028",
+      "measure": "023028-level-stage-i-15_min-m",
+      "value": 0.327,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023038",
+      "measure": "023038-level-stage-i-15_min-m",
+      "value": 0.12,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023001",
+      "measure": "023001-level-stage-i-15_min-m",
+      "value": 0.872,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023039",
+      "measure": "023039-level-stage-i-15_min-m",
+      "value": 0.67,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023058",
+      "measure": "023058-level-reservoir_level-i-15_min-m",
+      "value": 0.032,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023011",
+      "measure": "023011-level-stage-i-15_min-m",
+      "value": 0.313,
+      "dateTime": "2026-04-06T05:45:00Z"
+    },
+    {
+      "stationId": "023021",
+      "measure": "023021-level-stage-i-15_min-m",
+      "value": 0.537,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023003",
+      "measure": "023003-level-stage-i-15_min-m",
+      "value": 0.844,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023022",
+      "measure": "023022-level-stage-i-15_min-m",
+      "value": 0.615,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "023041",
+      "measure": "023041-level-stage-i-15_min-m",
+      "value": -0.005,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023004",
+      "measure": "023004-level-stage-i-15_min-m",
+      "value": 0.476,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023023",
+      "measure": "023023-level-stage-i-15_min-m",
+      "value": 1.005,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023042",
+      "measure": "023042-level-stage-i-15_min-m",
+      "value": 0.26,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023033",
+      "measure": "023033-level-stage-i-15_min-m",
+      "value": 0.578,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023024",
+      "measure": "023024-level-stage-i-15_min-m",
+      "value": 0.443,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023103",
+      "measure": "023103-level-stage-i-15_min-m",
+      "value": 0.664,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023006",
+      "measure": "023006-level-stage-i-15_min-m",
+      "value": 0.324,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023025",
+      "measure": "023025-level-stage-i-15_min-m",
+      "value": 0.202,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023053",
+      "measure": "023053-level-stage-i-15_min-m",
+      "value": 0.442,
+      "dateTime": "2026-04-06T05:45:00Z"
+    },
+    {
+      "stationId": "023016",
+      "measure": "023016-level-stage-i-15_min-m",
+      "value": 0.116,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023054",
+      "measure": "023054-level-stage-i-15_min-m",
+      "value": 0.372,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023017",
+      "measure": "023017-level-stage-i-15_min-m",
+      "value": 0.237,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023020",
+      "measure": "023020-level-stage-i-15_min-mAOD",
+      "value": 31.321,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023002",
+      "measure": "023002-level-stage-i-15_min-m",
+      "value": 0.283,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023026",
+      "measure": "023026-level-stage-i-15_min-m",
+      "value": 0.474,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023057",
+      "measure": "023057-level-stage-i-15_min-m",
+      "value": 0.011,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023066",
+      "measure": "023066-level-stage-i-15_min-m",
+      "value": 0.245,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023063",
+      "measure": "023063-level-stage-i-15_min-m",
+      "value": 0.29,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023062",
+      "measure": "023062-level-stage-i-15_min-m",
+      "value": 0.003,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023049",
+      "measure": "023049-level-stage-i-15_min-m",
+      "value": 0.227,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024012",
+      "measure": "024012-level-stage-i-15_min-m",
+      "value": 0.137,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024003",
+      "measure": "024003-level-stage-i-15_min-m",
+      "value": 0.373,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024013",
+      "measure": "024013-level-stage-i-15_min-m",
+      "value": 0.089,
+      "dateTime": "2026-04-06T05:45:00Z"
+    },
+    {
+      "stationId": "024004",
+      "measure": "024004-level-stage-i-15_min-m",
+      "value": 0.293,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024023",
+      "measure": "024023-level-stage-i-15_min-m",
+      "value": 0.228,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024014",
+      "measure": "024014-level-stage-i-15_min-m",
+      "value": 0.124,
+      "dateTime": "2026-04-06T05:45:00Z"
+    },
+    {
+      "stationId": "024005",
+      "measure": "024005-level-stage-i-15_min-m",
+      "value": 0.136,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024024",
+      "measure": "024024-level-downstage-i-15_min-m",
+      "value": 0.207,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024024",
+      "measure": "024024-level-1-i-15_min-m",
+      "value": 0.592,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024015",
+      "measure": "024015-level-stage-i-15_min-m",
+      "value": 0.222,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024006",
+      "measure": "024006-level-stage-i-15_min-m",
+      "value": 0.095,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024016",
+      "measure": "024016-level-stage-i-15_min-m",
+      "value": 0.53,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "0240120",
+      "measure": "0240120-level-stage-i-15_min-m",
+      "value": 0.291,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024017",
+      "measure": "024017-level-stage-i-15_min-m",
+      "value": 0.271,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024008",
+      "measure": "024008-level-stage-i-15_min-m",
+      "value": 0.472,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024027",
+      "measure": "024027-level-stage-i-15_min-m",
+      "value": 0.105,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024009",
+      "measure": "024009-level-stage-i-15_min-m",
+      "value": 0.451,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024000",
+      "measure": "024000-level-stage-i-15_min-m",
+      "value": 0.114,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024010",
+      "measure": "024010-level-stage-i-15_min-m",
+      "value": 0.143,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024001",
+      "measure": "024001-level-stage-i-15_min-m",
+      "value": 0.41,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "024030",
+      "measure": "024030-level-stage-i-15_min-m",
+      "value": 0.016,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3901",
+      "measure": "L3901-level-tidal_level-i-15_min-mAOD",
+      "value": 1.726,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3804",
+      "measure": "L3804-level-stage-i-15_min-m",
+      "value": 0.656,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3693",
+      "measure": "L3693-level-stage-i-15_min-m",
+      "value": 0.775,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F3705",
+      "measure": "F3705-level-stage-i-15_min-m",
+      "value": 0.209,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F3501",
+      "measure": "F3501-level-stage-i-15_min-m",
+      "value": 0.811,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3503",
+      "measure": "L3503-level-stage-i-15_min-m",
+      "value": 0.168,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F3803",
+      "measure": "F3803-level-stage-i-15_min-m",
+      "value": 0.258,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3805",
+      "measure": "L3805-level-stage-i-15_min-m",
+      "value": 0.115,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3806",
+      "measure": "L3806-level-stage-i-15_min-m",
+      "value": 0.571,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3602",
+      "measure": "L3602-level-stage-i-15_min-m",
+      "value": 0.562,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3807",
+      "measure": "L3807-level-stage-i-15_min-m",
+      "value": 0.061,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F3504",
+      "measure": "F3504-level-stage-i-15_min-m",
+      "value": 0.556,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F3523",
+      "measure": "F3523-level-stage-i-15_min-m",
+      "value": 0.272,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F3505",
+      "measure": "F3505-level-stage-i-15_min-m",
+      "value": 0.545,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3934",
+      "measure": "L3934-level-stage-i-15_min-m",
+      "value": 0.072,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2922",
+      "measure": "L2922-level-stage-i-15_min-mAOD",
+      "value": 4.19,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3907",
+      "measure": "L3907-level-stage-i-15_min-mAOD",
+      "value": 2.724,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F3808",
+      "measure": "F3808-level-stage-i-15_min-m",
+      "value": 0.145,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F3581",
+      "measure": "F3581-level-stage-i-15_min-m",
+      "value": 0.268,
+      "dateTime": "2026-04-06T05:45:00Z"
+    },
+    {
+      "stationId": "F3702",
+      "measure": "F3702-level-stage-i-15_min-m",
+      "value": 0.239,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3937",
+      "measure": "L3937-level-stage-i-15_min-m",
+      "value": 0.403,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F3606",
+      "measure": "F3606-level-stage-i-15_min-m",
+      "value": 0.542,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F3509",
+      "measure": "F3509-level-stage-i-15_min-m",
+      "value": 0.159,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L39011",
+      "measure": "L39011-level-stage-i-15_min-m",
+      "value": -0.008,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3921",
+      "measure": "L3921-level-stage-i-15_min-m",
+      "value": 0.025,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3921A",
+      "measure": "L3921A-level-stage-i-15_min-m",
+      "value": -0.046,
+      "dateTime": "2026-04-06T07:00:00Z"
+    },
+    {
+      "stationId": "L35024",
+      "measure": "L35024-level-stage-i-15_min-m",
+      "value": 0.128,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L39021",
+      "measure": "L39021-level-stage-i-15_min-m",
+      "value": 0.077,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L39021",
+      "measure": "L39021-level-downstage-i-15_min-m",
+      "value": 0.091,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L3915",
+      "measure": "L3915-level-stage-i-15_min-m",
+      "value": 0.083,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L39020",
+      "measure": "L39020-level-stage-i-15_min-m",
+      "value": 0.03,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2926",
+      "measure": "L2926-level-stage-i-15_min-m",
+      "value": 0.328,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L3609A",
+      "measure": "L3609A-level-stage-i-15_min-m",
+      "value": 0.528,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "E2900-southern",
+      "measure": "E2900-southern-level-tidal_level-i-15_min-mAOD",
+      "value": 1.049,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "0782SO",
+      "measure": "0782SO-level-groundwater-i-1_h-mAOD",
+      "value": 21.381,
+      "dateTime": "2026-04-06T17:07:40Z"
+    },
+    {
+      "stationId": "E3060",
+      "measure": "E3060-level-stage-i-15_min-mAOD",
+      "value": 3.268,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "E3070",
+      "measure": "E3070-level-stage-i-15_min-mAOD",
+      "value": 8.15,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "F1906",
+      "measure": "F1906-level-stage-i-15_min-m",
+      "value": 0.572,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1931",
+      "measure": "L1931-level-stage-i-15_min-m",
+      "value": 0.119,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2011",
+      "measure": "L2011-level-stage-i-15_min-mAOD",
+      "value": 3.138,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2402",
+      "measure": "L2402-level-downstage-i-15_min-mAOD",
+      "value": 3.752,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2402",
+      "measure": "L2402-level-stage-i-15_min-m",
+      "value": 0.925,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2403",
+      "measure": "L2403-level-stage-i-15_min-mAOD",
+      "value": 2.245,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2401A",
+      "measure": "L2401A-level-stage-i-15_min-mAOD",
+      "value": 1.719,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2005",
+      "measure": "L2005-level-stage-i-15_min-m",
+      "value": 0.766,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1907",
+      "measure": "L1907-level-stage-i-15_min-m",
+      "value": 0.374,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2024",
+      "measure": "L2024-level-stage-i-15_min-mAOD",
+      "value": 4.475,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2043",
+      "measure": "L2043-level-stage-i-15_min-m",
+      "value": 0.188,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2007",
+      "measure": "L2007-level-stage-i-15_min-m",
+      "value": 0.689,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2035",
+      "measure": "L2035-level-stage-i-15_min-m",
+      "value": 0.266,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1902",
+      "measure": "F1902-level-stage-i-15_min-m",
+      "value": 0.299,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2008",
+      "measure": "L2008-level-stage-i-15_min-m",
+      "value": 0.358,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1903",
+      "measure": "F1903-level-stage-i-15_min-m",
+      "value": 0.496,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2009",
+      "measure": "L2009-level-stage-i-15_min-m",
+      "value": 0.419,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2002",
+      "measure": "F2002-flow-logged-i-15_min-m3_s",
+      "value": 14.637,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2002",
+      "measure": "F2002-level-stage-i-15_min-m",
+      "value": 0.379,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2004",
+      "measure": "F2004-level-stage-i-15_min-m",
+      "value": 0.72,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1970",
+      "measure": "L1970-level-stage-i-15_min-m",
+      "value": 0.258,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2029",
+      "measure": "L2029-level-stage-i-15_min-m",
+      "value": 0.002,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2029",
+      "measure": "L2029-level-downstage-i-15_min-m",
+      "value": -0.022,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2401B",
+      "measure": "L2401B-level-stage-i-15_min-mAOD",
+      "value": 1.901,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2012",
+      "measure": "L2012-level-stage-i-15_min-m",
+      "value": 1.452,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1960",
+      "measure": "F1960-level-stage-i-15_min-m",
+      "value": 0.414,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1115",
+      "measure": "L1115-level-stage-i-15_min-m",
+      "value": -0.005,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1203",
+      "measure": "L1203-level-stage-i-15_min-m",
+      "value": 0.427,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1231",
+      "measure": "L1231-level-stage-i-15_min-m",
+      "value": -0.02,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1505",
+      "measure": "L1505-level-stage-i-15_min-m",
+      "value": -0.154,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1357",
+      "measure": "L1357-level-stage-i-15_min-m",
+      "value": 0.0,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1376",
+      "measure": "L1376-level-stage-i-15_min-m",
+      "value": 0.211,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1241",
+      "measure": "L1241-level-stage-i-15_min-m",
+      "value": 0.632,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L12061",
+      "measure": "L12061-level-stage-i-15_min-m",
+      "value": 0.014,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1515",
+      "measure": "L1515-level-stage-i-15_min-m",
+      "value": -0.043,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1207",
+      "measure": "F1207-level-stage-i-15_min-m",
+      "value": 0.456,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1506",
+      "measure": "L1506-level-stage-i-15_min-m",
+      "value": 0.704,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1358",
+      "measure": "L1358-level-stage-i-15_min-m",
+      "value": 0.017,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1003",
+      "measure": "F1003-level-stage-i-15_min-m",
+      "value": 0.406,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1386",
+      "measure": "L1386-level-stage-i-15_min-m",
+      "value": 0.038,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1808",
+      "measure": "L1808-level-stage-i-15_min-m",
+      "value": 0.185,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L17012",
+      "measure": "L17012-level-stage-i-15_min-m",
+      "value": 0.122,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1205",
+      "measure": "L1205-level-stage-i-15_min-m",
+      "value": 0.02,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1108",
+      "measure": "L1108-level-stage-i-15_min-m",
+      "value": 0.269,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L17022",
+      "measure": "L17022-level-stage-i-15_min-m",
+      "value": 0.247,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1535",
+      "measure": "L1535-level-stage-i-15_min-m",
+      "value": 0.066,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L17013",
+      "measure": "L17013-level-stage-i-15_min-m",
+      "value": 0.047,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1403",
+      "measure": "F1403-level-stage-i-15_min-m",
+      "value": 0.317,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1306",
+      "measure": "F1306-level-stage-i-15_min-m",
+      "value": 0.72,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1206",
+      "measure": "L1206-level-stage-i-15_min-m",
+      "value": 0.151,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1605",
+      "measure": "L1605-level-stage-i-15_min-m",
+      "value": 0.448,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1322",
+      "measure": "L1322-level-stage-i-15_min-m",
+      "value": 0.033,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1608",
+      "measure": "F1608-level-stage-i-15_min-m",
+      "value": 0.295,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1545",
+      "measure": "L1545-level-stage-i-15_min-m",
+      "value": 0.351,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1102",
+      "measure": "F1102-level-stage-i-15_min-m",
+      "value": 0.469,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1721",
+      "measure": "L1721-level-stage-i-15_min-m",
+      "value": 0.094,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1304",
+      "measure": "L1304-level-stage-i-15_min-m",
+      "value": 0.064,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1800",
+      "measure": "L1800-level-stage-i-15_min-m",
+      "value": 3.177,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1527",
+      "measure": "L1527-level-stage-i-15_min-m",
+      "value": 0.311,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1715",
+      "measure": "F1715-level-stage-i-15_min-m",
+      "value": 0.133,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1207",
+      "measure": "L1207-level-stage-i-15_min-m",
+      "value": 0.33,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1703",
+      "measure": "L1703-level-stage-i-15_min-m",
+      "value": 1.263,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L17033",
+      "measure": "L17033-level-stage-i-15_min-m",
+      "value": 0.062,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1546",
+      "measure": "L1546-level-stage-i-15_min-m",
+      "value": 0.077,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1810",
+      "measure": "L1810-level-stage-i-15_min-m",
+      "value": 0.41,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1389",
+      "measure": "L1389-level-stage-i-15_min-m",
+      "value": 0.031,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1305",
+      "measure": "L1305-level-stage-i-15_min-m",
+      "value": 0.539,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1801",
+      "measure": "L1801-level-stage-i-15_min-m",
+      "value": 0.172,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1707",
+      "measure": "F1707-level-stage-i-15_min-m",
+      "value": 0.597,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1607",
+      "measure": "L1607-level-stage-i-15_min-m",
+      "value": 0.589,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1104",
+      "measure": "F1104-level-stage-i-15_min-m",
+      "value": 0.322,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1352",
+      "measure": "L1352-level-stage-i-15_min-m",
+      "value": 0.405,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1503",
+      "measure": "F1503-level-stage-i-15_min-m",
+      "value": 0.465,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1538",
+      "measure": "L1538-level-stage-i-15_min-m",
+      "value": 0.196,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1209",
+      "measure": "L1209-level-stage-i-15_min-m",
+      "value": 0.027,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1821",
+      "measure": "L1821-level-stage-i-15_min-m",
+      "value": 0.595,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L12010",
+      "measure": "L12010-level-stage-i-15_min-m",
+      "value": 0.42,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1812",
+      "measure": "L1812-level-stage-i-15_min-m",
+      "value": 0.61,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1307",
+      "measure": "L1307-level-stage-i-15_min-m",
+      "value": 0.19,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1803",
+      "measure": "L1803-level-stage-i-15_min-m",
+      "value": 0.09,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1806",
+      "measure": "F1806-level-stage-i-15_min-m",
+      "value": 0.519,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1831",
+      "measure": "L1831-level-stage-i-15_min-m",
+      "value": 0.07,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1240",
+      "measure": "F1240-level-stage-i-15_min-m",
+      "value": 0.174,
+      "dateTime": "2026-04-06T05:15:00Z"
+    },
+    {
+      "stationId": "F1203",
+      "measure": "F1203-level-stage-i-15_min-m",
+      "value": 0.522,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1103",
+      "measure": "L1103-level-stage-i-15_min-m",
+      "value": 0.185,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1502",
+      "measure": "L1502-level-stage-i-15_min-m",
+      "value": 0.102,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1813",
+      "measure": "L1813-level-stage-i-15_min-m",
+      "value": 0.155,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1405",
+      "measure": "L1405-level-stage-i-15_min-m",
+      "value": 0.112,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1308",
+      "measure": "L1308-level-stage-i-15_min-m",
+      "value": 0.275,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1385",
+      "measure": "F1385-level-stage-i-15_min-m",
+      "value": 0.065,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1113",
+      "measure": "L1113-level-stage-i-15_min-m",
+      "value": 0.151,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1707",
+      "measure": "L1707-level-stage-i-15_min-m",
+      "value": 0.633,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1301",
+      "measure": "F1301-level-stage-i-15_min-m",
+      "value": 1.291,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1540",
+      "measure": "L1540-level-stage-i-15_min-m",
+      "value": 0.224,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1388B",
+      "measure": "L1388B-level-stage-i-15_min-m",
+      "value": 0.08,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1355",
+      "measure": "L1355-level-stage-i-15_min-m",
+      "value": 0.261,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1814",
+      "measure": "L1814-level-stage-i-15_min-m",
+      "value": 0.989,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1805",
+      "measure": "L1805-level-stage-i-15_min-m",
+      "value": 0.69,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1374",
+      "measure": "L1374-level-stage-i-15_min-m",
+      "value": 0.332,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1374",
+      "measure": "L1374-level-downstage-i-15_min-m",
+      "value": 0.093,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1708",
+      "measure": "L1708-level-stage-i-15_min-m",
+      "value": 1.545,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1525",
+      "measure": "F1525-level-stage-i-15_min-m",
+      "value": 0.249,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1202",
+      "measure": "L1202-level-stage-i-15_min-m",
+      "value": -1.182,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1008",
+      "measure": "L1008-level-stage-i-15_min-m",
+      "value": 0.448,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1221",
+      "measure": "L1221-level-stage-i-15_min-m",
+      "value": 0.133,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1815",
+      "measure": "L1815-level-stage-i-15_min-m",
+      "value": 0.53,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1711",
+      "measure": "L1711-level-stage-i-15_min-m",
+      "value": 0.433,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1602",
+      "measure": "L1602-level-stage-i-15_min-m",
+      "value": 0.176,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1741",
+      "measure": "L1741-level-stage-i-15_min-m",
+      "value": 0.28,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1702",
+      "measure": "F1702-level-stage-i-15_min-m",
+      "value": 0.408,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1816",
+      "measure": "L1816-level-stage-i-15_min-m",
+      "value": 0.52,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1431",
+      "measure": "L1431-level-stage-i-15_min-m",
+      "value": 0.026,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1377",
+      "measure": "L1377-level-stage-i-15_min-m",
+      "value": 0.031,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L12041",
+      "measure": "L12041-level-stage-i-15_min-m",
+      "value": 0.282,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1811",
+      "measure": "L1811-level-stage-i-15_min-m",
+      "value": -0.366,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1402",
+      "measure": "F1402-level-stage-i-15_min-m",
+      "value": 0.034,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1359",
+      "measure": "L1359-level-stage-i-15_min-m",
+      "value": 0.385,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1650",
+      "measure": "F1650-level-stage-i-15_min-m",
+      "value": 0.233,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L13512",
+      "measure": "L13512-level-stage-i-15_min-m",
+      "value": 0.262,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L17032",
+      "measure": "L17032-level-stage-i-15_min-m",
+      "value": 0.137,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1705A",
+      "measure": "L1705A-level-stage-i-15_min-mAOD",
+      "value": 22.567,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1705A",
+      "measure": "L1705A-level-downstage-i-15_min-mAOD",
+      "value": 19.819,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1707A",
+      "measure": "L1707A-level-stage-i-15_min-mAOD",
+      "value": 23.77,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1707A",
+      "measure": "L1707A-level-downstage-i-15_min-mAOD",
+      "value": 22.53,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1526",
+      "measure": "L1526-level-stage-i-15_min-m",
+      "value": 0.032,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1751",
+      "measure": "L1751-level-stage-i-15_min-m",
+      "value": 0.251,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L15401",
+      "measure": "L15401-level-stage-i-15_min-m",
+      "value": 0.168,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1539",
+      "measure": "L1539-level-stage-i-15_min-m",
+      "value": 0.581,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1536",
+      "measure": "L1536-level-stage-i-15_min-m",
+      "value": 0.103,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1530",
+      "measure": "F1530-level-stage-i-15_min-m",
+      "value": 0.181,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1538A",
+      "measure": "L1538A-level-stage-i-15_min-m",
+      "value": 0.324,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L12062",
+      "measure": "L12062-level-stage-i-15_min-m",
+      "value": 0.146,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1215",
+      "measure": "L1215-level-stage-i-15_min-m",
+      "value": 0.088,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1303",
+      "measure": "L1303-level-stage-i-15_min-m",
+      "value": 0.903,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1141",
+      "measure": "L1141-level-stage-i-15_min-m",
+      "value": 0.012,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L11311",
+      "measure": "L11311-level-stage-i-15_min-m",
+      "value": 0.044,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1132",
+      "measure": "L1132-level-stage-i-15_min-m",
+      "value": 0.244,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1353",
+      "measure": "L1353-level-stage-i-15_min-m",
+      "value": -0.03,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L13810",
+      "measure": "L13810-level-stage-i-15_min-m",
+      "value": 0.051,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1656",
+      "measure": "L1656-level-stage-i-15_min-m",
+      "value": 0.938,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L17014",
+      "measure": "L17014-level-stage-i-15_min-m",
+      "value": 0.121,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L17014",
+      "measure": "L17014-level-downstage-i-15_min-m",
+      "value": 0.437,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1719",
+      "measure": "L1719-level-stage-i-15_min-m",
+      "value": 0.489,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1783",
+      "measure": "L1783-level-stage-i-15_min-m",
+      "value": 0.612,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1255",
+      "measure": "L1255-level-stage-i-15_min-m",
+      "value": 0.223,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L1034",
+      "measure": "L1034-level-stage-i-15_min-m",
+      "value": 0.305,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1509",
+      "measure": "F1509-level-stage-i-15_min-m",
+      "value": 0.385,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L12013",
+      "measure": "L12013-level-stage-i-15_min-m",
+      "value": 0.063,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L17014A",
+      "measure": "L17014A-level-stage-i-15_min-m",
+      "value": 0.426,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1204",
+      "measure": "F1204-level-stage-i-15_min-m",
+      "value": 1.474,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F1171",
+      "measure": "F1171-level-stage-i-15_min-m",
+      "value": 0.227,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L08015",
+      "measure": "L08015-level-stage-i-15_min-m",
+      "value": 0.312,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F0815",
+      "measure": "F0815-level-stage-i-15_min-m",
+      "value": 0.112,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0307",
+      "measure": "L0307-level-stage-i-15_min-m",
+      "value": 0.042,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "F0806",
+      "measure": "F0806-level-stage-i-15_min-m",
+      "value": 0.281,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F0203",
+      "measure": "F0203-level-stage-i-15_min-m",
+      "value": 0.312,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0414",
+      "measure": "L0414-level-stage-i-15_min-m",
+      "value": 0.06,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0405",
+      "measure": "L0405-level-stage-i-15_min-m",
+      "value": -0.01,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0902",
+      "measure": "L0902-level-stage-i-15_min-mAOD",
+      "value": 1.451,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0902",
+      "measure": "L0902-level-downstage-i-15_min-mAOD",
+      "value": 1.436,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0930",
+      "measure": "L0930-level-stage-i-15_min-m",
+      "value": 0.324,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0930",
+      "measure": "L0930-level-downstage-i-15_min-m",
+      "value": -0.078,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0601",
+      "measure": "L0601-level-stage-i-15_min-m",
+      "value": 0.083,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0504",
+      "measure": "L0504-level-stage-i-15_min-m",
+      "value": 0.846,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0407",
+      "measure": "L0407-level-stage-i-15_min-m",
+      "value": 0.387,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0903",
+      "measure": "L0903-level-stage-i-15_min-mAOD",
+      "value": 1.96,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "F0605",
+      "measure": "F0605-level-stage-i-15_min-m",
+      "value": 0.376,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0668",
+      "measure": "L0668-level-stage-i-15_min-m",
+      "value": 0.004,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0904",
+      "measure": "L0904-level-stage-i-15_min-mAOD",
+      "value": 2.353,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0807",
+      "measure": "L0807-level-stage-i-15_min-m",
+      "value": 0.242,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0204",
+      "measure": "L0204-level-stage-i-15_min-m",
+      "value": 0.088,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0669",
+      "measure": "L0669-level-stage-i-15_min-m",
+      "value": 0.055,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F0908",
+      "measure": "F0908-level-stage-i-15_min-m",
+      "value": 0.381,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0808",
+      "measure": "L0808-level-stage-i-15_min-m",
+      "value": 0.146,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F0402",
+      "measure": "F0402-level-stage-i-15_min-m",
+      "value": 0.197,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0933",
+      "measure": "L0933-level-stage-i-15_min-m",
+      "value": 0.268,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0233",
+      "measure": "L0233-level-stage-i-15_min-m",
+      "value": -0.007,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0215",
+      "measure": "L0215-level-stage-i-15_min-m",
+      "value": -0.003,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0809",
+      "measure": "L0809-level-stage-i-15_min-m",
+      "value": 0.322,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0303",
+      "measure": "L0303-level-stage-i-15_min-mAOD",
+      "value": 25.462,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0206",
+      "measure": "L0206-level-stage-i-15_min-m",
+      "value": 0.586,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0410",
+      "measure": "L0410-level-stage-i-15_min-m",
+      "value": 0.078,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0670",
+      "measure": "L0670-level-stage-i-15_min-m",
+      "value": 0.043,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0313",
+      "measure": "L0313-level-stage-i-15_min-mAOD",
+      "value": 25.641,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0935",
+      "measure": "L0935-level-stage-i-15_min-m",
+      "value": 0.132,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F0803",
+      "measure": "F0803-level-stage-i-15_min-m",
+      "value": 0.32,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0703",
+      "measure": "L0703-level-stage-i-15_min-m",
+      "value": 0.544,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0235",
+      "measure": "L0235-level-stage-i-15_min-m",
+      "value": 0.355,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0509",
+      "measure": "L0509-level-stage-i-15_min-m",
+      "value": 0.389,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F0103",
+      "measure": "F0103-level-stage-i-15_min-m",
+      "value": 0.172,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L08013",
+      "measure": "L08013-level-stage-i-15_min-m",
+      "value": 0.418,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L08041",
+      "measure": "L08041-level-stage-i-15_min-m",
+      "value": 0.133,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0607",
+      "measure": "L0607-level-stage-i-15_min-m",
+      "value": 0.482,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F0920",
+      "measure": "F0920-level-stage-i-15_min-m",
+      "value": 0.248,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L06601",
+      "measure": "L06601-level-stage-i-15_min-m",
+      "value": -0.004,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F0600",
+      "measure": "F0600-level-stage-i-15_min-m",
+      "value": 0.242,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L24013",
+      "measure": "L24013-level-stage-i-15_min-mAOD",
+      "value": -0.829,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "F0220",
+      "measure": "F0220-level-stage-i-15_min-m",
+      "value": 0.101,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0705",
+      "measure": "L0705-level-stage-i-15_min-m",
+      "value": 0.637,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0928",
+      "measure": "L0928-level-stage-i-15_min-m",
+      "value": 0.442,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0237",
+      "measure": "L0237-level-stage-i-15_min-m",
+      "value": -0.03,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F0513",
+      "measure": "F0513-level-stage-i-15_min-m",
+      "value": 0.101,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0511",
+      "measure": "L0511-level-stage-i-15_min-m",
+      "value": 0.277,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0508",
+      "measure": "L0508-level-stage-i-15_min-m",
+      "value": 0.027,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0716",
+      "measure": "L0716-level-stage-i-15_min-m",
+      "value": 0.648,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0716",
+      "measure": "L0716-level-downstage-i-15_min-m",
+      "value": -0.049,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0962",
+      "measure": "L0962-level-stage-i-15_min-mAOD",
+      "value": 2.599,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0923",
+      "measure": "L0923-level-stage-i-15_min-m",
+      "value": 0.901,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0681",
+      "measure": "L0681-level-stage-i-15_min-m",
+      "value": -0.028,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0812",
+      "measure": "L0812-level-stage-i-15_min-m",
+      "value": 0.261,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0691",
+      "measure": "L0691-level-downstage-i-15_min-m",
+      "value": 0.003,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0801",
+      "measure": "L0801-level-stage-i-15_min-m",
+      "value": 1.695,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0208",
+      "measure": "L0208-level-stage-i-15_min-m",
+      "value": 0.269,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0208",
+      "measure": "L0208-level-downstage-i-15_min-m",
+      "value": 0.251,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0301",
+      "measure": "L0301-level-stage-i-15_min-mAOD",
+      "value": 23.974,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0301",
+      "measure": "L0301-level-downstage-i-15_min-mAOD",
+      "value": 23.977,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0302",
+      "measure": "L0302-level-stage-i-15_min-m",
+      "value": 0.163,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0218",
+      "measure": "L0218-level-stage-i-15_min-m",
+      "value": 0.509,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L08102",
+      "measure": "L08102-level-stage-i-15_min-m",
+      "value": 0.0,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0305",
+      "measure": "L0305-level-stage-i-15_min-m",
+      "value": 0.314,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0306",
+      "measure": "L0306-level-stage-i-15_min-mAOD",
+      "value": 35.212,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0306",
+      "measure": "L0306-level-downstage-i-15_min-mAOD",
+      "value": 34.984,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0942",
+      "measure": "L0942-level-stage-i-15_min-mAOD",
+      "value": 0.964,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0851",
+      "measure": "L0851-level-stage-i-15_min-m",
+      "value": 0.369,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0422",
+      "measure": "L0422-level-stage-i-15_min-m",
+      "value": 0.505,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0351",
+      "measure": "L0351-level-stage-i-15_min-m",
+      "value": 0.264,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0550",
+      "measure": "L0550-level-stage-i-15_min-m",
+      "value": 0.235,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0908",
+      "measure": "L0908-level-stage-i-15_min-mAOD",
+      "value": 7.552,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L0245",
+      "measure": "L0245-level-stage-i-15_min-m",
+      "value": 0.161,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0853",
+      "measure": "L0853-level-stage-i-15_min-m",
+      "value": 0.163,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L2545",
+      "measure": "L2545-level-stage-i-15_min-m",
+      "value": 0.23,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F25110",
+      "measure": "F25110-level-stage-i-15_min-m",
+      "value": 0.074,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2592",
+      "measure": "L2592-level-stage-i-15_min-m",
+      "value": 0.083,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2810",
+      "measure": "L2810-level-stage-i-15_min-mAOD",
+      "value": 7.207,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2502",
+      "measure": "F2502-level-stage-i-15_min-m",
+      "value": 1.185,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2519",
+      "measure": "L2519-level-stage-i-15_min-m",
+      "value": 0.228,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2540",
+      "measure": "F2540-level-stage-i-15_min-m",
+      "value": 0.143,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2708",
+      "measure": "F2708-level-stage-i-15_min-m",
+      "value": 0.236,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2803",
+      "measure": "L2803-level-stage-i-15_min-mAOD",
+      "value": 2.554,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2560",
+      "measure": "F2560-level-stage-i-15_min-m",
+      "value": 0.292,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2725",
+      "measure": "L2725-level-stage-i-15_min-m",
+      "value": 0.103,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2505",
+      "measure": "F2505-level-stage-i-15_min-m",
+      "value": 0.495,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2570",
+      "measure": "F2570-level-stage-i-15_min-m",
+      "value": 0.237,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2807",
+      "measure": "F2807-level-stage-i-15_min-m",
+      "value": 0.238,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2515",
+      "measure": "F2515-level-stage-i-15_min-m",
+      "value": 0.117,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2603",
+      "measure": "F2603-level-stage-i-15_min-m",
+      "value": 0.154,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2581",
+      "measure": "F2581-level-stage-i-15_min-m",
+      "value": 0.201,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2806",
+      "measure": "L2806-level-stage-i-15_min-mAOD",
+      "value": 5.615,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2806",
+      "measure": "L2806-level-downstage-i-15_min-mAOD",
+      "value": 3.804,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2809",
+      "measure": "F2809-level-stage-i-15_min-m",
+      "value": 1.171,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2702",
+      "measure": "F2702-level-stage-i-15_min-m",
+      "value": 2.085,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2702",
+      "measure": "F2702-flow-logged-i-15_min-m3_s",
+      "value": 4.05,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2508",
+      "measure": "F2508-level-stage-i-15_min-m",
+      "value": 0.138,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023044",
+      "measure": "023044-level-stage-i-15_min-m",
+      "value": 0.093,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "023007",
+      "measure": "023007-level-stage-i-15_min-m",
+      "value": 0.176,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2760",
+      "measure": "F2760-level-stage-i-15_min-m",
+      "value": 0.092,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2809",
+      "measure": "L2809-level-stage-i-15_min-m",
+      "value": 1.121,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2837",
+      "measure": "L2837-level-stage-i-15_min-m",
+      "value": 0.004,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2801",
+      "measure": "L2801-level-stage-i-15_min-mAOD",
+      "value": 1.831,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2808",
+      "measure": "L2808-level-stage-i-15_min-mAOD",
+      "value": 14.407,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2516",
+      "measure": "L2516-level-1-i-15_min-m",
+      "value": 0.5,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2516",
+      "measure": "L2516-level-downstage-i-15_min-m",
+      "value": 0.34,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2841",
+      "measure": "L2841-level-stage-i-15_min-mAOD",
+      "value": 4.054,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2603",
+      "measure": "L2603-level-stage-i-15_min-m",
+      "value": 0.281,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2604",
+      "measure": "L2604-level-stage-i-15_min-m",
+      "value": 0.1,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2517",
+      "measure": "F2517-level-stage-i-15_min-m",
+      "value": 0.144,
+      "dateTime": "2026-04-06T05:30:00Z"
+    },
+    {
+      "stationId": "F2830",
+      "measure": "F2830-level-stage-i-15_min-m",
+      "value": 0.193,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2835",
+      "measure": "F2835-level-stage-i-15_min-m",
+      "value": 0.166,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L28091",
+      "measure": "L28091-level-stage-i-15_min-m",
+      "value": 0.96,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L28092",
+      "measure": "L28092-level-stage-i-15_min-m",
+      "value": 0.354,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2711",
+      "measure": "L2711-level-stage-i-15_min-mAOD",
+      "value": 41.244,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2802",
+      "measure": "F2802-level-stage-i-15_min-mAOD",
+      "value": 1.879,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2518",
+      "measure": "F2518-level-stage-i-15_min-m",
+      "value": 0.153,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2518",
+      "measure": "F2518-level-downstage-i-15_min-m",
+      "value": -0.221,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L2551",
+      "measure": "L2551-level-stage-i-15_min-m",
+      "value": 0.17,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F2709",
+      "measure": "F2709-level-stage-i-15_min-m",
+      "value": 0.293,
+      "dateTime": "2026-04-06T06:00:00Z"
+    },
+    {
+      "stationId": "E5852",
+      "measure": "E5852-level-stage-i-15_min-mASD",
+      "value": 0.234,
+      "dateTime": "2026-04-06T17:16:16Z"
+    },
+    {
+      "stationId": "E6642",
+      "measure": "E6642-level-stage-i-15_min-mASD",
+      "value": 0.082,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "E10389",
+      "measure": "E10389-level-stage-i-15_min-mASD",
+      "value": 0.378,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "F0304",
+      "measure": "F0304-level-stage-i-15_min-m",
+      "value": 0.535,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "E6520",
+      "measure": "E6520-level-stage-i-15_min-mASD",
+      "value": 1.21,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "E6140",
+      "measure": "E6140-level-stage-i-15_min-mASD",
+      "value": 0.14,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "E6600",
+      "measure": "E6600-level-stage-i-15_min-mASD",
+      "value": 0.134,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "E6415",
+      "measure": "E6415-level-tidal_level-i-15_min-mAOD",
+      "value": -0.522,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0317",
+      "measure": "L0317-level-stage-i-15_min-m",
+      "value": 0.361,
+      "dateTime": "2026-04-06T17:00:00Z"
+    },
+    {
+      "stationId": "L02203",
+      "measure": "L02203-level-stage-i-15_min-m",
+      "value": 0.03,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0207",
+      "measure": "L0207-level-stage-i-15_min-m",
+      "value": 0.254,
+      "dateTime": "2026-04-06T17:15:00Z"
+    },
+    {
+      "stationId": "L0311",
+      "measure": "L0311-level-stage-i-15_min-m",
+      "value": 0.058,
+      "dateTime": "2026-04-06T17:00:00Z"
+    }
+  ],
+  "meta": {
+    "fetched": "2026-04-06T17:36:41.811851+00:00",
+    "count": 382,
+    "source": "EA Flood Monitoring API"
+  }
+}

@@ -1,15 +1,12 @@
 name: Fetch Water Quality Data
 
 on:
-  schedule:
-    # Readings + rainfall: every 6 hours
-    - cron: '15 */6 * * *'
-    # Flood warnings: every 2 hours
-    - cron: '5 */2 * * *'
-    # Stations + measures: weekly Sunday 02:00 UTC
-    - cron: '0 2 * * 0'
-    # Daily archive snapshot: 23:55 UTC
-    - cron: '55 23 * * *'
+  # Schedule disabled — use manual dispatch or live refresh button on dashboard
+  # schedule:
+  #   - cron: '15 */6 * * *'   # Readings: every 6 hours
+  #   - cron: '5 */2 * * *'    # Flood warnings: every 2 hours
+  #   - cron: '0 2 * * 0'      # Stations: weekly Sunday 02:00 UTC
+  #   - cron: '55 23 * * *'    # Daily archive snapshot
   workflow_dispatch:
     inputs:
       fetch_type:
@@ -36,22 +33,8 @@ jobs:
       - name: Determine fetch type
         id: fetch-type
         run: |
-          CRON="${{ github.event.schedule }}"
-          MANUAL="${{ github.event.inputs.fetch_type }}"
-
-          if [ -n "$MANUAL" ]; then
-            echo "type=$MANUAL" >> $GITHUB_OUTPUT
-          elif [ "$CRON" = "15 */6 * * *" ]; then
-            echo "type=readings" >> $GITHUB_OUTPUT
-          elif [ "$CRON" = "5 */2 * * *" ]; then
-            echo "type=floods" >> $GITHUB_OUTPUT
-          elif [ "$CRON" = "0 2 * * 0" ]; then
-            echo "type=stations" >> $GITHUB_OUTPUT
-          elif [ "$CRON" = "55 23 * * *" ]; then
-            echo "type=archive" >> $GITHUB_OUTPUT
-          else
-            echo "type=all" >> $GITHUB_OUTPUT
-          fi
+          TYPE="${{ github.event.inputs.fetch_type || 'all' }}"
+          echo "type=$TYPE" >> $GITHUB_OUTPUT
 
       - name: Create data directory
         run: mkdir -p assets/data/water-quality/history
