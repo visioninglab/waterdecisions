@@ -10,14 +10,23 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
 <div class="hero">
   <div class="hero-inner">
     <h1>Water Decisions</h1>
-    <p class="hero-subtitle">A structured knowledge framework for water infrastructure resilience &mdash; linking concepts, operational scenarios, proven strategies, and real-world evidence.</p>
+    <p class="hero-subtitle">An open-source decision support framework that structures best practice from around the world into reusable knowledge for water infrastructure resilience.</p>
   </div>
 </div>
 
 <!-- CONTENT -->
 <div class="page-content">
 
+  <!-- VALUE PROPOSITION -->
+  <div class="intro-text">
+    <p>The critical question for water decision makers is whether solutions used elsewhere will work in their context. Water Decisions addresses this by structuring <a href="case-studies/index.html">real-world case studies</a> through an AI-enabled <a href="ontology/index.html">ontological framework</a>, decomposing them into <a href="use-cases/index.html">use cases</a>, <a href="decision-patterns/index.html">decision patterns</a>, and <a href="models/index.html">system models</a> that can be compared, adapted, and applied.</p>
+    <p>The framework aligns with <a href="https://www.iso.org/standard/50275.html" target="_blank" rel="noopener">ISO 22372</a> and the <a href="https://www.undrr.org/publication/handbook-implementing-principles-resilient-infrastructure" target="_blank" rel="noopener">UNDRR Principles for Resilient Infrastructure</a>, so that structured insight can be ported into existing company systems and analytical processes.</p>
+  </div>
+
   <!-- FRAMEWORK FLOW (stepper) -->
+  <h2 style="font-family:'Playfair Display',Georgia,serif;margin:0 0 0.5rem;">How It Works</h2>
+  <p style="margin-bottom:1.25rem;color:var(--muted);font-size:14.5px;">Case studies are structured through the framework into reusable, comparable components.</p>
+
   <style>
     .fw-flow { display:grid; grid-template-columns:1fr; gap:0; margin:0 auto 2.5rem; max-width:680px; }
     .fw-step { display:grid; grid-template-columns:56px 1fr; gap:0 1.25rem; align-items:start; }
@@ -40,15 +49,31 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
   <div class="fw-flow">
     <div class="fw-step">
       <div class="fw-step-line">
+        <div class="fw-step-dot" style="background:#c8962d;"><i data-lucide="book-open"></i></div>
+        <div class="fw-step-bar"></div>
+      </div>
+      <div class="fw-step-content">
+        <h3><a href="case-studies/index.html">Case Studies</a></h3>
+        <p>Best practice from {{ site.case_studies | size }} real-world water infrastructure projects across 15 countries &mdash; what worked, what didn't, and why.</p>
+        <div class="fw-tags">
+          <span class="fw-tag">{{ site.case_studies | size }} published</span>
+          <span class="fw-tag">15 countries</span>
+          <span class="fw-tag">SDG mapped</span>
+        </div>
+      </div>
+    </div>
+    <div class="fw-step">
+      <div class="fw-step-line">
         <div class="fw-step-dot" style="background:#0284c7;"><i data-lucide="network"></i></div>
         <div class="fw-step-bar"></div>
       </div>
       <div class="fw-step-content">
         <h3><a href="ontology/index.html">Ontology</a></h3>
-        <p>Core concepts organised into four domains &mdash; infrastructure, monitoring, regulation, and hazards.</p>
+        <p>The AI-enabled knowledge framework that structures case studies into comparable, reusable components across four domains.</p>
         <div class="fw-tags">
           <span class="fw-tag">4 domains</span>
           <span class="fw-tag">24 concepts</span>
+          <span class="fw-tag">ISO 22372 aligned</span>
         </div>
       </div>
     </div>
@@ -59,7 +84,7 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
       </div>
       <div class="fw-step-content">
         <h3><a href="use-cases/index.html">Use Cases</a></h3>
-        <p>Operational scenarios where water infrastructure decisions must be made.</p>
+        <p>Operational scenarios extracted from case studies &mdash; what triggers a decision, what data is available, and what action follows.</p>
         <div class="fw-tags">
           <span class="fw-tag">{{ site.data.use-cases | size }} scenarios</span>
           <span class="fw-tag">Cross-linked</span>
@@ -73,25 +98,10 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
       </div>
       <div class="fw-step-content">
         <h3><a href="decision-patterns/index.html">Decision Patterns</a></h3>
-        <p>Proven infrastructure strategies with typical monitoring methods and evidence.</p>
+        <p>Proven strategies distilled from case studies &mdash; the playbook entries for common water infrastructure challenges.</p>
         <div class="fw-tags">
           <span class="fw-tag">{{ site.data.decision-patterns | size }} patterns</span>
           <span class="fw-tag">Evidence-based</span>
-        </div>
-      </div>
-    </div>
-    <div class="fw-step">
-      <div class="fw-step-line">
-        <div class="fw-step-dot" style="background:#c8962d;"><i data-lucide="book-open"></i></div>
-        <div class="fw-step-bar"></div>
-      </div>
-      <div class="fw-step-content">
-        <h3><a href="case-studies/index.html">Case Studies</a></h3>
-        <p>Real-world water infrastructure assessed against resilience principles.</p>
-        <div class="fw-tags">
-          <span class="fw-tag">{{ site.case_studies | size }} published</span>
-          <span class="fw-tag">6 principles</span>
-          <span class="fw-tag">SDG mapped</span>
         </div>
       </div>
     </div>
@@ -101,7 +111,7 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
       </div>
       <div class="fw-step-content">
         <h3><a href="models/index.html">System Models</a></h3>
-        <p>How water systems behave over time &mdash; from flood forecasts to supply-demand scenarios.</p>
+        <p>How water systems behave over time &mdash; the analytical layer that turns options into projected outcomes.</p>
         <div class="fw-tags">
           <span class="fw-tag">{{ site.data.models | size }} model types</span>
           <span class="fw-tag">{{ site.data.model-mapping | size }} model&ndash;case links</span>
@@ -246,8 +256,8 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
   </div>
 
   <!-- TOOLS -->
-  <h2 style="font-family:'Playfair Display',Georgia,serif;margin:0 0 0.5rem;">Tools &amp; Resources</h2>
-  <p style="margin-bottom:1.25rem;color:var(--muted);font-size:14.5px;">Interactive tools and reference material supporting the framework.</p>
+  <h2 style="font-family:'Playfair Display',Georgia,serif;margin:0 0 0.5rem;">Apply It</h2>
+  <p style="margin-bottom:1.25rem;color:var(--muted);font-size:14.5px;">Assess your own infrastructure, explore the principles, and access reference material.</p>
 
   <div class="studies-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
     <div class="study-card" style="cursor:pointer;" onclick="window.location.href='assessment.html'">
@@ -255,7 +265,7 @@ footer_text: "Water Decisions &bull; Water Infrastructure Resilience Research &b
       <div class="study-card-body">
         <div class="study-card-category">Tool</div>
         <div class="study-card-title">Resilience Assessment</div>
-        <div class="study-card-desc">7-minute diagnostic with radar charts and PDF export.</div>
+        <div class="study-card-desc">7-minute diagnostic &mdash; assess your system against six UNDRR principles and compare with case studies.</div>
       </div>
     </div>
     <div class="study-card" style="cursor:pointer;" onclick="window.location.href='principles.html'">
